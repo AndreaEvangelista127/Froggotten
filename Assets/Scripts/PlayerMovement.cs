@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float coyoteTime = 0.15f;
 
     [Header("Wall Jump Settings")]
+    [SerializeField] LayerMask wallLayer;
     [SerializeField] float wallJumpForceX = 8f; // Forza orizzontale del wall jump
     [SerializeField] float wallJumpForceY = 12f; // Forza verticale del wall jump
     [SerializeField] float wallCheckDistance = 0.2f; // Distanza per rilevare il muro
@@ -65,8 +66,8 @@ public class PlayerMovement : MonoBehaviour
         _rayLength = _playerHalfHeight + groundCheckOffset;
 
         playerSpriteR.flipX = false;
-        Debug.Log($"Velocity iniziale: {rb.linearVelocity}");
-        Debug.Log($"flipX iniziale: {playerSpriteR.flipX}");
+        //Debug.Log($"Velocity iniziale: {rb.linearVelocity}");
+        //Debug.Log($"flipX iniziale: {playerSpriteR.flipX}");
     }
 
     private void FixedUpdate() //FOR PHYSICS
@@ -154,25 +155,31 @@ public class PlayerMovement : MonoBehaviour
 
     private bool GetIsGrounded()
     {
-        _rayLength = _playerHalfHeight + groundCheckOffset;
+        // ✅ Raggio piccolo per ogni piede
+        float footRadius = _playerHalfWidth * 0.2f; // Piccolo!
 
-        Vector2 leftFootPos = new Vector2(transform.position.x - _playerHalfWidth * groundCheckOffset, transform.position.y); //vector2(Posizione centrale del player - (mezza lunghezza del player * offset)) = from where the point on the left has to start
-        Vector2 rightFootPos = new Vector2(transform.position.x + _playerHalfWidth * groundCheckOffset, transform.position.y); //vector2(Posizione centrale del player + (mezza lunghezza del player * offset)) = from where the point on the right has to start
+        // ✅ Posizione dei piedi (sinistra e destra)
+        float feetY = transform.position.y - _playerHalfHeight - 0.09f;
+        float footOffset = _playerHalfWidth * 0.7f; // Distanza dal centro
 
-        bool leftGrounded = Physics2D.Raycast(leftFootPos, Vector2.down, _rayLength, groundLayer);
-        bool rightGrounded = Physics2D.Raycast(rightFootPos, Vector2.down, _rayLength, groundLayer);
+        Vector2 leftFootPos = new Vector2(transform.position.x - footOffset, feetY);
+        Vector2 rightFootPos = new Vector2(transform.position.x + footOffset, feetY);
 
-        return leftGrounded || rightGrounded;
+        // ✅ Controlla entrambi i piedi
+        bool leftFootGrounded = Physics2D.OverlapCircle(leftFootPos, footRadius, groundLayer);
+        bool rightFootGrounded = Physics2D.OverlapCircle(rightFootPos, footRadius, groundLayer);
 
+        // Grounded se ALMENO UN piede tocca
+        return leftFootGrounded || rightFootGrounded;
     }
 
     private int GetWallJumpDirection()
     {
-        if (Physics2D.Raycast(transform.position, Vector2.right, _playerHalfWidth + wallCheckDistance, groundLayer)) //wallCheckDistance as an offset to be sure
+        if (Physics2D.Raycast(transform.position, Vector2.right, _playerHalfWidth + wallCheckDistance, wallLayer)) //wallCheckDistance as an offset to be sure
         {
             return -1; //we are jumping from a wall on the right to go left so negative value
         }
-        else if(Physics2D.Raycast(transform.position, Vector2.left, _playerHalfWidth + wallCheckDistance, groundLayer)) //wallCheckDistance as an offset to be sure
+        else if(Physics2D.Raycast(transform.position, Vector2.left, _playerHalfWidth + wallCheckDistance, wallLayer)) //wallCheckDistance as an offset to be sure
         {
             return 1; //we are jumping from a wall on the left to go right so positive value
         }
@@ -187,7 +194,7 @@ public class PlayerMovement : MonoBehaviour
             // WALL JUMP (priorità massima)
             if (wallDirection != 0 && !GetIsGrounded())
             {
-                Debug.Log("WALL JUMP");
+                //Debug.Log("WALL JUMP");
 
                 // Salto diagonale
                 rb.linearVelocity = new Vector2(wallJumpForceX * wallDirection, wallJumpForceY); //OVERWRITTEN BY THE MOVE IN THE FIXEDUPDATE SO WE USE wallJumpControlLockTime
@@ -209,7 +216,7 @@ public class PlayerMovement : MonoBehaviour
             //Instead of using grounded now we check coyote timer because we want to jump when is grounded or even if the player is mid air meanwhile coyotimer is still > 0
             if (_coyoteTimeCounter > 0f)
             {
-                Debug.Log("FIRST JUMP");
+                //Debug.Log("FIRST JUMP");
                 rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpingForce);
 
                 _isJumping = true;
@@ -224,7 +231,7 @@ public class PlayerMovement : MonoBehaviour
             // Doppio salto
             else if (_canDoubleJump)
             {
-                Debug.Log("DOUBLE JUMP");
+                //Debug.Log("DOUBLE JUMP");
                 rb.linearVelocity = new Vector2(rb.linearVelocityX, doubleJumpingForce);
 
                 _isJumping = true;
@@ -250,36 +257,37 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void OnDrawGizmos() 
+    private void OnDrawGizmos()
     {
         if (playerCollider != null)
         {
-            /* -----------------GROUND JUMP GIZMOS-----------------*/
-            Vector2 leftFootPos = new Vector2(transform.position.x - playerCollider.bounds.extents.x * groundCheckOffset, transform.position.y);
-            Vector2 rightFootPos = new Vector2(transform.position.x + playerCollider.bounds.extents.x * groundCheckOffset, transform.position.y);
+            /* -----------------GROUND CHECK GIZMOS (2 Sfere)-----------------*/
+            float footRadius = playerCollider.bounds.extents.x * 0.2f;
+            float feetY = transform.position.y - playerCollider.bounds.extents.y - 0.09f;
+            float footOffset = playerCollider.bounds.extents.x * 0.7f; //distanza tra i due piedi
 
-            // Ray sinistro
-            bool leftGrounded = Physics2D.Raycast(leftFootPos, Vector2.down, _rayLength, groundLayer);
-            Gizmos.color = leftGrounded ? Color.green : Color.red;
-            Gizmos.DrawLine(leftFootPos, leftFootPos + Vector2.down * _rayLength);
-            Gizmos.DrawWireSphere(leftFootPos, 0.05f);
+            Vector2 leftFootPos = new Vector2(transform.position.x - footOffset, feetY);
+            Vector2 rightFootPos = new Vector2(transform.position.x + footOffset, feetY);
 
-            // Ray destro
-            bool rightGrounded = Physics2D.Raycast(rightFootPos, Vector2.down, _rayLength, groundLayer);
-            Gizmos.color = rightGrounded ? Color.green : Color.red;
-            Gizmos.DrawLine(rightFootPos, rightFootPos + Vector2.down * _rayLength);
-            Gizmos.DrawWireSphere(rightFootPos, 0.05f);
+            bool leftFootGrounded = Physics2D.OverlapCircle(leftFootPos, footRadius, groundLayer);
+            Gizmos.color = leftFootGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(leftFootPos, footRadius);
+            Gizmos.DrawSphere(leftFootPos, 0.03f);
 
+            bool rightFootGrounded = Physics2D.OverlapCircle(rightFootPos, footRadius, groundLayer);
+            Gizmos.color = rightFootGrounded ? Color.green : Color.red;
+            Gizmos.DrawWireSphere(rightFootPos, footRadius);
+            Gizmos.DrawSphere(rightFootPos, 0.03f);
 
             /* -----------------WALL JUMP GIZMOS-----------------*/
             float wallCheckLen = playerCollider.bounds.extents.x + wallCheckDistance;
-            // Ray DESTRO(blu = nessun muro, ciano = muro rilevato)
-            bool wallRight = Physics2D.Raycast(transform.position, Vector2.right, wallCheckLen, groundLayer);
-            Gizmos.color = wallRight ? Color.cyan : Color.blue;
+
+            // ✅ Usa wallLayer invece di groundLayer
+            bool wallRight = Physics2D.Raycast(transform.position, Vector2.right, wallCheckLen, wallLayer);
+            Gizmos.color = wallRight ? Color.cyan : Color.blue; // Cambiato colore
             Gizmos.DrawLine(transform.position, transform.position + Vector3.right * wallCheckLen);
 
-            // Ray SINISTRO
-            bool wallLeft = Physics2D.Raycast(transform.position, Vector2.left, wallCheckLen, groundLayer);
+            bool wallLeft = Physics2D.Raycast(transform.position, Vector2.left, wallCheckLen, wallLayer);
             Gizmos.color = wallLeft ? Color.cyan : Color.blue;
             Gizmos.DrawLine(transform.position, transform.position + Vector3.left * wallCheckLen);
         }
@@ -290,5 +298,6 @@ public class PlayerMovement : MonoBehaviour
             Gizmos.DrawWireSphere(transform.position, 0.3f);
         }
     }
+
 
 }
