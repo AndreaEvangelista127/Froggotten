@@ -1,0 +1,3159 @@
+fileFormatVersion: 2
+guid: 9fe1c77a7a313ca4bb2777c16da87131
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3895711943615313568
+    second: Pink Buttons Text_0
+  - first:
+      213: 1085398567560629936
+    second: Pink Buttons Text_1
+  - first:
+      213: -9021284499969210350
+    second: Pink Buttons Text_2
+  - first:
+      213: -8122136433546780710
+    second: Pink Buttons Text_3
+  - first:
+      213: -9050240567799450366
+    second: Pink Buttons Text_4
+  - first:
+      213: 7119766060208825893
+    second: Pink Buttons Text_5
+  - first:
+      213: 8378463862558777765
+    second: Pink Buttons Text_6
+  - first:
+      213: -4108541507998272986
+    second: Pink Buttons Text_7
+  - first:
+      213: -3911318143625103303
+    second: Pink Buttons Text_8
+  - first:
+      213: -392491833020405535
+    second: Pink Buttons Text_9
+  - first:
+      213: 2184904487154805919
+    second: Pink Buttons Text_10
+  - first:
+      213: 3615867691100859265
+    second: Pink Buttons Text_11
+  - first:
+      213: 1744754043895713104
+    second: Pink Buttons Text_12
+  - first:
+      213: 6375775138340070679
+    second: Pink Buttons Text_13
+  - first:
+      213: -258879684255896069
+    second: Pink Buttons Text_14
+  - first:
+      213: 194742411153725376
+    second: Pink Buttons Text_15
+  - first:
+      213: -7557195073579855626
+    second: Pink Buttons Text_16
+  - first:
+      213: -7398186175619873872
+    second: Pink Buttons Text_17
+  - first:
+      213: -8773825266407037345
+    second: Pink Buttons Text_18
+  - first:
+      213: 1284087309975270135
+    second: Pink Buttons Text_19
+  - first:
+      213: -35155494670006337
+    second: Pink Buttons Text_20
+  - first:
+      213: -6768797760007821872
+    second: Pink Buttons Text_21
+  - first:
+      213: 9179820084160343620
+    second: Pink Buttons Text_22
+  - first:
+      213: -4061608398130808522
+    second: Pink Buttons Text_23
+  - first:
+      213: 3864905814512589807
+    second: Pink Buttons Text_24
+  - first:
+      213: -3324830412866443394
+    second: Pink Buttons Text_25
+  - first:
+      213: -6302565737431906053
+    second: Pink Buttons Text_26
+  - first:
+      213: 7046785192247980401
+    second: Pink Buttons Text_27
+  - first:
+      213: 6842601608850714783
+    second: Pink Buttons Text_28
+  - first:
+      213: -992586848743860134
+    second: Pink Buttons Text_29
+  - first:
+      213: -6081728298740220110
+    second: Pink Buttons Text_30
+  - first:
+      213: -3161506381919634423
+    second: Pink Buttons Text_31
+  - first:
+      213: 6416844918926884912
+    second: Pink Buttons Text_32
+  - first:
+      213: -4209507941764566049
+    second: Pink Buttons Text_33
+  - first:
+      213: -3017134530031150243
+    second: Pink Buttons Text_34
+  - first:
+      213: -6763780675514752639
+    second: Pink Buttons Text_35
+  - first:
+      213: -3921267149326771891
+    second: Pink Buttons Text_36
+  - first:
+      213: 1261017337342046483
+    second: Pink Buttons Text_37
+  - first:
+      213: -8253126765217432233
+    second: Pink Buttons Text_38
+  - first:
+      213: 6502498000400609835
+    second: Pink Buttons Text_39
+  - first:
+      213: -5471451427751893529
+    second: Pink Buttons Text_40
+  - first:
+      213: -6521247326046928994
+    second: Pink Buttons Text_41
+  - first:
+      213: 7642851265061700864
+    second: Pink Buttons Text_42
+  - first:
+      213: -9131405244672486218
+    second: Pink Buttons Text_43
+  - first:
+      213: -600321787977353436
+    second: Pink Buttons Text_44
+  - first:
+      213: -4751991281090653843
+    second: Pink Buttons Text_45
+  - first:
+      213: 1144755639412494960
+    second: Pink Buttons Text_46
+  - first:
+      213: -2487918010700293003
+    second: Pink Buttons Text_47
+  - first:
+      213: 6393284112876139555
+    second: Pink Buttons Text_48
+  - first:
+      213: -4931104463766722018
+    second: Pink Buttons Text_49
+  - first:
+      213: 5511311902994344472
+    second: Pink Buttons Text_50
+  - first:
+      213: 6985975405562192324
+    second: Pink Buttons Text_51
+  - first:
+      213: 899782859131196848
+    second: Pink Buttons Text_52
+  - first:
+      213: -1879290649263522883
+    second: Pink Buttons Text_53
+  - first:
+      213: 9116268078797243533
+    second: Pink Buttons Text_54
+  - first:
+      213: -556219062058014539
+    second: Pink Buttons Text_55
+  - first:
+      213: 3714813275408950632
+    second: Pink Buttons Text_56
+  - first:
+      213: 7998722337131164065
+    second: Pink Buttons Text_57
+  - first:
+      213: -3659073242492414838
+    second: Pink Buttons Text_58
+  - first:
+      213: 7315514892213112727
+    second: Pink Buttons Text_59
+  - first:
+      213: -6266421816069743501
+    second: Pink Buttons Text_60
+  - first:
+      213: -7614526702808688744
+    second: Pink Buttons Text_61
+  - first:
+      213: -391660716516875174
+    second: Pink Buttons Text_62
+  - first:
+      213: -4746085071197584309
+    second: Pink Buttons Text_63
+  - first:
+      213: 3105833222546877753
+    second: Pink Buttons Text_64
+  - first:
+      213: 1312333344748802990
+    second: Pink Buttons Text_65
+  - first:
+      213: 655218379855784855
+    second: Pink Buttons Text_66
+  - first:
+      213: 215059037425899661
+    second: Pink Buttons Text_67
+  - first:
+      213: -7589219046137526356
+    second: Pink Buttons Text_68
+  - first:
+      213: 6772286881146917163
+    second: Pink Buttons Text_69
+  - first:
+      213: 8768302405174067193
+    second: Pink Buttons Text_70
+  - first:
+      213: 7281207397403340070
+    second: Pink Buttons Text_71
+  - first:
+      213: 2669974342718843792
+    second: Pink Buttons Text_72
+  - first:
+      213: 4368531405162037566
+    second: Pink Buttons Text_73
+  - first:
+      213: -3370575273471412008
+    second: Pink Buttons Text_74
+  - first:
+      213: -6979822640237350794
+    second: Pink Buttons Text_75
+  - first:
+      213: 7589123636417438843
+    second: Pink Buttons Text_76
+  - first:
+      213: 5240012347263594876
+    second: Pink Buttons Text_77
+  - first:
+      213: 4069699901775763120
+    second: Pink Buttons Text_78
+  - first:
+      213: 6669020160493976934
+    second: Pink Buttons Text_79
+  - first:
+      213: 2532271239335387386
+    second: Pink Buttons Text_80
+  - first:
+      213: 5066492190585795977
+    second: Pink Buttons Text_81
+  - first:
+      213: -4663642914426021018
+    second: Pink Buttons Text_82
+  - first:
+      213: 2119893344746967454
+    second: Pink Buttons Text_83
+  - first:
+      213: 3786103643044587081
+    second: Pink Buttons Text_84
+  - first:
+      213: -5063308316610327892
+    second: Pink Buttons Text_85
+  - first:
+      213: -6916474962900286632
+    second: Pink Buttons Text_86
+  - first:
+      213: -1303744975340525216
+    second: Pink Buttons Text_87
+  - first:
+      213: -5000547754095767160
+    second: Pink Buttons Text_88
+  - first:
+      213: 660356333570405100
+    second: Pink Buttons Text_89
+  - first:
+      213: 3558561454140490501
+    second: Pink Buttons Text_90
+  - first:
+      213: -1405180546175386817
+    second: Pink Buttons Text_91
+  - first:
+      213: -3114168197326205349
+    second: Pink Buttons Text_92
+  - first:
+      213: 6461287337333658001
+    second: Pink Buttons Text_93
+  - first:
+      213: 5761166845559425171
+    second: Pink Buttons Text_94
+  - first:
+      213: -750544415587553217
+    second: Pink Buttons Text_95
+  - first:
+      213: 3335922490270916316
+    second: Pink Buttons Text_96
+  - first:
+      213: 2793811765554152916
+    second: Pink Buttons Text_97
+  - first:
+      213: 5148370913054936280
+    second: Pink Buttons Text_98
+  - first:
+      213: 8299664641700383663
+    second: Pink Buttons Text_99
+  - first:
+      213: -1950598170378434906
+    second: Pink Buttons Text_100
+  - first:
+      213: -111479491787779372
+    second: Pink Buttons Text_101
+  - first:
+      213: -290742609386382942
+    second: Pink Buttons Text_102
+  - first:
+      213: 8525280515180469993
+    second: Pink Buttons Text_103
+  - first:
+      213: -7741613738868248067
+    second: Pink Buttons Text_104
+  - first:
+      213: 584242914935684834
+    second: Pink Buttons Text_105
+  - first:
+      213: -3235734400754514180
+    second: Pink Buttons Text_106
+  - first:
+      213: 13218283468520421
+    second: Pink Buttons Text_107
+  - first:
+      213: -7665395158829445077
+    second: Pink Buttons Text_108
+  - first:
+      213: 662723504571485668
+    second: Pink Buttons Text_109
+  - first:
+      213: 2032537760899442088
+    second: Pink Buttons Text_110
+  - first:
+      213: 489745672522386953
+    second: Pink Buttons Text_111
+  - first:
+      213: 4989470271035849995
+    second: Pink Buttons Text_112
+  - first:
+      213: 7483574696997558600
+    second: Pink Buttons Text_113
+  - first:
+      213: -1734998026197902833
+    second: Pink Buttons Text_114
+  - first:
+      213: -5589391618467143039
+    second: Pink Buttons Text_115
+  - first:
+      213: 1163545902031522840
+    second: Pink Buttons Text_116
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Pink Buttons Text_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a6ff625f59501630800000000000000
+      internalID: 3895711943615313568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 352
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0be4b2b1f3c101f00800000000000000
+      internalID: 1085398567560629936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 384
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21809994b85fdc280800000000000000
+      internalID: -9021284499969210350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 352
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adf9f2552ff584f80800000000000000
+      internalID: -8122136433546780710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 384
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 205fb706726176280800000000000000
+      internalID: -9050240567799450366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_5
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 352
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52621a6728d7ec260800000000000000
+      internalID: 7119766060208825893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a16343fd78464470800000000000000
+      internalID: 8378463862558777765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_7
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 352
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 622b0d634478bf6c0800000000000000
+      internalID: -4108541507998272986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 384
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9387fa51fd438b9c0800000000000000
+      internalID: -3911318143625103303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_9
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 352
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e8a393e1c69d8af0800000000000000
+      internalID: -392491833020405535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_10
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 384
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9ce4011e07525e10800000000000000
+      internalID: 2184904487154805919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_11
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 352
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18be0e2e1842e2230800000000000000
+      internalID: 3615867691100859265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_12
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05d84de0f8c963810800000000000000
+      internalID: 1744754043895713104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 352
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 715e68045bd4b7850800000000000000
+      internalID: 6375775138340070679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_14
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 384
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfdac5c7c46486cf0800000000000000
+      internalID: -258879684255896069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_15
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 352
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c7558fe03dd3b200800000000000000
+      internalID: 194742411153725376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_16
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 384
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f0d0fcce137f1790800000000000000
+      internalID: -7557195073579855626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_17
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 352
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b3c8fbdedc545990800000000000000
+      internalID: -7398186175619873872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f56267ae76c1d3680800000000000000
+      internalID: -8773825266407037345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f2b9a3ea9ef1d110800000000000000
+      internalID: 1284087309975270135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_20
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 320
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb78a4c834a138ff0800000000000000
+      internalID: -35155494670006337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_21
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 288
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d52646cc466012a0800000000000000
+      internalID: -6768797760007821872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_22
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 320
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44eaf52dab5456f70800000000000000
+      internalID: 9179820084160343620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_23
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 288
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6397ba46ea442a7c0800000000000000
+      internalID: -4061608398130808522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_24
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 320
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: feb5d547c57e2a530800000000000000
+      internalID: 3864905814512589807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_25
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 288
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e772eaeea54dbd1d0800000000000000
+      internalID: -3324830412866443394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_26
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 320
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf8c2deaad9c888a0800000000000000
+      internalID: -6302565737431906053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_27
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 288
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1717c600cc53bc160800000000000000
+      internalID: 7046785192247980401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_28
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 320
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f90301bd8edc5fe50800000000000000
+      internalID: 6842601608850714783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_29
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 288
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a58d5ef158f9932f0800000000000000
+      internalID: -992586848743860134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_30
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 320
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23ff52da55c599ba0800000000000000
+      internalID: -6081728298740220110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_31
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 288
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90cbc8e22b21024d0800000000000000
+      internalID: -3161506381919634423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_32
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 320
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0304863b4763d0950800000000000000
+      internalID: 6416844918926884912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_33
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 288
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd3ffe374d2d495c0800000000000000
+      internalID: -4209507941764566049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_34
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 320
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5b9de1612cf026d0800000000000000
+      internalID: -3017134530031150243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_35
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 288
+        width: 80
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 181aa49cf493222a0800000000000000
+      internalID: -6763780675514752639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4918fead4cd499c0800000000000000
+      internalID: -3921267149326771891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_37
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 311b1ef4698008110800000000000000
+      internalID: 1261017337342046483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_38
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75d32f81fe0077d80800000000000000
+      internalID: -8253126765217432233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_39
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 224
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b22f09aca738d3a50800000000000000
+      internalID: 6502498000400609835
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_40
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 256
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e56b0b5aef7114b0800000000000000
+      internalID: -5471451427751893529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_41
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 224
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9fb186ab10ef75a0800000000000000
+      internalID: -6521247326046928994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_42
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 256
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 005c5256bbcd01a60800000000000000
+      internalID: 7642851265061700864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_43
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 224
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b4582b6f4bb64180800000000000000
+      internalID: -9131405244672486218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_44
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 256
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 427bea4b38a3ba7f0800000000000000
+      internalID: -600321787977353436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_45
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 224
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6196d26b198d0eb0800000000000000
+      internalID: -4751991281090653843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_46
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 256
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0729ec9503df2ef00800000000000000
+      internalID: 1144755639412494960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_47
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 224
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57c99e530c3297dd0800000000000000
+      internalID: -2487918010700293003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_48
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 256
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3247120170289b850800000000000000
+      internalID: 6393284112876139555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_49
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 224
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1a67d6cd92319bb0800000000000000
+      internalID: -4931104463766722018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_50
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 256
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81a2c50c9fc1c7c40800000000000000
+      internalID: 5511311902994344472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_51
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 224
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c1662a3e9b23f060800000000000000
+      internalID: 6985975405562192324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_52
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 256
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b5108d3ebbac7c00800000000000000
+      internalID: 899782859131196848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_53
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 224
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbb3fe48c1b6be5e0800000000000000
+      internalID: -1879290649263522883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_54
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8441f1848d738e70800000000000000
+      internalID: 9116268078797243533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_55
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b82bb4c5b9e748f0800000000000000
+      internalID: -556219062058014539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_56
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 865e7a7fdfaad8330800000000000000
+      internalID: 3714813275408950632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_57
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a17fa9269b210f60800000000000000
+      internalID: 7998722337131164065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_58
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 192
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a845a16c54c583dc0800000000000000
+      internalID: -3659073242492414838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_59
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 160
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79f4173090ee58560800000000000000
+      internalID: 7315514892213112727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_60
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37c97682f823909a0800000000000000
+      internalID: -6266421816069743501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_61
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 160
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8979c5aae44c35690800000000000000
+      internalID: -7614526702808688744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_62
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 192
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a54698747aa809af0800000000000000
+      internalID: -391660716516875174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_63
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 160
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b44cb7906c4822eb0800000000000000
+      internalID: -4746085071197584309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_64
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 192
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93d63894cd22a1b20800000000000000
+      internalID: 3105833222546877753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_65
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 160
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea317a85938563210800000000000000
+      internalID: 1312333344748802990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_66
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79b6c9d15adc71900800000000000000
+      internalID: 655218379855784855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_67
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 160
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d88128b1e0b0cf200800000000000000
+      internalID: 215059037425899661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_68
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 192
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca70858ac7dada690800000000000000
+      internalID: -7589219046137526356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_69
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 160
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b21dccb890ffbfd50800000000000000
+      internalID: 6772286881146917163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_70
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 192
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ff7a9fb4944fa970800000000000000
+      internalID: 8768302405174067193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_71
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 160
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62d2c2aec8b0c0560800000000000000
+      internalID: 7281207397403340070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_72
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09be921c487ad0520800000000000000
+      internalID: 2669974342718843792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_73
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3142d2ea2420ac30800000000000000
+      internalID: 4368531405162037566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_74
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d8750895af4931d0800000000000000
+      internalID: -3370575273471412008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_75
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6707c651a40b22f90800000000000000
+      internalID: -6979822640237350794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_76
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b74ae290dbbf15960800000000000000
+      internalID: 7589123636417438843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_77
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 96
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c71be41977348b840800000000000000
+      internalID: 5240012347263594876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_78
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 128
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b659cb9f7a7a7830800000000000000
+      internalID: 4069699901775763120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_79
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 96
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66d7922808e1d8c50800000000000000
+      internalID: 6669020160493976934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_80
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af0268f864f642320800000000000000
+      internalID: 2532271239335387386
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_81
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 96
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 985382dcdcbcf4640800000000000000
+      internalID: 5066492190585795977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_82
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 128
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66b9e567a79674fb0800000000000000
+      internalID: -4663642914426021018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_83
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 96
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e919b5fe3cf5b6d10800000000000000
+      internalID: 2119893344746967454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_84
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9462c762431fa8430800000000000000
+      internalID: 3786103643044587081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_85
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 96
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: caa0920a9e38bb9b0800000000000000
+      internalID: -5063308316610327892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_86
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 128
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85302729aaeb300a0800000000000000
+      internalID: -6916474962900286632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_87
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 96
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 069a02b3ada28ede0800000000000000
+      internalID: -1303744975340525216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_88
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 128
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8819ebacf4c7a9ab0800000000000000
+      internalID: -5000547754095767160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_89
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 96
+        width: 96
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce2b4af269e0a2900800000000000000
+      internalID: 660356333570405100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5030179d9cc826130800000000000000
+      internalID: 3558561454140490501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_91
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3b3debfcbbcf7ce0800000000000000
+      internalID: -1405180546175386817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_92
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5e8d8b268048c4d0800000000000000
+      internalID: -3114168197326205349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_93
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1919085999a1ba950800000000000000
+      internalID: 6461287337333658001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_94
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 398c359d8b6c3ff40800000000000000
+      internalID: 5761166845559425171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_95
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3030c0a4d78595f0800000000000000
+      internalID: -750544415587553217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_96
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 64
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cde95d694d39b4e20800000000000000
+      internalID: 3335922490270916316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_97
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d5892f9ffc95c620800000000000000
+      internalID: 2793811765554152916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_98
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 64
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8dcc7947110b27740800000000000000
+      internalID: 5148370913054936280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_99
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 32
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fabcb63a4055e2370800000000000000
+      internalID: 8299664641700383663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_100
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 64
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a6011b7c451ee4e0800000000000000
+      internalID: -1950598170378434906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_101
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 32
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d29f3c2ef1f37ef0800000000000000
+      internalID: -111479491787779372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_102
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 64
+        width: 112
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a9547e132317fbf0800000000000000
+      internalID: -290742609386382942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_103
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 32
+        width: 128
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ee14eda571ef4670800000000000000
+      internalID: 8525280515180469993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_104
+      rect:
+        serializedVersion: 2
+        x: 496
+        y: 64
+        width: 112
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df179724253409490800000000000000
+      internalID: -7741613738868248067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_105
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 32
+        width: 128
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2eeb74fe5d5ab1800800000000000000
+      internalID: 584242914935684834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_106
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 64
+        width: 112
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf60487c4bc5813d0800000000000000
+      internalID: -3235734400754514180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_107
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 32
+        width: 128
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5eb7ea275f5fe2000800000000000000
+      internalID: 13218283468520421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_108
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b20d8fe47bb0f9590800000000000000
+      internalID: -7665395158829445077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_109
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ed09422487723900800000000000000
+      internalID: 662723504571485668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_110
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a5aafe1356053c10800000000000000
+      internalID: 2032537760899442088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_111
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90e4bf8281debc600800000000000000
+      internalID: 489745672522386953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_112
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0db672b6c82e3540800000000000000
+      internalID: 4989470271035849995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_113
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84914a8898ffad760800000000000000
+      internalID: 7483574696997558600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_114
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 128
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0a5872dc7c0ce7e0800000000000000
+      internalID: -1734998026197902833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_115
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 128
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18268b6dfed7e62b0800000000000000
+      internalID: -5589391618467143039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink Buttons Text_116
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 128
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81c437a45deb52010800000000000000
+      internalID: 1163545902031522840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Pink Buttons Text_0: 3895711943615313568
+      Pink Buttons Text_1: 1085398567560629936
+      Pink Buttons Text_10: 2184904487154805919
+      Pink Buttons Text_100: -1950598170378434906
+      Pink Buttons Text_101: -111479491787779372
+      Pink Buttons Text_102: -290742609386382942
+      Pink Buttons Text_103: 8525280515180469993
+      Pink Buttons Text_104: -7741613738868248067
+      Pink Buttons Text_105: 584242914935684834
+      Pink Buttons Text_106: -3235734400754514180
+      Pink Buttons Text_107: 13218283468520421
+      Pink Buttons Text_108: -7665395158829445077
+      Pink Buttons Text_109: 662723504571485668
+      Pink Buttons Text_11: 3615867691100859265
+      Pink Buttons Text_110: 2032537760899442088
+      Pink Buttons Text_111: 489745672522386953
+      Pink Buttons Text_112: 4989470271035849995
+      Pink Buttons Text_113: 7483574696997558600
+      Pink Buttons Text_114: -1734998026197902833
+      Pink Buttons Text_115: -5589391618467143039
+      Pink Buttons Text_116: 1163545902031522840
+      Pink Buttons Text_12: 1744754043895713104
+      Pink Buttons Text_13: 6375775138340070679
+      Pink Buttons Text_14: -258879684255896069
+      Pink Buttons Text_15: 194742411153725376
+      Pink Buttons Text_16: -7557195073579855626
+      Pink Buttons Text_17: -7398186175619873872
+      Pink Buttons Text_18: -8773825266407037345
+      Pink Buttons Text_19: 1284087309975270135
+      Pink Buttons Text_2: -9021284499969210350
+      Pink Buttons Text_20: -35155494670006337
+      Pink Buttons Text_21: -6768797760007821872
+      Pink Buttons Text_22: 9179820084160343620
+      Pink Buttons Text_23: -4061608398130808522
+      Pink Buttons Text_24: 3864905814512589807
+      Pink Buttons Text_25: -3324830412866443394
+      Pink Buttons Text_26: -6302565737431906053
+      Pink Buttons Text_27: 7046785192247980401
+      Pink Buttons Text_28: 6842601608850714783
+      Pink Buttons Text_29: -992586848743860134
+      Pink Buttons Text_3: -8122136433546780710
+      Pink Buttons Text_30: -6081728298740220110
+      Pink Buttons Text_31: -3161506381919634423
+      Pink Buttons Text_32: 6416844918926884912
+      Pink Buttons Text_33: -4209507941764566049
+      Pink Buttons Text_34: -3017134530031150243
+      Pink Buttons Text_35: -6763780675514752639
+      Pink Buttons Text_36: -3921267149326771891
+      Pink Buttons Text_37: 1261017337342046483
+      Pink Buttons Text_38: -8253126765217432233
+      Pink Buttons Text_39: 6502498000400609835
+      Pink Buttons Text_4: -9050240567799450366
+      Pink Buttons Text_40: -5471451427751893529
+      Pink Buttons Text_41: -6521247326046928994
+      Pink Buttons Text_42: 7642851265061700864
+      Pink Buttons Text_43: -9131405244672486218
+      Pink Buttons Text_44: -600321787977353436
+      Pink Buttons Text_45: -4751991281090653843
+      Pink Buttons Text_46: 1144755639412494960
+      Pink Buttons Text_47: -2487918010700293003
+      Pink Buttons Text_48: 6393284112876139555
+      Pink Buttons Text_49: -4931104463766722018
+      Pink Buttons Text_5: 7119766060208825893
+      Pink Buttons Text_50: 5511311902994344472
+      Pink Buttons Text_51: 6985975405562192324
+      Pink Buttons Text_52: 899782859131196848
+      Pink Buttons Text_53: -1879290649263522883
+      Pink Buttons Text_54: 9116268078797243533
+      Pink Buttons Text_55: -556219062058014539
+      Pink Buttons Text_56: 3714813275408950632
+      Pink Buttons Text_57: 7998722337131164065
+      Pink Buttons Text_58: -3659073242492414838
+      Pink Buttons Text_59: 7315514892213112727
+      Pink Buttons Text_6: 8378463862558777765
+      Pink Buttons Text_60: -6266421816069743501
+      Pink Buttons Text_61: -7614526702808688744
+      Pink Buttons Text_62: -391660716516875174
+      Pink Buttons Text_63: -4746085071197584309
+      Pink Buttons Text_64: 3105833222546877753
+      Pink Buttons Text_65: 1312333344748802990
+      Pink Buttons Text_66: 655218379855784855
+      Pink Buttons Text_67: 215059037425899661
+      Pink Buttons Text_68: -7589219046137526356
+      Pink Buttons Text_69: 6772286881146917163
+      Pink Buttons Text_7: -4108541507998272986
+      Pink Buttons Text_70: 8768302405174067193
+      Pink Buttons Text_71: 7281207397403340070
+      Pink Buttons Text_72: 2669974342718843792
+      Pink Buttons Text_73: 4368531405162037566
+      Pink Buttons Text_74: -3370575273471412008
+      Pink Buttons Text_75: -6979822640237350794
+      Pink Buttons Text_76: 7589123636417438843
+      Pink Buttons Text_77: 5240012347263594876
+      Pink Buttons Text_78: 4069699901775763120
+      Pink Buttons Text_79: 6669020160493976934
+      Pink Buttons Text_8: -3911318143625103303
+      Pink Buttons Text_80: 2532271239335387386
+      Pink Buttons Text_81: 5066492190585795977
+      Pink Buttons Text_82: -4663642914426021018
+      Pink Buttons Text_83: 2119893344746967454
+      Pink Buttons Text_84: 3786103643044587081
+      Pink Buttons Text_85: -5063308316610327892
+      Pink Buttons Text_86: -6916474962900286632
+      Pink Buttons Text_87: -1303744975340525216
+      Pink Buttons Text_88: -5000547754095767160
+      Pink Buttons Text_89: 660356333570405100
+      Pink Buttons Text_9: -392491833020405535
+      Pink Buttons Text_90: 3558561454140490501
+      Pink Buttons Text_91: -1405180546175386817
+      Pink Buttons Text_92: -3114168197326205349
+      Pink Buttons Text_93: 6461287337333658001
+      Pink Buttons Text_94: 5761166845559425171
+      Pink Buttons Text_95: -750544415587553217
+      Pink Buttons Text_96: 3335922490270916316
+      Pink Buttons Text_97: 2793811765554152916
+      Pink Buttons Text_98: 5148370913054936280
+      Pink Buttons Text_99: 8299664641700383663
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

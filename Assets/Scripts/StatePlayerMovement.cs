@@ -18,7 +18,7 @@ public class StatePlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator _animator;
 
-    [SerializeField] private Rigidbody2D rigidBody;
+    [SerializeField] private Rigidbody2D _rigidBody;
 
     [Header("State Thresholds")]
     [SerializeField] private float velocityYThreshold = 0.5f; // Threshold per caduta
@@ -39,9 +39,9 @@ public class StatePlayerMovement : MonoBehaviour
     private void Update()
     {
         // Controllo con threshold
-        bool isGrounded = Mathf.Abs(rigidBody.linearVelocity.y) < velocityYThreshold;
-        bool isMoving = Mathf.Abs(rigidBody.linearVelocity.x) > velocityXThreshold;
-        bool isFalling = rigidBody.linearVelocity.y < -velocityYThreshold;
+        bool isGrounded = Mathf.Abs(_rigidBody.linearVelocity.y) < velocityYThreshold;
+        bool isMoving = Mathf.Abs(_rigidBody.linearVelocity.x) > velocityXThreshold;
+        bool isFalling = _rigidBody.linearVelocity.y < -velocityYThreshold;
 
         // Logica stati
         if (isFalling)
