@@ -155,17 +155,14 @@ public class PlayerMovement : MonoBehaviour
 
     private bool GetIsGrounded()
     {
-        // ✅ Raggio piccolo per ogni piede
         float footRadius = _playerHalfWidth * 0.2f; // Piccolo!
 
-        // ✅ Posizione dei piedi (sinistra e destra)
         float feetY = transform.position.y - _playerHalfHeight - 0.09f;
         float footOffset = _playerHalfWidth * 0.7f; // Distanza dal centro
 
         Vector2 leftFootPos = new Vector2(transform.position.x - footOffset, feetY);
         Vector2 rightFootPos = new Vector2(transform.position.x + footOffset, feetY);
 
-        // ✅ Controlla entrambi i piedi
         bool leftFootGrounded = Physics2D.OverlapCircle(leftFootPos, footRadius, groundLayer);
         bool rightFootGrounded = Physics2D.OverlapCircle(rightFootPos, footRadius, groundLayer);
 
