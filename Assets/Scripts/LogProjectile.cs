@@ -5,7 +5,7 @@ public class LogProjectile : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float _bulletSpeed = 5f;
-    [SerializeField] private int _damage = 10;
+    [SerializeField] private int _damage = 1;
     [SerializeField] private float _lifetime = 5f;
 
     [Header("Break Sprites")]
