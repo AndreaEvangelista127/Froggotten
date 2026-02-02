@@ -1171,7 +1171,7 @@ MonoBehaviour:
   _projectilePrefab: {fileID: 9104689023663857749, guid: f2f8d7b450071b74880afd418194152a, type: 3}
   _shootPoint: {fileID: 254329004}
   _moveSpeed: 2
-  _detectionRange: 5
+  _detectionRange: 15
   _attackRange: 10
   _attackCooldown: 2
 --- !u!95 &578341250
@@ -10408,9 +10408,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db0cc2c0e8650544b913fd195725b5f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 3
-  _currHealth: 0
-  healthUi: {fileID: 550453796}
+  _maxHealth: 5.5
+  _healthUi: {fileID: 550453796}
+  _numberOfFlashes: 5
+  _spriteRenderer: {fileID: 1051317703}
+  _hitFlashDuration: 0.1
 --- !u!1001 &1293561366
 PrefabInstance:
   m_ObjectHideFlags: 0

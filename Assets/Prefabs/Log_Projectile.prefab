@@ -199,6 +199,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpeed: 10
-  _damage: 10
+  _damage: 0.5
   _lifetime: 5
   _brokenProjectilePrefab: {fileID: 5843485491431487987, guid: 07d77ea3fcef8944594d71de53fabe12, type: 3}

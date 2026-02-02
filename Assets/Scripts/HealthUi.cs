@@ -1,71 +1,76 @@
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class HealthUi : MonoBehaviour
 {
+    [Header("Heart Sprites")]
     [SerializeField] private Sprite _fullHeart;
     [SerializeField] private Sprite _halfHeart;
     [SerializeField] private Sprite _emptyHeart;
+
+    [Header("Heart Prefab")]
     [SerializeField] private GameObject _heartPrefab;
 
     private List<Image> _heartImages = new List<Image>();
-    
-    
+
 
     private void Start()
     {
-        
+
     }
 
-    public void InitializeHealthUi(int maxHealth)
+    public void InitializeHealthUi(float maxHealth)
     {
-        _heartImages = new List<Image>();
 
-        for (int i = 0; i < maxHealth; i++)
+        // Ogni cuore pieno = 1.0, mezzo cuore = 0.5
+        int numberOfHearts = (int)maxHealth;  // here we store only the integer part
+
+        // if there is a half heart needed
+        if (maxHealth % 1 != 0)
         {
-            GameObject heart = Instantiate(_heartPrefab, gameObject.transform); // Spawning the heart in the parent position and then pushing the others with Horizontal Layout Group
-            if(heart.TryGetComponent(out Image heartImage))
-            {
-                _heartImages.Add(heartImage);
-            }
-
+            numberOfHearts = numberOfHearts + 1; // add one more heart for the half
         }
+
+        // Istanciate hearts
+        for (int i = 0; i < numberOfHearts; i++)
+        {
+            GameObject heart = Instantiate(_heartPrefab, transform);
+            Image heartImage = heart.GetComponent<Image>();
+            _heartImages.Add(heartImage);
+        }
+
+        UpdateHeartContainer(maxHealth);
     }
 
     public void UpdateHeartContainer(float currentHealth)
     {
-        int maxHealth = _heartImages.Count;
+        int fullHearts = (int)currentHealth;  
 
-        int fullHeart = (int)currentHealth;
-
-        bool hasHalf = false;
-
-        if (currentHealth % 2 > 0)
-        { // we are in odd so half heart
-            hasHalf = true;
-        }
-
-        for (int i = 0; i < maxHealth; i ++)
+        bool hasHalfHeart = false;
+        if (currentHealth % 1 != 0)
         {
-            for(int j = 0;  j < fullHeart; j++)
-            {
-                _heartImages[j].sprite = _fullHeart;
-                i++;
-
-            }
-            if (hasHalf)
-            {
-                _heartImages[i].sprite = _halfHeart;
-
-            }
+            hasHalfHeart = true;
         }
 
-
-
-
-
-
+        // Aggiorna ogni cuore
+        for (int i = 0; i < _heartImages.Count; i++)
+        {
+            if (i < fullHearts) // if the player still has full hearts
+            {
+                // Cuore pieno
+                _heartImages[i].sprite = _fullHeart;
+            }
+            else if (i == fullHearts && hasHalfHeart == true) //As soon as u finish checking the full hearts, check if there is a half heart
+            {
+                // Mezzo cuore
+                _heartImages[i].sprite = _halfHeart;
+            }
+            else
+            {
+                // Cuore vuoto
+                _heartImages[i].sprite = _emptyHeart; //otherwise empty heart
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@ public class LogProjectile : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float _bulletSpeed = 5f;
-    [SerializeField] private int _damage = 1;
+    [SerializeField] private float _damage = 0.5f;
     [SerializeField] private float _lifetime = 5f;
 
     [Header("Break Sprites")]
@@ -49,8 +49,9 @@ public class LogProjectile : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            //TODO: Damage player
-            BreakProjectile();
+            collision.GetComponent<PlayerHealth>().TakeDamage(_damage);
+            //BreakProjectile();
+            Destroy(gameObject);
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
         {

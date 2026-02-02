@@ -1,51 +1,126 @@
+﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int _maxHealth = 3;
-    [SerializeField] private float _currHealth;
+    [Header("Health Settings")]
+    [SerializeField] private float _maxHealth = 3.5f; 
+    private float _currentHealth;
 
-    [SerializeField] public HealthUi healthUi;
+    [Header("UI")]
+    [SerializeField] private HealthUi _healthUi;
 
-    private int _totalHits = 0;
+    [Header("Invulnerability Settings")]
+    [SerializeField] private int _numberOfFlashes = 5;
+    private bool _isInvulnerable = false;
+
+    [Header("Visual Feedback")]
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private float _hitFlashDuration = 0.1f;
+
+    private Color _originalColor;
 
 
-
-    private void Awake()
+    void Start()
     {
-        _currHealth = _maxHealth;
-        
-    }
+        _currentHealth = _maxHealth;
 
-    public void Start()
-    {
-        if (healthUi != null)
+        if (_healthUi != null)
         {
-            healthUi.InitializeHealthUi(_maxHealth);
+            _healthUi.InitializeHealthUi(_maxHealth);
+        }
+
+        if (_spriteRenderer != null)
+        {
+            _originalColor = _spriteRenderer.color;
         }
     }
 
-    private void Update()
+    public void TakeDamage(float damage)
     {
-        
-    }
+        if(_isInvulnerable) return;
 
-    public void TakeDamage(int damage)
-    {
-        _currHealth -= damage;
-        _totalHits++;
+        _currentHealth = _currentHealth - damage;
 
-        if(_currHealth < 0)
+        if (_currentHealth < 0)
         {
-            _currHealth = 0;
+            _currentHealth = 0;
         }
 
-        //UpdateHeartContainer();
+        Debug.Log($" Player Health: {_currentHealth}/{_maxHealth}");
+
+        if (_healthUi != null)
+        {
+            _healthUi.UpdateHeartContainer(_currentHealth);
+        }
+
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            StartCoroutine(HitEffect());
+        }
     }
 
-    public void PlayerIsDead()
+    IEnumerator HitEffect()
     {
-        Debug.Log("ur dead bro");
+        _isInvulnerable = true;
+
+        if (_spriteRenderer != null)
+        {
+            _spriteRenderer.color = Color.red;
+        }
+
+        yield return new WaitForSeconds(_hitFlashDuration); //flash red animation + duration
+
+        float flashInterval = 0.1f;
+
+        // Flashing effect
+        for (int i = 0; i < _numberOfFlashes; i++)
+        {
+            if (_spriteRenderer != null)
+            {
+                _spriteRenderer.color = Color.clear; //Transparent
+            }
+            yield return new WaitForSeconds(flashInterval);
+
+            if (_spriteRenderer != null)
+            {
+                _spriteRenderer.color = _originalColor; //Back to original
+            }
+            yield return new WaitForSeconds(flashInterval);
+        }
+
+        if (_spriteRenderer != null)
+        {
+            _spriteRenderer.color = _originalColor;
+        }
+
+        _isInvulnerable = false;
+    }
+
+    public void Heal(float amount)
+    {
+        _currentHealth = _currentHealth + amount;
+
+        // Non superare il massimo
+        if (_currentHealth > _maxHealth)
+        {
+            _currentHealth = _maxHealth;
+        }
+
+        Debug.Log($" Player healed! Health: {_currentHealth}/{_maxHealth}");
+
+        if (_healthUi != null)
+        {
+            _healthUi.UpdateHeartContainer(_currentHealth);
+        }
+    }
+
+    void Die()
+    {
+        Debug.Log(" Player è morto!");
     }
 }
