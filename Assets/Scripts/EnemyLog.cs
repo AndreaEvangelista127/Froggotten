@@ -1,11 +1,13 @@
-using UnityEngine;
+ï»¿using UnityEngine;
+using System.Collections;
 
-public class EnemyLog : MonoBehaviour
+public class EnemyLog : MonoBehaviour, IEnemy
 {
     [Header("References")]
     [SerializeField] private Transform _sprite;
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _shootPoint;
+    [SerializeField] private Transform _playerTf;
 
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 2f;
@@ -13,35 +15,32 @@ public class EnemyLog : MonoBehaviour
 
     [Header("Attack")]
     [SerializeField] private float _attackRange = 3f;
-    [SerializeField] private float _attackCooldown = 2f;
+    [SerializeField] private float _timeBetweenAttacks = 1.5f;
 
     private Animator _animator;
     private Rigidbody2D _rb;
-    private Transform _playerTf;
-    private float _lastAttackTime;
     private bool _facingRight = true;
+    private bool _isAttacking = false;
+    private bool _isDead = false;
 
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
-        _playerTf = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()
     {
-        if(_playerTf == null) return;
+        if (_playerTf == null || _isDead) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, _playerTf.position);
 
-        float coolDown = _lastAttackTime + _attackCooldown;
-
-        if (_attackRange >= distanceToPlayer && Time.time >= coolDown) // if in attack range and time.time reached the cooldown
+        if (distanceToPlayer <= _attackRange) // we are in attack range
         {
-            Attack();
+            StopAndAttack();
         }
-        else if(_detectionRange >= distanceToPlayer) // if in detection range
+        else if (_detectionRange >= distanceToPlayer) // we are in detection range
         {
             ChasePlayer();
         }
@@ -53,11 +52,13 @@ public class EnemyLog : MonoBehaviour
 
     private void ChasePlayer()
     {
+
         _animator.SetBool("isRunning", true);
 
         // Move towards player
         Vector2 direction = (_playerTf.position - transform.position).normalized;
         _rb.linearVelocity = new Vector2(direction.x * _moveSpeed, _rb.linearVelocity.y);
+
         // Flip sprite based on movement direction
         if (direction.x > 0 && !_facingRight)
         {
@@ -75,16 +76,50 @@ public class EnemyLog : MonoBehaviour
         _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
     }
 
-    private void Attack()
+    private void StopAndAttack()
     {
-        _animator.SetTrigger("attack"); 
-        _lastAttackTime = Time.time;
+        // Stop rigidbody and animation
+        _animator.SetBool("isRunning", false);
         _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
+
+        // Flip sprite towards player
+        Vector2 direction = (_playerTf.position - transform.position).normalized;
+        if (direction.x > 0 && !_facingRight)
+        {
+            Flip();
+        }
+        else if (direction.x < 0 && _facingRight)
+        {
+            Flip();
+        }
+
+        // attack check
+        if (!_isAttacking)
+        {
+            StartCoroutine(AttackCoroutine());
+        }
+    }
+
+    IEnumerator AttackCoroutine()
+    {
+        _isAttacking = true;
+
+        _animator.SetBool("isAttacking", true);
+
+        yield return new WaitForSeconds(_timeBetweenAttacks);
+
+        _animator.SetBool("isAttacking", false);
+
+        _isAttacking = false;
     }
 
     public void ShootProjectile()
     {
-        // Questo metodo sarà chiamato dall'Animation Event
+        if (_isDead)
+        {
+            return;
+        }
+
         if (_projectilePrefab != null && _shootPoint != null)
         {
             GameObject projectile = Instantiate(_projectilePrefab, _shootPoint.position, Quaternion.identity);
@@ -99,27 +134,26 @@ public class EnemyLog : MonoBehaviour
 
         }
     }
-
-
-    public void TakeDamage(int damage)
-    {
-        _animator.SetTrigger("hit");
-    }
-
     public void Flip()
     {
         _facingRight = !_facingRight;
         float scaleX;
         if (_facingRight)
         {
-            scaleX = -1f;  
+            scaleX = -1f;
         }
         else
         {
-            scaleX = 1f;   
+            scaleX = 1f;
         }
         _sprite.localScale = new Vector3(scaleX, 1f, 1f);
     }
 
+    public void OnDeath()
+    {
+        _isDead = true;
+        StopAllCoroutines();
+        this.enabled = false;
+    }
 
 }
