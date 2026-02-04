@@ -53,7 +53,7 @@ public class LogProjectile : MonoBehaviour
             //BreakProjectile();
             Destroy(gameObject);
         }
-        else if(collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Platform"))
+        else if(collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Platform") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             BreakProjectile();
         }

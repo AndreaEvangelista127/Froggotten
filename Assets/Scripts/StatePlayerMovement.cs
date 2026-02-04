@@ -14,11 +14,15 @@ public class StatePlayerMovement : MonoBehaviour
         Fall,
         Double_Jump,
         Wall_Jump,
+        Wall_Slide,
+        Gliding
     }
 
     [SerializeField] private Animator _animator;
 
     [SerializeField] private Rigidbody2D _rigidBody;
+
+    [SerializeField] private PlayerMovement _playerMovement;
 
     [Header("State Thresholds")]
     [SerializeField] private float velocityYThreshold = 0.5f; // Threshold per caduta
@@ -32,12 +36,26 @@ public class StatePlayerMovement : MonoBehaviour
     private const string fallAnim = "Fall";
     private const string doubleJumpAnim = "Double Jump";
     private const string wallJumpAnim = "Wall Jump";
+    private const string wallSlideAnim = "Wall Slide";
+    private const string glidingAnim = "Gliding";
 
     public static Action<MoveState> OnPlayerMoveStateChanged;
 
 
     private void Update()
     {
+        if (_playerMovement != null && _playerMovement.IsGliding)
+        {
+            SetMoveState(MoveState.Gliding);
+            return;
+        }
+
+        if (_playerMovement != null && _playerMovement.IsWallSliding)
+        {
+            SetMoveState(MoveState.Wall_Slide);
+            return;  // Esci, non controllare altro
+        }
+
         // Controllo con threshold
         bool isGrounded = Mathf.Abs(_rigidBody.linearVelocity.y) < velocityYThreshold;
         bool isMoving = Mathf.Abs(_rigidBody.linearVelocity.x) > velocityXThreshold;
@@ -91,6 +109,12 @@ public class StatePlayerMovement : MonoBehaviour
             case MoveState.Wall_Jump:
                 HandleWallJump();
                 break;
+            case MoveState.Wall_Slide:  
+                HandleWallSlide();
+                break;
+            case MoveState.Gliding:  
+                HandleGliding();
+                break;
             default:
                 Debug.LogError($"Invalid movement state: {moveState}");
                 break;
@@ -130,5 +154,14 @@ public class StatePlayerMovement : MonoBehaviour
     private void HandleWallJump() 
     {
         _animator.Play(wallJumpAnim);
+    }
+
+    private void HandleWallSlide()
+    {
+        _animator.Play(wallSlideAnim);
+    }
+    private void HandleGliding()
+    {
+        _animator.Play(fallAnim);  
     }
 }

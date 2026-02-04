@@ -1,5 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -30,11 +31,22 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float coyoteTime = 0.15f;
 
     [Header("Wall Jump Settings")]
+    [SerializeField] private bool _wallJumpEnabled = true;  
     [SerializeField] LayerMask wallLayer;
     [SerializeField] float wallJumpForceX = 8f; // Forza orizzontale del wall jump
     [SerializeField] float wallJumpForceY = 12f; // Forza verticale del wall jump
     [SerializeField] float wallCheckDistance = 0.2f; // Distanza per rilevare il muro
-    [SerializeField] float wallJumpControlLockTime = 0.2f; // Time to
+    [SerializeField] float wallJumpControlLockTime = 0.2f; // Tempo di blocco del controllo orizzontale dopo il wall jump
+
+    [Header("Wall Slide Settings")]
+    [SerializeField] private bool _wallSlideEnabled = true;
+    [SerializeField] private float _wallSlideSpeed = 2f;
+
+    [Header("Gliding Settings")]
+    [SerializeField] private bool _glidingEnabled = true;
+    [SerializeField] private float _glidingFallSpeed = 2f;  // Velocità caduta lenta
+    [SerializeField] private float _glidingHorizontalSpeed = 5f;  // Velocità movimento orizzontale
+    [SerializeField] private GameObject _lilypadSprite;  // Sprite lilypad
 
     //Player sprite dimension
     private float _playerHalfHeight;
@@ -51,12 +63,19 @@ public class PlayerMovement : MonoBehaviour
     private float _coyoteTimeCounter;
     private float _wallJumpControlTimer;
 
+    // Gliding
+    private bool _isGliding = false;
+    private bool _isJumpButtonHeld = false;
+
     //public varibales used for animation
     public bool IsGrounded => GetIsGrounded();
     public bool IsMoving => Mathf.Abs(_moveValue) > 0.01f;
     public float VelocityY => rb.linearVelocityY;
     public float VelocityX => rb.linearVelocityX;
     public int WallDirection => GetWallJumpDirection();
+    public bool IsWallSliding => CanWallSlide();
+    public bool IsGliding => _isGliding;
+
 
     private void Start()
     {
@@ -66,6 +85,11 @@ public class PlayerMovement : MonoBehaviour
         _rayLength = _playerHalfHeight + groundCheckOffset;
 
         playerSpriteR.flipX = false;
+
+        if(_lilypadSprite != null)
+        {
+            _lilypadSprite.SetActive(false); 
+        }
         //Debug.Log($"Velocity iniziale: {rb.linearVelocity}");
         //Debug.Log($"flipX iniziale: {playerSpriteR.flipX}");
     }
@@ -82,6 +106,14 @@ public class PlayerMovement : MonoBehaviour
             // Decrementa il timer
             _wallJumpControlTimer -= Time.fixedDeltaTime;
         }
+
+        if (CanWallSlide())
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocityX, -_wallSlideSpeed);
+        }
+
+        UpdateGliding();
+
 
         if (GetIsGrounded())
         {
@@ -108,6 +140,17 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             _isJumping = false;
+        }
+
+        //GLIDING CHECK
+        if (_glidingEnabled && _isJumpButtonHeld && CanGlide() && !_isGliding)
+        {
+            StartGliding();
+        }
+
+        if (_isGliding && !_isJumpButtonHeld)
+        {
+            StopGliding();
         }
 
     }
@@ -172,6 +215,8 @@ public class PlayerMovement : MonoBehaviour
 
     private int GetWallJumpDirection()
     {
+        if (!_wallJumpEnabled) return 0;
+
         if (Physics2D.Raycast(transform.position, Vector2.right, _playerHalfWidth + wallCheckDistance, wallLayer)) //wallCheckDistance as an offset to be sure
         {
             return -1; //we are jumping from a wall on the right to go left so negative value
@@ -183,32 +228,89 @@ public class PlayerMovement : MonoBehaviour
         return 0;
     }
 
+    private bool CanWallSlide()
+    {
+        if(!_wallSlideEnabled) return false;
+
+        if(GetIsGrounded()) return false;
+
+        if(rb.linearVelocityY >= 0) return false; //only when falling
+
+        // Now we check if we are touching a wall and which side
+        int wallDirection = GetWallJumpDirection();
+        if(wallDirection == 0) return false; //not touching any wall
+
+        // If we are touching a wall we need to check if we are moving towards it
+        bool pressingTowardsWall = false;
+
+        if (wallDirection == -1 && _moveValue > 0.1f)  // right wall, pressing right
+        {
+            pressingTowardsWall = true;
+        }
+        else if (wallDirection == 1 && _moveValue < -0.1f)  // left wall, pressing left
+        {
+            pressingTowardsWall = true;
+        }
+
+        return pressingTowardsWall;
+    }
+
     public void Jump(InputAction.CallbackContext context)
     {
+        if (context.started)
+        {
+            _isJumpButtonHeld = true;
+        }
+
+        if (context.canceled)
+        {
+            _isJumpButtonHeld = false;
+            _isJumping = false;
+
+
+            if (_isGliding)
+            {
+                StopGliding();
+            }
+
+            if (rb.linearVelocityY > 0)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);
+            }
+        }
+
         if (context.performed)
         {
-            int wallDirection = GetWallJumpDirection();
-            // WALL JUMP (priorità massima)
-            if (wallDirection != 0 && !GetIsGrounded())
+            // If gliding, stop gliding when jump is pressed
+            if (_isGliding)
             {
-                //Debug.Log("WALL JUMP");
+                StopGliding();
+            }
 
-                // Salto diagonale
-                rb.linearVelocity = new Vector2(wallJumpForceX * wallDirection, wallJumpForceY); //OVERWRITTEN BY THE MOVE IN THE FIXEDUPDATE SO WE USE wallJumpControlLockTime
+            if (_wallJumpEnabled)
+            {
+            int wallDirection = GetWallJumpDirection();
 
-                //  RESETTA il doppio salto invece di consumarlo
-                _canDoubleJump = true;
+                // WALL JUMP 
+                if (wallDirection != 0 && !GetIsGrounded())
+                {
+                    // Salto diagonale
+                    rb.linearVelocity = new Vector2(wallJumpForceX * wallDirection, wallJumpForceY); //OVERWRITTEN BY THE MOVE IN THE FIXEDUPDATE SO WE USE wallJumpControlLockTime
 
-                // If true the wall jump would be overwritten by the press and hold jump in the update method
-                _isJumping = false;
+                    //  RESETTA il doppio salto invece di consumarlo
+                    _canDoubleJump = true;
 
-                /* Blocking the horizontal movement in the fixedUpdate to let the player jump properly in a wall jump, otherwise the wall jump direction would
-                have been overriden by the rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y); */
-                _wallJumpControlTimer = wallJumpControlLockTime;
+                    // If true the wall jump would be overwritten by the press and hold jump in the update method
+                    _isJumping = false;
 
-                _statePlayerMovement.SetMoveState(StatePlayerMovement.MoveState.Wall_Jump);
+                    /* Blocking the horizontal movement in the fixedUpdate to let the player jump properly in a wall jump, otherwise the wall jump direction would
+                    have been overriden by the rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y); */
+                    _wallJumpControlTimer = wallJumpControlLockTime;
 
-                return; //without returning the player would override the wall jump with the double jump
+                    _statePlayerMovement.SetMoveState(StatePlayerMovement.MoveState.Wall_Jump);
+
+                    return; //without returning the player would override the wall jump with the double jump
+                }
             }
             //Instead of using grounded now we check coyote timer because we want to jump when is grounded or even if the player is mid air meanwhile coyotimer is still > 0
             if (_coyoteTimeCounter > 0f)
@@ -242,15 +344,68 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (context.canceled)
-        {
-            _isJumping = false;
+        //if (context.canceled)
+        //{
+        //    _isJumping = false;
 
-            if (rb.linearVelocityY > 0)
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);// Cut the y speed because otherwise the player will be floating a little
-            }
+        //    if (rb.linearVelocityY > 0)
+        //    {
+        //        rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);// Cut the y speed because otherwise the player will be floating a little
+        //    }
+        //}
+    }
+
+    public bool CanGlide()
+    {
+        if (!_glidingEnabled) return false;
+
+        if (GetIsGrounded()) return false;
+
+        if (rb.linearVelocityY >= 0) return false;
+
+        if (CanWallSlide()) return false;
+
+        // The player can't glide during wall jump control lock
+        if (_wallJumpControlTimer > 0) return false; 
+
+        return true;
+    }
+
+    private void StartGliding()
+    {
+        _isGliding = true;
+
+        // Attiva sprite lilypad
+        if (_lilypadSprite != null)
+        {
+            _lilypadSprite.SetActive(true);
         }
+    }
+
+    private void StopGliding()
+    {
+        _isGliding = false;
+
+        // Disattiva sprite lilypad
+        if (_lilypadSprite != null)
+        {
+            _lilypadSprite.SetActive(false);
+        }
+    }
+
+    private void UpdateGliding()
+    {
+        if (!_isGliding) return;
+
+        // Velocità caduta ridotta
+        if (rb.linearVelocityY < -_glidingFallSpeed)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocityX, -_glidingFallSpeed);
+        }
+
+        // Movimento orizzontale (leggermente ridotto rispetto a normale)
+        float horizontalInput = _moveValue;
+        rb.linearVelocity = new Vector2(horizontalInput * _glidingHorizontalSpeed, rb.linearVelocityY);
     }
 
 
