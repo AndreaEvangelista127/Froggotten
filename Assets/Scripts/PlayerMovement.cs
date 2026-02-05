@@ -14,8 +14,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Collider2D playerCollider;
 
     [Header("Ground Check")]
-    [SerializeField] LayerMask groundLayer; // Layer del terreno
-    [SerializeField] float groundCheckOffset = 0.2f; // Offset extra per sicurezza
+    [SerializeField] Transform groundCheckTransform; // Il GameObject figlio
+    [SerializeField] Vector2 groundCheckSize = new Vector2(0.8f, 0.1f); // Dimensione del box
+    [SerializeField] LayerMask groundLayer;
 
     [Header("Player Settings")]
     [SerializeField] float speed;
@@ -82,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         _playerHalfHeight = playerCollider.bounds.extents.y; //return the width of the sprite from the center to one side, so if it was 0.5 the total width will be 1
         _playerHalfWidth = playerCollider.bounds.extents.x;
 
-        _rayLength = _playerHalfHeight + groundCheckOffset;
+        //_rayLength = _playerHalfHeight + groundCheckOffset;
 
         playerSpriteR.flipX = false;
 
@@ -119,6 +120,11 @@ public class PlayerMovement : MonoBehaviour
         {
             _canDoubleJump = true;
             _coyoteTimeCounter = coyoteTime; //  Reset timer when grounded
+
+            if (_isGliding)
+            {
+                StopGliding();
+            }
         }
         else
         {
@@ -198,19 +204,16 @@ public class PlayerMovement : MonoBehaviour
 
     private bool GetIsGrounded()
     {
-        float footRadius = _playerHalfWidth * 0.2f; // Piccolo!
+        if (groundCheckTransform == null) return false;
 
-        float feetY = transform.position.y - _playerHalfHeight - 0.09f;
-        float footOffset = _playerHalfWidth * 0.7f; // Distanza dal centro
+        bool isGrounded = Physics2D.OverlapBox(
+            groundCheckTransform.position,
+            groundCheckSize,
+            0f,
+            groundLayer
+        );
 
-        Vector2 leftFootPos = new Vector2(transform.position.x - footOffset, feetY);
-        Vector2 rightFootPos = new Vector2(transform.position.x + footOffset, feetY);
-
-        bool leftFootGrounded = Physics2D.OverlapCircle(leftFootPos, footRadius, groundLayer);
-        bool rightFootGrounded = Physics2D.OverlapCircle(rightFootPos, footRadius, groundLayer);
-
-        // Grounded se ALMENO UN piede tocca
-        return leftFootGrounded || rightFootGrounded;
+        return isGrounded;
     }
 
     private int GetWallJumpDirection()
@@ -355,6 +358,8 @@ public class PlayerMovement : MonoBehaviour
         //}
     }
 
+    
+
     public bool CanGlide()
     {
         if (!_glidingEnabled) return false;
@@ -408,43 +413,79 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector2(horizontalInput * _glidingHorizontalSpeed, rb.linearVelocityY);
     }
 
-
     private void OnDrawGizmos()
     {
-        if (playerCollider != null)
+        if (playerCollider == null) return;
+
+        DrawGroundCheckGizmos();
+        DrawWallCheckGizmos();
+        DrawCoyoteTimeGizmo();
+    }
+
+    // ========== GROUND CHECK VISUALIZATION ==========
+    private void DrawGroundCheckGizmos()
+    {
+        if (groundCheckTransform == null) return;
+
+        bool isGrounded = Physics2D.OverlapBox(
+            groundCheckTransform.position,
+            groundCheckSize,
+            0f,
+            groundLayer
+        );
+
+        if (isGrounded)
         {
-            /* -----------------GROUND CHECK GIZMOS (2 Sfere)-----------------*/
-            float footRadius = playerCollider.bounds.extents.x * 0.2f;
-            float feetY = transform.position.y - playerCollider.bounds.extents.y - 0.09f;
-            float footOffset = playerCollider.bounds.extents.x * 0.7f; //distanza tra i due piedi
-
-            Vector2 leftFootPos = new Vector2(transform.position.x - footOffset, feetY);
-            Vector2 rightFootPos = new Vector2(transform.position.x + footOffset, feetY);
-
-            bool leftFootGrounded = Physics2D.OverlapCircle(leftFootPos, footRadius, groundLayer);
-            Gizmos.color = leftFootGrounded ? Color.green : Color.red;
-            Gizmos.DrawWireSphere(leftFootPos, footRadius);
-            Gizmos.DrawSphere(leftFootPos, 0.03f);
-
-            bool rightFootGrounded = Physics2D.OverlapCircle(rightFootPos, footRadius, groundLayer);
-            Gizmos.color = rightFootGrounded ? Color.green : Color.red;
-            Gizmos.DrawWireSphere(rightFootPos, footRadius);
-            Gizmos.DrawSphere(rightFootPos, 0.03f);
-
-            /* -----------------WALL JUMP GIZMOS-----------------*/
-            float wallCheckLen = playerCollider.bounds.extents.x + wallCheckDistance;
-
-            // ✅ Usa wallLayer invece di groundLayer
-            bool wallRight = Physics2D.Raycast(transform.position, Vector2.right, wallCheckLen, wallLayer);
-            Gizmos.color = wallRight ? Color.cyan : Color.blue; // Cambiato colore
-            Gizmos.DrawLine(transform.position, transform.position + Vector3.right * wallCheckLen);
-
-            bool wallLeft = Physics2D.Raycast(transform.position, Vector2.left, wallCheckLen, wallLayer);
-            Gizmos.color = wallLeft ? Color.cyan : Color.blue;
-            Gizmos.DrawLine(transform.position, transform.position + Vector3.left * wallCheckLen);
+            Gizmos.color = Color.green;
+        }
+        else
+        {
+            Gizmos.color = Color.red;
         }
 
-        if (_coyoteTimeCounter > 0 && !GetIsGrounded())
+        // Disegna il box
+        Gizmos.DrawWireCube(groundCheckTransform.position, groundCheckSize);
+
+        // Centro del ground check
+        //Gizmos.DrawSphere(groundCheckTransform.position, 0.05f);
+    }
+
+    // ========== WALL CHECK VISUALIZATION ==========
+    private void DrawWallCheckGizmos()
+    {
+        float wallCheckLen = playerCollider.bounds.extents.x + wallCheckDistance;
+
+        // Right Wall Check
+        bool wallRight = Physics2D.Raycast(transform.position, Vector2.right, wallCheckLen, wallLayer);
+        if (wallRight)
+        {
+            Gizmos.color = Color.cyan;
+        }
+        else
+        {
+            Gizmos.color = Color.blue;
+        }
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.right * wallCheckLen);
+
+        //Left Wall Check
+        bool wallLeft = Physics2D.Raycast(transform.position, Vector2.left, wallCheckLen, wallLayer);
+        if (wallLeft)
+        {
+            Gizmos.color = Color.cyan;
+        }
+        else
+        {
+            Gizmos.color = Color.blue;
+        }
+        Gizmos.DrawLine(transform.position, transform.position + Vector3.left * wallCheckLen);
+    }
+
+    // ========== COYOTE TIME VISUALIZATION ==========
+    private void DrawCoyoteTimeGizmo()
+    {
+        bool isCoyoteTimeActive = _coyoteTimeCounter > 0 && !GetIsGrounded();
+
+        if (isCoyoteTimeActive)
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, 0.3f);

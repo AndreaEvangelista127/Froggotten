@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 61418d734a9c46049a84a722bb00e2ef
+guid: 343ece92c770e5140b339e48cf5fc6ed
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7035141729170985926
-    second: lilypad_0
+      213: -6525585032739864417
+    second: lilypad_improved_64x64-1.png_1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lilypad_0
+      name: lilypad_improved_64x64-1.png_1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 6
-        width: 32
-        height: 15
+        y: 19
+        width: 64
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6c393cff028d1a160800000000000000
-      internalID: 7035141729170985926
+      spriteID: f904feb9cf67075a0800000000000000
+      internalID: -6525585032739864417
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      lilypad_0: 7035141729170985926
+      lilypad_improved_64x64-1.png_1_0: -6525585032739864417
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

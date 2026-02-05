@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 61418d734a9c46049a84a722bb00e2ef
+guid: 2e759dde578d435429bd91300c217059
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7035141729170985926
-    second: lilypad_0
+      213: -3717204793744296271
+    second: lilypad_buono_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lilypad_0
+      name: lilypad_buono_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 6
-        width: 32
-        height: 15
+        x: 3
+        y: 4
+        width: 27
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6c393cff028d1a160800000000000000
-      internalID: 7035141729170985926
+      spriteID: 1b6fd774fe5d96cc0800000000000000
+      internalID: -3717204793744296271
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      lilypad_0: 7035141729170985926
+      lilypad_buono_0: -3717204793744296271
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
