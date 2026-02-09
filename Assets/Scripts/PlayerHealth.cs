@@ -11,18 +11,32 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private HealthUi _healthUi;
 
     [Header("Invulnerability Settings")]
-    [SerializeField] private int _numberOfFlashes = 5;
+    [SerializeField] private int _numberOfFlashes = 2;
     private bool _isInvulnerable = false;
 
     [Header("Visual Feedback")]
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private float _hitFlashDuration = 0.1f;
 
+    [Header("Respawn Settings")]
+    [SerializeField] private Vector3 _startPosition; 
+    private Vector3 _currentCheckpoint; 
+    private bool _hasCheckpoint = false;
+
+    [Header("Audio")]
+    [SerializeField] private AudioManager _audioManager;
+
     private Color _originalColor;
 
 
     void Start()
     {
+        // ============== Respawn System Initialization ==============
+        _startPosition = transform.position;
+        _currentCheckpoint = _startPosition;
+
+
+        // ============== Health UI Initialization ==============
         _currentHealth = _maxHealth;
 
         if (_healthUi != null)
@@ -52,6 +66,11 @@ public class PlayerHealth : MonoBehaviour
         if (_healthUi != null)
         {
             _healthUi.UpdateHeartContainer(_currentHealth);
+        }
+
+        if (_audioManager != null)
+        {
+            _audioManager.PlayTakeDamageSound();
         }
 
         if (_currentHealth <= 0)
@@ -119,8 +138,42 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
         Debug.Log(" Player è morto!");
+        Respawn();
+
+        if (_audioManager != null)
+        {
+            _audioManager.PlayDeathSound();
+        }
+
+
+    }
+
+    // ============== Respawn System Methods ==============
+    public void SetRespawnPoint(Vector3 newCheckpoint)
+    {
+        _currentCheckpoint = newCheckpoint;
+        _hasCheckpoint = true;
+    }
+
+    private void Respawn()
+    {
+        _currentHealth = _maxHealth;
+        if(_healthUi != null)
+        {
+            _healthUi.UpdateHeartContainer(_currentHealth);
+        }
+
+        // Respawn at current checkpoint if it exists, otherwise respawn at start position
+        if (_hasCheckpoint)
+        {
+            transform.position = _currentCheckpoint;
+        }
+        else
+        {
+            transform.position = _startPosition;
+        }
     }
 }

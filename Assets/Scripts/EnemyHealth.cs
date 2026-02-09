@@ -65,7 +65,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
 
-    private void ApplyDeathBounce()
+    public void ApplyDeathBounce()
     {
         if (_enemyRb != null)
         {

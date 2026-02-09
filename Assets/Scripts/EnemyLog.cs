@@ -17,6 +17,9 @@ public class EnemyLog : MonoBehaviour, IEnemy
     [SerializeField] private float _attackRange = 3f;
     [SerializeField] private float _timeBetweenAttacks = 1.5f;
 
+    [Header("Audio Manager")]
+    [SerializeField] private AudioManager _audioManager;
+
     private Animator _animator;
     private Rigidbody2D _rb;
     private bool _facingRight = true;
@@ -123,6 +126,11 @@ public class EnemyLog : MonoBehaviour, IEnemy
         if (_projectilePrefab != null && _shootPoint != null)
         {
             GameObject projectile = Instantiate(_projectilePrefab, _shootPoint.position, Quaternion.identity);
+
+            if (_audioManager != null)
+            {
+                _audioManager.PlayEnemyShootSound();
+            }
 
             LogProjectile projScript = projectile.GetComponent<LogProjectile>();
             if (projScript != null)

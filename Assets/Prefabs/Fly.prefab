@@ -170,4 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6839d14cb38ff2d4b860d45ae8e53452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 6261014011252309690}
+  _verticalSpeed: 2
+  _horizontalSpeed: 1.5
+  _verticalDistance: 0.3
+  _horizontalDistance: 0.5
+  _audioManager: {fileID: 0}

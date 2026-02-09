@@ -6,26 +6,33 @@ public class PlayerCollisions : MonoBehaviour
     [Header("Enemy Bounce")]
     [SerializeField] private float _enemyBounceForce = 10f;
 
+    [Header("Traps Damage")]
+    [SerializeField] private float _sawDamage = 0.5f;
+
     private Rigidbody2D _playerRb;
+    private PlayerHealth _playerHealth;
 
     private void Awake()
     {
         _playerRb = GetComponent<Rigidbody2D>();
+        _playerHealth = GetComponent<PlayerHealth>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // ========== ENEMY HEAD ==========
 
-        if(collision.CompareTag("EnemyHead"))
+        if (collision.CompareTag("EnemyHead"))
         {
             IDamageable enemy = collision.GetComponentInParent<IDamageable>();
             if (enemy != null)
             {
                 enemy.Die();
-                BouncePlayer();
+                BouncePlayer(_enemyBounceForce);
             }
         }
 
+        // ========== COLLECTIBLES ==========
         if (collision.CompareTag("Fly"))
         {
             Collectibles collectible = collision.GetComponent<Collectibles>();
@@ -34,10 +41,22 @@ public class PlayerCollisions : MonoBehaviour
                 collectible.Collect();
             }
         }
+
+        // ========== TRAPS (SAW, SPIKES, ETC) ==========
+        if (collision.CompareTag("Trap"))
+        {
+            Debug.Log($" PLAYER TRIGGER ENTERED: {collision.gameObject.name}");
+
+            if (_playerHealth != null)
+            {
+                _playerHealth.TakeDamage(_sawDamage);
+            }
+        }
     }
 
-    private void BouncePlayer()
+    public void BouncePlayer(float bounceForce)
     {
+        _enemyBounceForce = bounceForce;//in case we want to set different bounce forces for different enemies in the future
         _playerRb.linearVelocity = new Vector2(_playerRb.linearVelocity.x, _enemyBounceForce);
 
         Debug.Log("Bounce!");

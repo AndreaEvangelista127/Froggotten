@@ -9,11 +9,15 @@ public class Collectibles : MonoBehaviour
     [SerializeField] private float _verticalDistance = 0.3f;
     [SerializeField] private float _horizontalDistance = 0.5f;
 
+    [Header("Audio Source")]
+    [SerializeField] private AudioManager _audioManager;
+
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private Vector3 _startPosition;
     private float previousX;
     private bool _isCollected = false;
+    
 
     public void Awake()
     {
@@ -61,6 +65,7 @@ public class Collectibles : MonoBehaviour
     public void Collect()
     {
         _animator.SetTrigger("Collect");
+        if (_audioManager != null) _audioManager.PlayCollectibleSound();
         _isCollected = true;
 
         Destroy(gameObject, 0.5f);
