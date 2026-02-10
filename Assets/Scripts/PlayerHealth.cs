@@ -140,7 +140,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log(" Player è morto!");
+        Debug.Log(" Player dead!"); 
         Respawn();
 
         if (_audioManager != null)

@@ -5,7 +5,7 @@ using TMPro;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance {  get; private set; }
-    
+
     [Header("Music")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private Slider volumeSlider;
@@ -14,29 +14,38 @@ public class AudioManager : MonoBehaviour
     [Header("SFX")]
     [SerializeField] private AudioSource _sfxSource;
     [SerializeField] private AudioClip _clickSound;
+    [SerializeField][Range(0f, 1f)] private float _clickVolume = 1f; 
 
     [Header("Player Jump")]
     [SerializeField] private AudioClip _jumpSound;
+    [SerializeField][Range(0f, 1f)] private float _jumpVolume = 0.8f; 
     [SerializeField] private AudioClip _doubleJumpSound;
+    [SerializeField][Range(0f, 1f)] private float _doubleJumpVolume = 0.9f; 
     [SerializeField] private AudioClip _wallJumpSound;
+    [SerializeField][Range(0f, 1f)] private float _wallJumpVolume = 0.85f; 
 
     [Header("Player Footsteps")]
-    [SerializeField] private AudioSource _footstepSource; 
+    [SerializeField] private AudioSource _footstepSource;
     [SerializeField] private AudioClip _footstepSound;
-    [SerializeField] private float _footstepVolume = 0.3f;
+    [SerializeField][Range(0f, 1f)] private float _footstepVolume = 0.3f;
 
     [Header("Player Health SFX")]
     [SerializeField] private AudioClip _takeDamageSound;
+    [SerializeField][Range(0f, 1f)] private float _takeDamageVolume = 1f; 
     [SerializeField] private AudioClip _deathSound;
+    [SerializeField][Range(0f, 1f)] private float _deathVolume = 1f; 
 
     [Header("Checkpoint SFX")]
     [SerializeField] private AudioClip _checkpointSound;
+    [SerializeField][Range(0f, 1f)] private float _checkpointVolume = 0.7f; 
 
     [Header("Collectibles SFX")]
     [SerializeField] private AudioClip _collectibleSound;
+    [SerializeField][Range(0f, 1f)] private float _collectibleVolume = 0.6f;
 
     [Header("Enemy SFX")]
     [SerializeField] private AudioClip _enemyShootSound;
+    [SerializeField][Range(0f, 1f)] private float _enemyShootingVolume = 0.6f;
 
     [Header("References")]
     [SerializeField] private StatePlayerMovement _statePlayerMovement;
@@ -130,7 +139,7 @@ public class AudioManager : MonoBehaviour
     {
         if (_jumpSound != null)
         {
-            _sfxSource.PlayOneShot(_jumpSound);
+            _sfxSource.PlayOneShot(_jumpSound, _jumpVolume);
         }
     }
 
@@ -138,7 +147,7 @@ public class AudioManager : MonoBehaviour
     {
         if (_doubleJumpSound != null)
         {
-            _sfxSource.PlayOneShot(_doubleJumpSound);
+            _sfxSource.PlayOneShot(_doubleJumpSound, _doubleJumpVolume);
         }
     }
 
@@ -146,7 +155,7 @@ public class AudioManager : MonoBehaviour
     {
         if (_wallJumpSound != null)
         {
-            _sfxSource.PlayOneShot(_wallJumpSound);
+            _sfxSource.PlayOneShot(_wallJumpSound, _wallJumpVolume);
         }
     }
 
@@ -156,7 +165,7 @@ public class AudioManager : MonoBehaviour
     {
         if (_takeDamageSound != null)
         {
-            _sfxSource.PlayOneShot(_takeDamageSound);
+            _sfxSource.PlayOneShot(_takeDamageSound, _takeDamageVolume);
         }
     }
 
@@ -164,7 +173,7 @@ public class AudioManager : MonoBehaviour
     {
         if (_deathSound != null)
         {
-            _sfxSource.PlayOneShot(_deathSound);
+            _sfxSource.PlayOneShot(_deathSound, _deathVolume);
         }
     }
 
@@ -174,7 +183,7 @@ public class AudioManager : MonoBehaviour
     {
         if (_checkpointSound != null)
         {
-            _sfxSource.PlayOneShot(_checkpointSound);
+            _sfxSource.PlayOneShot(_checkpointSound, _checkpointVolume);
         }
     }
 
@@ -183,7 +192,7 @@ public class AudioManager : MonoBehaviour
     {
         if (_collectibleSound != null)
         {
-            _sfxSource.PlayOneShot(_collectibleSound);
+            _sfxSource.PlayOneShot(_collectibleSound, _collectibleVolume);
         }
     }
 
@@ -193,7 +202,7 @@ public class AudioManager : MonoBehaviour
     {
         if (_enemyShootSound != null)
         {
-            _sfxSource.PlayOneShot(_enemyShootSound);
+            _sfxSource.PlayOneShot(_enemyShootSound, _enemyShootingVolume);
         }
     }
 
@@ -234,7 +243,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayClickSound()
     {
-        _sfxSource.PlayOneShot(_clickSound);
+        _sfxSource.PlayOneShot(_clickSound, _clickVolume);
     }
 
     public void PlaySFX(AudioClip clip)

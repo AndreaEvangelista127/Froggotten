@@ -15,7 +15,8 @@ public class StatePlayerMovement : MonoBehaviour
         Double_Jump,
         Wall_Jump,
         Wall_Slide,
-        Gliding
+        Gliding,
+        Despawn
     }
 
     [SerializeField] private Animator _animator;
@@ -37,13 +38,17 @@ public class StatePlayerMovement : MonoBehaviour
     private const string doubleJumpAnim = "Double Jump";
     private const string wallJumpAnim = "Wall Jump";
     private const string wallSlideAnim = "Wall Slide";
-    private const string glidingAnim = "Gliding";
+    private const string despawnAnim = "Despawn";
 
     public static Action<MoveState> OnPlayerMoveStateChanged;
 
+    private bool _isDespawning = false;
 
     private void Update()
     {
+
+        if (_isDespawning) return;
+
         if (_playerMovement != null && _playerMovement.IsGliding)
         {
             SetMoveState(MoveState.Gliding);
@@ -53,7 +58,7 @@ public class StatePlayerMovement : MonoBehaviour
         if (_playerMovement != null && _playerMovement.IsWallSliding)
         {
             SetMoveState(MoveState.Wall_Slide);
-            return;  // Esci, non controllare altro
+            return;  
         }
 
         // Controllo con threshold
@@ -115,6 +120,9 @@ public class StatePlayerMovement : MonoBehaviour
             case MoveState.Gliding:  
                 HandleGliding();
                 break;
+            case MoveState.Despawn: 
+                HandleDespawn();
+                break;
             default:
                 Debug.LogError($"Invalid movement state: {moveState}");
                 break;
@@ -122,6 +130,17 @@ public class StatePlayerMovement : MonoBehaviour
 
         OnPlayerMoveStateChanged?.Invoke( moveState );//If nothing matches don't throw an error
         currentMoveState = moveState;
+    }
+
+    public void TriggerDespawn()
+    {
+        _isDespawning = true;
+        SetMoveState(MoveState.Despawn);
+
+        if (_playerMovement != null)
+        {
+            _playerMovement.enabled = false;
+        }
     }
 
     private void HandleIdle()
@@ -163,5 +182,10 @@ public class StatePlayerMovement : MonoBehaviour
     private void HandleGliding()
     {
         _animator.Play(fallAnim);  
+    }
+
+    private void HandleDespawn()
+    {
+        _animator.Play(despawnAnim);
     }
 }

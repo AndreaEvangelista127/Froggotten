@@ -136,7 +136,6 @@ public class EnemyLog : MonoBehaviour, IEnemy
             if (projScript != null)
             {
                 Vector2 dir = _facingRight ? Vector2.right : Vector2.left;
-                Debug.Log($"Chiamo SetDirection con: {dir}, FacingRight: {_facingRight}");
                 projScript.SetDirection(dir);
             }
 

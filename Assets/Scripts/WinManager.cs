@@ -1,34 +1,111 @@
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class WinManager : MonoBehaviour
 {
     [Header("Win Animation Settings")]
-    [SerializeField] private string _WinAnimationTrigger = "Win";
+    [SerializeField] private string _winAnimationTrigger = "Win";
     [SerializeField] private Animator _winAnimator;
 
     [Header("Trophy Settings")]
-    [SerializeField] private GameObject _trophyPrefab; // Prefab del trofeo
-    [SerializeField] private Transform _trophySpawnPoint;
+    [SerializeField] private GameObject _trophyObject; 
+    [SerializeField] private SpriteRenderer _trophySpriteRenderer;
+    [SerializeField] private Color _lockedColor = new Color(0.5f, 0.5f, 0.5f, 0.5f); 
+    [SerializeField] private Color _unlockedColor = Color.white;
 
-    private bool _hasAllTheFlies = false; // This should be set to true when the player collects all the required files
+    [Header("Player Win Settings")]
+    [SerializeField] private float _trophyBounceForce = 15f; 
+    [SerializeField] private float _delayBeforeDespawn = 0.3f;
+
+    private bool _isTrophyUnlocked = false;
+    private bool _hasWon = false;
+
+    private void Start()
+    {
+        if (_trophyObject != null)
+        {
+            SetTrophyLocked();
+        }
+    }
+
+    public void UnlockTrophy()
+    {
+        _isTrophyUnlocked = true;
+
+        if (_trophyObject != null)
+        {
+            SetTrophyUnlocked();
+        }
+
+        Debug.Log("WinManager:  Trofeo sbloccato!");
+    }
+
+    private void SetTrophyLocked()
+    {
+        if (_trophySpriteRenderer != null)
+        {
+            _trophySpriteRenderer.color = _lockedColor;
+        }
+    }
+
+    private void SetTrophyUnlocked()
+    {
+        if (_trophySpriteRenderer != null)
+        {
+            _trophySpriteRenderer.color = _unlockedColor;
+        }
+
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            TriggerWinAnimation();
+            if (_isTrophyUnlocked && !_hasWon)
+            {
+
+                StartCoroutine(TriggerWinSequence(collision.gameObject));
+
+            }
+            else
+            {
+                Debug.Log("WinManager:  Il trofeo è ancora bloccato! Raccogli tutte le mosche per sbloccarlo.");
+            }
         }
     }
 
     private void TriggerWinAnimation()
     {
-        if (_hasAllTheFlies && _winAnimator != null)
+        if (_winAnimator != null)
         {
-            _winAnimator.SetTrigger(_WinAnimationTrigger);
+            _winAnimator.SetTrigger(_winAnimationTrigger);
         }
-        else
+    }
+
+    private IEnumerator TriggerWinSequence(GameObject player)
+    {
+        _hasWon = true;
+        TriggerWinAnimation();
+
+        PlayerCollisions playerCollisions = player.GetComponent<PlayerCollisions>();
+        if (playerCollisions != null)
         {
-            Debug.Log("Player does not have all the required flies to win.");
+            playerCollisions.BouncePlayer(_trophyBounceForce);
+        }
+
+        if (_winAnimator != null)
+        {
+            _winAnimator.SetTrigger(_winAnimationTrigger);
+        }
+
+        //TODO : add sound effect here
+
+        yield return new WaitForSeconds(_delayBeforeDespawn);
+
+        StatePlayerMovement statePlayerMovement = player.GetComponent<StatePlayerMovement>();
+        if (statePlayerMovement != null)
+        {
+            statePlayerMovement.TriggerDespawn();
         }
     }
 }

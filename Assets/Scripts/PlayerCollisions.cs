@@ -4,13 +4,15 @@ public class PlayerCollisions : MonoBehaviour
 {
 
     [Header("Enemy Bounce")]
-    [SerializeField] private float _enemyBounceForce = 10f;
+    [SerializeField] private float _bounceForce = 10f;
 
     [Header("Traps Damage")]
     [SerializeField] private float _sawDamage = 0.5f;
 
     private Rigidbody2D _playerRb;
     private PlayerHealth _playerHealth;
+
+    public int _currentFliesCollected = 0;
 
     private void Awake()
     {
@@ -28,7 +30,7 @@ public class PlayerCollisions : MonoBehaviour
             if (enemy != null)
             {
                 enemy.Die();
-                BouncePlayer(_enemyBounceForce);
+                BouncePlayer(_bounceForce);
             }
         }
 
@@ -39,6 +41,8 @@ public class PlayerCollisions : MonoBehaviour
             if (collectible != null)
             {
                 collectible.Collect();
+                _currentFliesCollected++;
+                Debug.Log($"Flies collected: {_currentFliesCollected}");
             }
         }
 
@@ -56,8 +60,8 @@ public class PlayerCollisions : MonoBehaviour
 
     public void BouncePlayer(float bounceForce)
     {
-        _enemyBounceForce = bounceForce;//in case we want to set different bounce forces for different enemies in the future
-        _playerRb.linearVelocity = new Vector2(_playerRb.linearVelocity.x, _enemyBounceForce);
+        _bounceForce = bounceForce;//in case we want to set different bounce forces for different enemies in the future
+        _playerRb.linearVelocity = new Vector2(_playerRb.linearVelocity.x, _bounceForce);
 
         Debug.Log("Bounce!");
     }
@@ -73,6 +77,16 @@ public class PlayerCollisions : MonoBehaviour
                 playerHealth.TakeDamage(1);
             }
         }
+    }
+
+    public int GetCurrentFliesCollected()
+    {
+        return _currentFliesCollected;
+    }
+
+    public void ResetFliesCollected()
+    {
+        _currentFliesCollected = 0;
     }
 
 }
