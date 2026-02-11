@@ -65,6 +65,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
 
+
+    //TIP FOR THE FUTURE: use this method for the player and the enemys using parameters for the bounce force, rotation speed and gravity scale, so you can have different death animations for different characteter
     public void ApplyDeathBounce()
     {
         if (_enemyRb != null)

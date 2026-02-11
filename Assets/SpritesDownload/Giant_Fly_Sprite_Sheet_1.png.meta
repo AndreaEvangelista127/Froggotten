@@ -1,0 +1,793 @@
+fileFormatVersion: 2
+guid: 7307bb1cc07bea94eb8e6a7587210b4d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4654507167022960538
+    second: Giant_Fly_Sprite_Sheet_1_0
+  - first:
+      213: -3584943363301850626
+    second: Giant_Fly_Sprite_Sheet_1_1
+  - first:
+      213: -5167053864773751551
+    second: Giant_Fly_Sprite_Sheet_1_2
+  - first:
+      213: -2151925512685001738
+    second: Giant_Fly_Sprite_Sheet_1_3
+  - first:
+      213: 3632135056283208450
+    second: Giant_Fly_Sprite_Sheet_1_4
+  - first:
+      213: -6773997510368879603
+    second: Giant_Fly_Sprite_Sheet_1_5
+  - first:
+      213: 150811695161369518
+    second: Giant_Fly_Sprite_Sheet_1_6
+  - first:
+      213: -1430409053309802746
+    second: Giant_Fly_Sprite_Sheet_1_7
+  - first:
+      213: 5305483853899684105
+    second: Giant_Fly_Sprite_Sheet_1_8
+  - first:
+      213: -8648315153493198241
+    second: Giant_Fly_Sprite_Sheet_1_9
+  - first:
+      213: -6029618364228970164
+    second: Giant_Fly_Sprite_Sheet_1_10
+  - first:
+      213: -7736471055217694566
+    second: Giant_Fly_Sprite_Sheet_1_11
+  - first:
+      213: 586695799868209262
+    second: Giant_Fly_Sprite_Sheet_1_12
+  - first:
+      213: 4133831813393760862
+    second: Giant_Fly_Sprite_Sheet_1_13
+  - first:
+      213: -74316008354201920
+    second: Giant_Fly_Sprite_Sheet_1_14
+  - first:
+      213: 595693040649788826
+    second: Giant_Fly_Sprite_Sheet_1_15
+  - first:
+      213: -4988138395274519261
+    second: Giant_Fly_Sprite_Sheet_1_16
+  - first:
+      213: 2750200628112012560
+    second: Giant_Fly_Sprite_Sheet_1_17
+  - first:
+      213: -6794127806746032436
+    second: Giant_Fly_Sprite_Sheet_1_18
+  - first:
+      213: -5453858750908877923
+    second: Giant_Fly_Sprite_Sheet_1_19
+  - first:
+      213: -4035748561691297523
+    second: Giant_Fly_Sprite_Sheet_1_20
+  - first:
+      213: 5530573478283407648
+    second: Giant_Fly_Sprite_Sheet_1_21
+  - first:
+      213: 3625210324168092075
+    second: Giant_Fly_Sprite_Sheet_1_22
+  - first:
+      213: 5874323707300240993
+    second: Giant_Fly_Sprite_Sheet_1_23
+  - first:
+      213: 1023436725908155862
+    second: Giant_Fly_Sprite_Sheet_1_24
+  - first:
+      213: -9172072022967922436
+    second: Giant_Fly_Sprite_Sheet_1_25
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 133
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6603619646ed76fb0800000000000000
+      internalID: -4654507167022960538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 136
+        width: 24
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef1cf724109bf3ec0800000000000000
+      internalID: -3584943363301850626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_2
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 135
+        width: 26
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10de9ded2efea48b0800000000000000
+      internalID: -5167053864773751551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_3
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 135
+        width: 25
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f36f49c523d222e0800000000000000
+      internalID: -2151925512685001738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_4
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 101
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20b010ef69fe76230800000000000000
+      internalID: 3632135056283208450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_5
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 103
+        width: 25
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0c151d872dedf1a0800000000000000
+      internalID: -6773997510368879603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_6
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 100
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea3611e007ac71200800000000000000
+      internalID: 150811695161369518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_7
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 101
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60767fd6b8a262ce0800000000000000
+      internalID: -1430409053309802746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_8
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 70
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 909d249947dd0a940800000000000000
+      internalID: 5305483853899684105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_9
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 73
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5af86a40330bf780800000000000000
+      internalID: -8648315153493198241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_10
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 72
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c49d5f44b0e725ca0800000000000000
+      internalID: -6029618364228970164
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_11
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 72
+        width: 23
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9868aa909882a490800000000000000
+      internalID: -7736471055217694566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_12
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 38
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e68bb56b8bc542800800000000000000
+      internalID: 586695799868209262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_13
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 40
+        width: 23
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e524b8ed1225e5930800000000000000
+      internalID: 4133831813393760862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_14
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 36
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ce3ce0fbf9f7fef0800000000000000
+      internalID: -74316008354201920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_15
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 46
+        width: 17
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9d5a131aa3544800800000000000000
+      internalID: 595693040649788826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_16
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 40
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32ddc2bce8296cab0800000000000000
+      internalID: -4988138395274519261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_17
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 36
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0153cab66ecaa2620800000000000000
+      internalID: 2750200628112012560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_18
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 46
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc68c40b1c866b1a0800000000000000
+      internalID: -6794127806746032436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_19
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 54
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d93bbe0ac500054b0800000000000000
+      internalID: -5453858750908877923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_20
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 46
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d09b891c0142ef7c0800000000000000
+      internalID: -4035748561691297523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_21
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 37
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0217749b64b80cc40800000000000000
+      internalID: 5530573478283407648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_22
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 32
+        width: 15
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba92e1825955f4230800000000000000
+      internalID: 3625210324168092075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_23
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 36
+        width: 40
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16e594dc94ac58150800000000000000
+      internalID: 5874323707300240993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_24
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 13
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6dd28d1a74af33e00800000000000000
+      internalID: 1023436725908155862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Giant_Fly_Sprite_Sheet_1_25
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 13
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf0d2b0471146b080800000000000000
+      internalID: -9172072022967922436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Giant_Fly_Sprite_Sheet_1_0: -4654507167022960538
+      Giant_Fly_Sprite_Sheet_1_1: -3584943363301850626
+      Giant_Fly_Sprite_Sheet_1_10: -6029618364228970164
+      Giant_Fly_Sprite_Sheet_1_11: -7736471055217694566
+      Giant_Fly_Sprite_Sheet_1_12: 586695799868209262
+      Giant_Fly_Sprite_Sheet_1_13: 4133831813393760862
+      Giant_Fly_Sprite_Sheet_1_14: -74316008354201920
+      Giant_Fly_Sprite_Sheet_1_15: 595693040649788826
+      Giant_Fly_Sprite_Sheet_1_16: -4988138395274519261
+      Giant_Fly_Sprite_Sheet_1_17: 2750200628112012560
+      Giant_Fly_Sprite_Sheet_1_18: -6794127806746032436
+      Giant_Fly_Sprite_Sheet_1_19: -5453858750908877923
+      Giant_Fly_Sprite_Sheet_1_2: -5167053864773751551
+      Giant_Fly_Sprite_Sheet_1_20: -4035748561691297523
+      Giant_Fly_Sprite_Sheet_1_21: 5530573478283407648
+      Giant_Fly_Sprite_Sheet_1_22: 3625210324168092075
+      Giant_Fly_Sprite_Sheet_1_23: 5874323707300240993
+      Giant_Fly_Sprite_Sheet_1_24: 1023436725908155862
+      Giant_Fly_Sprite_Sheet_1_25: -9172072022967922436
+      Giant_Fly_Sprite_Sheet_1_3: -2151925512685001738
+      Giant_Fly_Sprite_Sheet_1_4: 3632135056283208450
+      Giant_Fly_Sprite_Sheet_1_5: -6773997510368879603
+      Giant_Fly_Sprite_Sheet_1_6: 150811695161369518
+      Giant_Fly_Sprite_Sheet_1_7: -1430409053309802746
+      Giant_Fly_Sprite_Sheet_1_8: 5305483853899684105
+      Giant_Fly_Sprite_Sheet_1_9: -8648315153493198241
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

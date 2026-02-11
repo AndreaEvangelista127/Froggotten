@@ -10678,6 +10678,7 @@ GameObject:
   - component: {fileID: 1051317702}
   - component: {fileID: 1051317703}
   - component: {fileID: 1051317704}
+  - component: {fileID: 1051317705}
   m_Layer: 0
   m_Name: PlayerSprite
   m_TagString: Untagged
@@ -10777,6 +10778,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1051317705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051317701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc35296e0f55a1d4a8f1da062593c742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1071161912
 GameObject:
   m_ObjectHideFlags: 0
@@ -11076,8 +11089,8 @@ MonoBehaviour:
   _trophySpriteRenderer: {fileID: 755344180}
   _lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   _unlockedColor: {r: 1, g: 1, b: 1, a: 1}
-  _trophyBounceForce: 15
-  _delayBeforeDespawn: 0.1
+  _trophyBounceForce: 20
+  _delayBeforeDespawnAnim: 0
 --- !u!61 &1137049365
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11406,8 +11419,12 @@ MonoBehaviour:
   _numberOfFlashes: 2
   _spriteRenderer: {fileID: 1051317703}
   _hitFlashDuration: 0.1
+  _fadeDuration: 1
+  _respawnDelay: 2
   _startPosition: {x: -17, y: 13, z: 0}
   _audioManager: {fileID: 1985415799}
+  _playerMovement: {fileID: 1177653265}
+  _virtualCamera: {fileID: 2110570016}
 --- !u!70 &1177653272
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -12504,7 +12521,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1840199471
 Transform:
   m_ObjectHideFlags: 0

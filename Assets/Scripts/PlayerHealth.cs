@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -18,15 +19,23 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private float _hitFlashDuration = 0.1f;
 
+    [Header("Death Fade Settings")]
+    [SerializeField] private float _fadeDuration = 1f;    
+    [SerializeField] private float _respawnDelay = 0.5f;
+
     [Header("Respawn Settings")]
     [SerializeField] private Vector3 _startPosition; 
     private Vector3 _currentCheckpoint; 
     private bool _hasCheckpoint = false;
 
-    [Header("Audio")]
+    [Header("References")]
     [SerializeField] private AudioManager _audioManager;
+    [SerializeField] private PlayerMovement _playerMovement;
+    [SerializeField] private CinemachineCamera _virtualCamera;
 
     private Color _originalColor;
+    private bool _isDead = false;
+    private Rigidbody2D _rb;
 
 
     void Start()
@@ -34,7 +43,6 @@ public class PlayerHealth : MonoBehaviour
         // ============== Respawn System Initialization ==============
         _startPosition = transform.position;
         _currentCheckpoint = _startPosition;
-
 
         // ============== Health UI Initialization ==============
         _currentHealth = _maxHealth;
@@ -53,8 +61,9 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if(_isInvulnerable) return;
+        if (_isDead) return;
 
-        _currentHealth = _currentHealth - damage;
+        _currentHealth -= damage;
 
         if (_currentHealth < 0)
         {
@@ -120,6 +129,7 @@ public class PlayerHealth : MonoBehaviour
         _isInvulnerable = false;
     }
 
+    //NOT USED IN THIS PROTOTYPE, BUT IMPLEMENTED FOR FUTURE USE
     public void Heal(float amount)
     {
         _currentHealth = _currentHealth + amount;
@@ -140,15 +150,33 @@ public class PlayerHealth : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log(" Player dead!"); 
-        Respawn();
+        if (_isDead) return;
+        _isDead = true;
+
+        // Blocca movimento
+        if (_playerMovement != null)
+        {
+            _playerMovement.enabled = false;
+        }
+
+        // Blocca fisica
+        if (_rb != null)
+        {
+            _rb.linearVelocity = Vector2.zero;
+            _rb.simulated = false; // Blocca completamente il rigidbody
+        }
+
+        // Blocca camera
+        if (_virtualCamera != null)
+        {
+            _virtualCamera.enabled = false;
+        }
 
         if (_audioManager != null)
         {
             _audioManager.PlayDeathSound();
         }
-
-
+        Respawn();
     }
 
     // ============== Respawn System Methods ==============
@@ -160,20 +188,34 @@ public class PlayerHealth : MonoBehaviour
 
     private void Respawn()
     {
+        _isDead = false;
+        _isInvulnerable = false;
+
+        if (_virtualCamera != null)
+        {
+            _virtualCamera.enabled = true;
+        }
+        // Ripristina health
         _currentHealth = _maxHealth;
-        if(_healthUi != null)
+        if (_healthUi != null)
         {
             _healthUi.UpdateHeartContainer(_currentHealth);
         }
 
-        // Respawn at current checkpoint if it exists, otherwise respawn at start position
-        if (_hasCheckpoint)
+        // Ripristina posizione
+        transform.position = _hasCheckpoint ? _currentCheckpoint : _startPosition;
+
+        // Ripristina velocità
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
         {
-            transform.position = _currentCheckpoint;
+            rb.linearVelocity = Vector2.zero;
         }
-        else
+
+        // Riabilita controlli
+        if (_playerMovement != null)
         {
-            transform.position = _startPosition;
+            _playerMovement.enabled = true;
         }
     }
 }

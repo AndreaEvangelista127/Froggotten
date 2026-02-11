@@ -16,7 +16,6 @@ public class StatePlayerMovement : MonoBehaviour
         Wall_Jump,
         Wall_Slide,
         Gliding,
-        Despawn
     }
 
     [SerializeField] private Animator _animator;
@@ -120,9 +119,6 @@ public class StatePlayerMovement : MonoBehaviour
             case MoveState.Gliding:  
                 HandleGliding();
                 break;
-            case MoveState.Despawn: 
-                HandleDespawn();
-                break;
             default:
                 Debug.LogError($"Invalid movement state: {moveState}");
                 break;
@@ -132,16 +128,6 @@ public class StatePlayerMovement : MonoBehaviour
         currentMoveState = moveState;
     }
 
-    public void TriggerDespawn()
-    {
-        _isDespawning = true;
-        SetMoveState(MoveState.Despawn);
-
-        if (_playerMovement != null)
-        {
-            _playerMovement.enabled = false;
-        }
-    }
 
     private void HandleIdle()
     {
@@ -183,9 +169,41 @@ public class StatePlayerMovement : MonoBehaviour
     {
         _animator.Play(fallAnim);  
     }
-
-    private void HandleDespawn()
+    public void TriggerDespawn()
     {
+        _isDespawning = true;
+
+        if (_playerMovement != null)
+        {
+            _playerMovement.enabled = false;
+        }
+
         _animator.Play(despawnAnim);
     }
+
+    //CALLED BY THE ANIMATION EVENT AT THE END OF THE DESPAWN ANIMATION
+    public void OnDespawnComplete()
+    {
+
+        Debug.Log("StatePlayerMovement: Despawn complete, disabling player.");
+        //Disable Movement
+        if (_playerMovement != null) _playerMovement.enabled = false;
+
+        // Disable physics 
+        if (_rigidBody != null)
+        {
+            _rigidBody.linearVelocity = Vector2.zero;
+            _rigidBody.gravityScale = 0;
+            _rigidBody.simulated = false; 
+        }
+
+        // Disable sprite renderer, invisible
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        if (sr != null) sr.enabled = false;
+
+        //Stop this script
+        this.enabled = false;
+    }
+
+
 }

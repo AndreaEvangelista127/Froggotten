@@ -15,7 +15,7 @@ public class WinManager : MonoBehaviour
 
     [Header("Player Win Settings")]
     [SerializeField] private float _trophyBounceForce = 15f; 
-    [SerializeField] private float _delayBeforeDespawn = 0.3f;
+    [SerializeField] private float _delayBeforeDespawnAnim = 0.1f;
 
     private bool _isTrophyUnlocked = false;
     private bool _hasWon = false;
@@ -36,8 +36,6 @@ public class WinManager : MonoBehaviour
         {
             SetTrophyUnlocked();
         }
-
-        Debug.Log("WinManager:  Trofeo sbloccato!");
     }
 
     private void SetTrophyLocked()
@@ -64,7 +62,7 @@ public class WinManager : MonoBehaviour
             if (_isTrophyUnlocked && !_hasWon)
             {
 
-                StartCoroutine(TriggerWinSequence(collision.gameObject));
+                TriggerWinSequence(collision.gameObject);
 
             }
             else
@@ -74,38 +72,32 @@ public class WinManager : MonoBehaviour
         }
     }
 
-    private void TriggerWinAnimation()
+    private void TriggerWinSequence(GameObject player)
     {
+        _hasWon = true;
+
+        // Animazione trofeo
         if (_winAnimator != null)
         {
             _winAnimator.SetTrigger(_winAnimationTrigger);
         }
-    }
 
-    private IEnumerator TriggerWinSequence(GameObject player)
-    {
-        _hasWon = true;
-        TriggerWinAnimation();
-
+        // Bounce player
         PlayerCollisions playerCollisions = player.GetComponent<PlayerCollisions>();
         if (playerCollisions != null)
         {
             playerCollisions.BouncePlayer(_trophyBounceForce);
         }
 
-        if (_winAnimator != null)
-        {
-            _winAnimator.SetTrigger(_winAnimationTrigger);
-        }
+        // TODO: add sound effect here
 
-        //TODO : add sound effect here
-
-        yield return new WaitForSeconds(_delayBeforeDespawn);
-
+        // Despawn immediato
         StatePlayerMovement statePlayerMovement = player.GetComponent<StatePlayerMovement>();
         if (statePlayerMovement != null)
         {
             statePlayerMovement.TriggerDespawn();
         }
     }
+
+
 }
