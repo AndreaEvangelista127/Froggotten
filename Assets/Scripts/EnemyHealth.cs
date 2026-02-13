@@ -33,7 +33,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
         if(_audioManager != null)
         {
-            _audioManager.PlayDeathSound();
+            Debug.Log("EnemyHealth: Playing death sound");
+            _audioManager.PlayEnemyDeathSound();
         }
 
         if (_animator != null)

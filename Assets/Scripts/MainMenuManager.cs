@@ -6,7 +6,7 @@ public class MainMenuManager : MonoBehaviour
 {
 
     [SerializeField] private Rigidbody2D _frogRb;
-    [SerializeField] private float fallDelay = 4f;
+    [SerializeField] private FadeTransition _fadeTransition;
 
     public void PlayGame()
     {
@@ -15,22 +15,11 @@ public class MainMenuManager : MonoBehaviour
 
     IEnumerator FrogFallAndLoad()
     {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+        _frogRb.gravityScale = 100;
 
-        operation.allowSceneActivation = false; // Load but not activate
+        yield return new WaitForSeconds(0.8f);
 
-        // Fai cadere la rana
-        _frogRb.gravityScale = 100; 
-
-        // Aspetta che cada
-        yield return new WaitForSeconds(fallDelay);
-
-        operation.allowSceneActivation = true;
-
-        yield return new WaitUntil(()=> operation.isDone); //wait until the scene is activated
-
-        operation = SceneManager.UnloadSceneAsync(0); // and then unload menu
-
+        _fadeTransition.FadeToMainMenu(1);
     }
 
     public void QuitGame()

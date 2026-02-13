@@ -10,7 +10,6 @@ public class PlayerCollisions : MonoBehaviour
     [Header("Traps Damage")]
     [SerializeField] private float _sawDamage = 0.5f;
     [SerializeField] private float _trapKnockbackForceX = 8f;  
-    [SerializeField] private float _trapKnockbackForceY = 10f;
 
     private Rigidbody2D _playerRb;
     private PlayerHealth _playerHealth;

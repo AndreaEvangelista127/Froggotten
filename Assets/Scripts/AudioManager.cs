@@ -211,8 +211,9 @@ public class AudioManager : MonoBehaviour
 
     public void PlayEnemyDeathSound()
     {
-        if(_enemyDeathVolume != null)
+        if(_enemyDeathSound != null)
         {
+            Debug.Log("Playing enemy death sound");
             _sfxSource.PlayOneShot(_enemyDeathSound, _enemyDeathVolume);
         }
     }

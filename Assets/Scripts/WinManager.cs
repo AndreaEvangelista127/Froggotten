@@ -15,7 +15,6 @@ public class WinManager : MonoBehaviour
 
     [Header("Player Win Settings")]
     [SerializeField] private float _trophyBounceForce = 15f; 
-    [SerializeField] private float _delayBeforeDespawnAnim = 0.1f;
 
     private bool _isTrophyUnlocked = false;
     private bool _hasWon = false;

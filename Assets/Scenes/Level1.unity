@@ -1077,7 +1077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &578341244
 Transform:
   m_ObjectHideFlags: 0
@@ -1228,7 +1228,7 @@ MonoBehaviour:
   _bounceForce: 4
   _bounceRotationSpeed: 720
   _deathGravityScale: 3
-  _audioManager: {fileID: 0}
+  _audioManager: {fileID: 1985415799}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -11091,7 +11091,6 @@ MonoBehaviour:
   _lockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   _unlockedColor: {r: 1, g: 1, b: 1, a: 1}
   _trophyBounceForce: 20
-  _delayBeforeDespawnAnim: 0
 --- !u!61 &1137049365
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11239,7 +11238,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  wallJumpForceX: 15
+  wallJumpForceX: 8
   wallJumpForceY: 15
   wallCheckDistance: 0.2
   wallJumpControlLockTime: 0.2
@@ -11249,7 +11248,7 @@ MonoBehaviour:
   _glidingFallSpeed: 2
   _glidingHorizontalSpeed: 5
   _lilypadSprite: {fileID: 1840199470}
-  _knockbackControlLockTime: 3
+  _knockbackControlLockTime: 0.3
 --- !u!114 &1177653266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11404,7 +11403,6 @@ MonoBehaviour:
   _bounceForce: 10
   _sawDamage: 0.5
   _trapKnockbackForceX: 10
-  _trapKnockbackForceY: 15
   _currentFliesCollected: 0
 --- !u!114 &1177653271
 MonoBehaviour:
@@ -11423,8 +11421,6 @@ MonoBehaviour:
   _numberOfFlashes: 2
   _spriteRenderer: {fileID: 1051317703}
   _hitFlashDuration: 0.1
-  _fadeDuration: 1
-  _respawnDelay: 2
   _startPosition: {x: -17, y: 13, z: 0}
   _audioManager: {fileID: 1985415799}
   _playerMovement: {fileID: 1177653265}

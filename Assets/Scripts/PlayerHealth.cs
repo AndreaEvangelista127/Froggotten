@@ -19,10 +19,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private float _hitFlashDuration = 0.1f;
 
-    [Header("Death Fade Settings")]
-    [SerializeField] private float _fadeDuration = 1f;    
-    [SerializeField] private float _respawnDelay = 0.5f;
-
     [Header("Respawn Settings")]
     [SerializeField] private Vector3 _startPosition; 
     private Vector3 _currentCheckpoint; 
