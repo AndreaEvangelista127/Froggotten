@@ -49,6 +49,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _glidingHorizontalSpeed = 5f;  // Velocità movimento orizzontale
     [SerializeField] private GameObject _lilypadSprite;  // Sprite lilypad
 
+    [Header("Knockback Settings")]
+    [SerializeField] private float _knockbackControlLockTime = 0.3f; // Tempo di blocco dopo knockback
+
+    private float _knockbackControlTimer = 0f; // Timer per il knockback
+
     //Player sprite dimension
     private float _playerHalfHeight;
     private float _playerHalfWidth;
@@ -83,29 +88,33 @@ public class PlayerMovement : MonoBehaviour
         _playerHalfHeight = playerCollider.bounds.extents.y; //return the width of the sprite from the center to one side, so if it was 0.5 the total width will be 1
         _playerHalfWidth = playerCollider.bounds.extents.x;
 
-        //_rayLength = _playerHalfHeight + groundCheckOffset;
-
         playerSpriteR.flipX = false;
 
         if(_lilypadSprite != null)
         {
             _lilypadSprite.SetActive(false); 
         }
-        //Debug.Log($"Velocity iniziale: {rb.linearVelocity}");
-        //Debug.Log($"flipX iniziale: {playerSpriteR.flipX}");
     }
 
     private void FixedUpdate() //FOR PHYSICS
     {
-        //  Applica movimento orizzontale SOLO se non sei in wall jump lock
-        if (_wallJumpControlTimer <= 0)
+        // ========== Apply horizontal movement only if not in wall jump control lock or knockback control lock ==========
+        if (_wallJumpControlTimer <= 0 && _knockbackControlTimer <= 0) // If we are in wall jump control lock we want to block the horizontal movement to let the player jump properly in a wall jump, otherwise the wall jump direction would have been overriden by the rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y);
         {
             rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y);
         }
         else
         {
-            // Decrementa il timer
-            _wallJumpControlTimer -= Time.fixedDeltaTime;
+            // Decrementa i timer
+            if (_wallJumpControlTimer > 0)
+            {
+                _wallJumpControlTimer -= Time.fixedDeltaTime;
+            }
+
+            if (_knockbackControlTimer > 0) //if we are in knockback control lock we want to block all the movement to let the player be knocked back properly, otherwise the player could move during the knockback and it would feel weird and not responsive
+            {
+                _knockbackControlTimer -= Time.fixedDeltaTime; //blocking the player movement for a certain amount of time, as soon as we reach 0 we restore the control to the player
+            }
         }
 
         if (CanWallSlide())
@@ -411,6 +420,20 @@ public class PlayerMovement : MonoBehaviour
         // Movimento orizzontale (leggermente ridotto rispetto a normale)
         float horizontalInput = _moveValue;
         rb.linearVelocity = new Vector2(horizontalInput * _glidingHorizontalSpeed, rb.linearVelocityY);
+    }
+
+    // https://discussions.unity.com/t/trying-to-get-a-knockback-function-to-work/951526
+    public void ApplyKnockBack(int direction, float forceX, float forceY)
+    {
+        //Actual knockback
+        rb.linearVelocity = new Vector2(forceX * direction, forceY);
+
+        //Block player control to have a proper knockback feeling, otherwise the player could move during the knockback and it would feel weird
+        _knockbackControlTimer = _knockbackControlLockTime;
+
+        Debug.Log($"Knockback applicato: direction={direction}, force=({forceX * direction}, {forceY})");
+
+
     }
 
     private void OnDrawGizmos()

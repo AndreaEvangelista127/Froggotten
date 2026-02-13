@@ -11152,8 +11152,8 @@ GameObject:
   - component: {fileID: 1177653267}
   - component: {fileID: 1177653270}
   - component: {fileID: 1177653269}
-  - component: {fileID: 1177653266}
   - component: {fileID: 1177653271}
+  - component: {fileID: 1177653266}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -11238,7 +11238,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  wallJumpForceX: 8
+  wallJumpForceX: 15
   wallJumpForceY: 15
   wallCheckDistance: 0.2
   wallJumpControlLockTime: 0.2
@@ -11248,6 +11248,7 @@ MonoBehaviour:
   _glidingFallSpeed: 2
   _glidingHorizontalSpeed: 5
   _lilypadSprite: {fileID: 1840199470}
+  _knockbackControlLockTime: 0.3
 --- !u!114 &1177653266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11401,6 +11402,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bounceForce: 10
   _sawDamage: 0.5
+  _trapKnockbackForceX: 15
+  _trapKnockbackForceY: 15
   _currentFliesCollected: 0
 --- !u!114 &1177653271
 MonoBehaviour:

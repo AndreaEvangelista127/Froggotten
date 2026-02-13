@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour
@@ -8,9 +9,12 @@ public class PlayerCollisions : MonoBehaviour
 
     [Header("Traps Damage")]
     [SerializeField] private float _sawDamage = 0.5f;
+    [SerializeField] private float _trapKnockbackForceX = 8f;  
+    [SerializeField] private float _trapKnockbackForceY = 10f;
 
     private Rigidbody2D _playerRb;
     private PlayerHealth _playerHealth;
+    private PlayerMovement _playerMovement;
 
     public int _currentFliesCollected = 0;
 
@@ -54,8 +58,45 @@ public class PlayerCollisions : MonoBehaviour
             if (_playerHealth != null)
             {
                 _playerHealth.TakeDamage(_sawDamage);
+
+                ApplyTrapKnockback(collision.transform.position);
             }
         }
+    }
+
+    
+    private void ApplyTrapKnockback(Vector3 trapPosition)
+    {
+
+        Debug.Log($"[KNOCKBACK] Player position: {transform.position}");
+        Debug.Log($"[KNOCKBACK] Trap position: {trapPosition}");
+
+        // Calcola se il player è a destra o sinistra della trap
+        float directionX = transform.position.x - trapPosition.x;
+        Debug.Log($"[KNOCKBACK] directionX (playerX - trapX): {directionX}");
+
+
+        // Converti in -1 (sinistra) o 1 (destra), come il wall jump
+        int knockbackDirection;
+
+        if (directionX < 0)
+        {
+            knockbackDirection = -1;
+        }
+        else
+        {
+            knockbackDirection = 1;
+        }
+        Debug.Log($"[KNOCKBACK] knockbackDirection: {knockbackDirection}");
+
+
+        if (_playerMovement != null)
+        {
+            _playerMovement.ApplyKnockBack(knockbackDirection, _trapKnockbackForceX, _trapKnockbackForceY);
+        }
+
+        Debug.Log($"Applied knockback with directionX: {knockbackDirection}, forceX: {_trapKnockbackForceX}, forceY: {_trapKnockbackForceY}");
+
     }
 
     public void BouncePlayer(float bounceForce)

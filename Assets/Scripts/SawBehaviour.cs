@@ -14,11 +14,10 @@ public class SawBehaviour : MonoBehaviour
     private int _currentDestIndex = 0;
     const float buffer = 0.05f;
 
-    private void Start()
+    private void Awake() 
     {
-
         _realDestinations = new Vector3[_destinationPositions.Length];
-        for(int i = 0;  i < _destinationPositions.Length; i++)
+        for (int i = 0; i < _destinationPositions.Length; i++)
         {
             _realDestinations[i] = _destinationPositions[i].position;
         }
