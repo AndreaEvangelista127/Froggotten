@@ -12,6 +12,9 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField] private float _bounceRotationSpeed = 720f;
     [SerializeField] protected float _deathGravityScale = 3f;
 
+    [Header("Audio Source")]
+    [SerializeField] private AudioManager _audioManager;
+
     private Animator _animator;
     private Rigidbody2D _enemyRb;
     private bool _isDead = false;
@@ -27,6 +30,11 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         if (_isDead) return;
 
         _isDead = true;
+
+        if(_audioManager != null)
+        {
+            _audioManager.PlayDeathSound();
+        }
 
         if (_animator != null)
         {

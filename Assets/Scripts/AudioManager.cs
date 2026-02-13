@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class AudioManager : MonoBehaviour
 {
@@ -46,6 +47,8 @@ public class AudioManager : MonoBehaviour
     [Header("Enemy SFX")]
     [SerializeField] private AudioClip _enemyShootSound;
     [SerializeField][Range(0f, 1f)] private float _enemyShootingVolume = 0.6f;
+    [SerializeField] private AudioClip _enemyDeathSound;
+    [SerializeField][Range(0f, 1f)] private float _enemyDeathVolume = 0.6f;
 
     [Header("References")]
     [SerializeField] private StatePlayerMovement _statePlayerMovement;
@@ -203,6 +206,14 @@ public class AudioManager : MonoBehaviour
         if (_enemyShootSound != null)
         {
             _sfxSource.PlayOneShot(_enemyShootSound, _enemyShootingVolume);
+        }
+    }
+
+    public void PlayEnemyDeathSound()
+    {
+        if(_enemyDeathVolume != null)
+        {
+            _sfxSource.PlayOneShot(_enemyDeathSound, _enemyDeathVolume);
         }
     }
 

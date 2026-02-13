@@ -1077,7 +1077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &578341244
 Transform:
   m_ObjectHideFlags: 0
@@ -1228,6 +1228,7 @@ MonoBehaviour:
   _bounceForce: 4
   _bounceRotationSpeed: 720
   _deathGravityScale: 3
+  _audioManager: {fileID: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -11248,7 +11249,7 @@ MonoBehaviour:
   _glidingFallSpeed: 2
   _glidingHorizontalSpeed: 5
   _lilypadSprite: {fileID: 1840199470}
-  _knockbackControlLockTime: 0.3
+  _knockbackControlLockTime: 3
 --- !u!114 &1177653266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11402,7 +11403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bounceForce: 10
   _sawDamage: 0.5
-  _trapKnockbackForceX: 15
+  _trapKnockbackForceX: 10
   _trapKnockbackForceY: 15
   _currentFliesCollected: 0
 --- !u!114 &1177653271
@@ -12983,6 +12984,8 @@ MonoBehaviour:
   _collectibleVolume: 0.6
   _enemyShootSound: {fileID: 8300000, guid: 129d539f88009f34fb3780764bd02908, type: 3}
   _enemyShootingVolume: 0.6
+  _enemyDeathSound: {fileID: 8300000, guid: 4da1096c43a87c447ae9588beb16994d, type: 3}
+  _enemyDeathVolume: 1
   _statePlayerMovement: {fileID: 1177653267}
 --- !u!82 &1985415800
 AudioSource:

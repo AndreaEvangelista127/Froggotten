@@ -22,6 +22,7 @@ public class PlayerCollisions : MonoBehaviour
     {
         _playerRb = GetComponent<Rigidbody2D>();
         _playerHealth = GetComponent<PlayerHealth>();
+        _playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -33,6 +34,7 @@ public class PlayerCollisions : MonoBehaviour
             IDamageable enemy = collision.GetComponentInParent<IDamageable>();
             if (enemy != null)
             {
+
                 enemy.Die();
                 BouncePlayer(_bounceForce);
             }
@@ -67,36 +69,13 @@ public class PlayerCollisions : MonoBehaviour
     
     private void ApplyTrapKnockback(Vector3 trapPosition)
     {
+        Vector3 dir = (transform.position - trapPosition); //Direction from the trap directe to player 
 
-        Debug.Log($"[KNOCKBACK] Player position: {transform.position}");
-        Debug.Log($"[KNOCKBACK] Trap position: {trapPosition}");
+        //Vector3 dir = -_playerRb.linearVelocity; //giving dir the vector that represent the velocity of the player but flipped
 
-        // Calcola se il player è a destra o sinistra della trap
-        float directionX = transform.position.x - trapPosition.x;
-        Debug.Log($"[KNOCKBACK] directionX (playerX - trapX): {directionX}");
+        Vector3 knockBackVelocity = dir.normalized * _trapKnockbackForceX;
 
-
-        // Converti in -1 (sinistra) o 1 (destra), come il wall jump
-        int knockbackDirection;
-
-        if (directionX < 0)
-        {
-            knockbackDirection = -1;
-        }
-        else
-        {
-            knockbackDirection = 1;
-        }
-        Debug.Log($"[KNOCKBACK] knockbackDirection: {knockbackDirection}");
-
-
-        if (_playerMovement != null)
-        {
-            _playerMovement.ApplyKnockBack(knockbackDirection, _trapKnockbackForceX, _trapKnockbackForceY);
-        }
-
-        Debug.Log($"Applied knockback with directionX: {knockbackDirection}, forceX: {_trapKnockbackForceX}, forceY: {_trapKnockbackForceY}");
-
+        _playerMovement.ApplyKnockBack(knockBackVelocity);
     }
 
     public void BouncePlayer(float bounceForce)

@@ -98,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() //FOR PHYSICS
     {
+        //Debug.Log(_knockbackControlTimer);
         // ========== Apply horizontal movement only if not in wall jump control lock or knockback control lock ==========
         if (_wallJumpControlTimer <= 0 && _knockbackControlTimer <= 0) // If we are in wall jump control lock we want to block the horizontal movement to let the player jump properly in a wall jump, otherwise the wall jump direction would have been overriden by the rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y);
         {
@@ -139,6 +140,8 @@ public class PlayerMovement : MonoBehaviour
         {
             _coyoteTimeCounter -= Time.fixedDeltaTime; // Decremet timer while in mid air
         }
+
+        //Debug.Log(rb.linearVelocity);
     }
 
     private void Update()
@@ -423,16 +426,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // https://discussions.unity.com/t/trying-to-get-a-knockback-function-to-work/951526
-    public void ApplyKnockBack(int direction, float forceX, float forceY)
-    {
-        //Actual knockback
-        rb.linearVelocity = new Vector2(forceX * direction, forceY);
+    public void ApplyKnockBack(Vector3 knockBackVel)
+    { 
+        
 
         //Block player control to have a proper knockback feeling, otherwise the player could move during the knockback and it would feel weird
         _knockbackControlTimer = _knockbackControlLockTime;
 
-        Debug.Log($"Knockback applicato: direction={direction}, force=({forceX * direction}, {forceY})");
-
+        //Actual knockback
+        rb.linearVelocity = knockBackVel;      
 
     }
 
