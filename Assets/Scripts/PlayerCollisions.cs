@@ -7,9 +7,14 @@ public class PlayerCollisions : MonoBehaviour
     [Header("Enemy Bounce")]
     [SerializeField] private float _bounceForce = 10f;
 
-    [Header("Traps Damage")]
+    [Header("Saw Settings")]
     [SerializeField] private float _sawDamage = 0.5f;
-    [SerializeField] private float _trapKnockbackForceX = 8f;  
+
+    [Header("Spike Settings")]
+    [SerializeField] private float _spikeDamage = 1f;
+
+    [Header("Traps Settings")]
+    [SerializeField] private float _trapKnockbackForce = 8f;
 
     private Rigidbody2D _playerRb;
     private PlayerHealth _playerHealth;
@@ -52,14 +57,22 @@ public class PlayerCollisions : MonoBehaviour
         }
 
         // ========== TRAPS (SAW, SPIKES, ETC) ==========
-        if (collision.CompareTag("Trap"))
+        if (collision.CompareTag("Saw"))
         {
-            Debug.Log($" PLAYER TRIGGER ENTERED: {collision.gameObject.name}");
-
             if (_playerHealth != null)
             {
                 _playerHealth.TakeDamage(_sawDamage);
 
+                ApplyTrapKnockback(collision.transform.position);
+            }
+        }
+
+        // ========== SPIKES ========== 
+        if (collision.CompareTag("Spike"))
+        {
+            if (_playerHealth != null)
+            {
+                _playerHealth.TakeDamage(_spikeDamage);
                 ApplyTrapKnockback(collision.transform.position);
             }
         }
@@ -70,9 +83,7 @@ public class PlayerCollisions : MonoBehaviour
     {
         Vector3 dir = (transform.position - trapPosition); //Direction from the trap directe to player 
 
-        //Vector3 dir = -_playerRb.linearVelocity; //giving dir the vector that represent the velocity of the player but flipped
-
-        Vector3 knockBackVelocity = dir.normalized * _trapKnockbackForceX;
+        Vector3 knockBackVelocity = dir.normalized * _trapKnockbackForce;
 
         _playerMovement.ApplyKnockBack(knockBackVelocity);
     }

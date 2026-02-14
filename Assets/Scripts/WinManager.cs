@@ -14,7 +14,11 @@ public class WinManager : MonoBehaviour
     [SerializeField] private Color _unlockedColor = Color.white;
 
     [Header("Player Win Settings")]
-    [SerializeField] private float _trophyBounceForce = 15f; 
+    [SerializeField] private float _trophyBounceForce = 15f;
+
+    [Header("VFX")]
+    [SerializeField] private GameObject _confettiPrefab;
+    [SerializeField] private Transform _confettiSpawnPoint;
 
     private bool _isTrophyUnlocked = false;
     private bool _hasWon = false;
@@ -80,6 +84,8 @@ public class WinManager : MonoBehaviour
         {
             _winAnimator.SetTrigger(_winAnimationTrigger);
         }
+
+        VFXConfetti.SpawnConfetti(_confettiPrefab, _confettiSpawnPoint.position);
 
         // Bounce player
         PlayerCollisions playerCollisions = player.GetComponent<PlayerCollisions>();

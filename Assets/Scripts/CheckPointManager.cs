@@ -9,6 +9,10 @@ public class CheckPointManager : MonoBehaviour
     [SerializeField] private Animator _flagAnimator;
     [SerializeField] private string _activationAnimationTrigger = "Activate";
 
+    [Header("VFX")]
+    [SerializeField] private GameObject _confettiPrefab; 
+    [SerializeField] private Transform _confettiSpawnPoint;
+
     [Header("Audio")]
     [SerializeField] private AudioManager _audioManager;
 
@@ -48,6 +52,8 @@ public class CheckPointManager : MonoBehaviour
             _flagAnimator.SetTrigger(_activationAnimationTrigger);
         }
 
+        VFXConfetti.SpawnConfetti(_confettiPrefab, _confettiSpawnPoint.position);
+
         if (_audioManager != null)
         {
             _audioManager.PlayCheckpointSound();
@@ -58,5 +64,7 @@ public class CheckPointManager : MonoBehaviour
     {
        _isActivated = false;
     }
+
+
 
 }
