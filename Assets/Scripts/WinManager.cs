@@ -20,8 +20,20 @@ public class WinManager : MonoBehaviour
     [SerializeField] private GameObject _confettiPrefab;
     [SerializeField] private Transform _confettiSpawnPoint;
 
+    [Header("Win UI")]
+    [SerializeField] private GameObject _winPanelUI;          
+    [SerializeField] private float _winPanelDelay = 1f;
+    [SerializeField] private Transform _continuosConfettiSpawnPoint;
+
+    [Header("References")]
+    [SerializeField] private AudioManager _audioManager;
+    [SerializeField] private FadeTransition _fadeTransition;
+
+
     private bool _isTrophyUnlocked = false;
     private bool _hasWon = false;
+    private bool _isPaused = false;
+
 
     private void Start()
     {
@@ -29,6 +41,9 @@ public class WinManager : MonoBehaviour
         {
             SetTrophyLocked();
         }
+
+        if (_winPanelUI != null)
+            _winPanelUI.SetActive(false);
     }
 
     public void UnlockTrophy()
@@ -62,6 +77,8 @@ public class WinManager : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            Debug.Log($"WinManager: Player toccato il trofeo. Unlocked: {_isTrophyUnlocked}, HasWon: {_hasWon}");
+
             if (_isTrophyUnlocked && !_hasWon)
             {
 
@@ -85,7 +102,7 @@ public class WinManager : MonoBehaviour
             _winAnimator.SetTrigger(_winAnimationTrigger);
         }
 
-        VFXConfetti.SpawnConfetti(_confettiPrefab, _confettiSpawnPoint.position);
+        VFXConfetti.SpawnConfettiWithTimer(_confettiPrefab, _confettiSpawnPoint.position);
 
         // Bounce player
         PlayerCollisions playerCollisions = player.GetComponent<PlayerCollisions>();
@@ -94,14 +111,70 @@ public class WinManager : MonoBehaviour
             playerCollisions.BouncePlayer(_trophyBounceForce);
         }
 
-        // TODO: add sound effect here
-
         // Despawn immediato
         StatePlayerMovement statePlayerMovement = player.GetComponent<StatePlayerMovement>();
         if (statePlayerMovement != null)
         {
             statePlayerMovement.TriggerDespawn();
         }
+
+        StartCoroutine(ShowWinPanelDelayed());
+    }
+
+    private IEnumerator ShowWinPanelDelayed()
+    {
+        yield return new WaitForSeconds(_winPanelDelay);
+
+        //spawn continuous confetti all around the panel
+
+        if (_winPanelUI != null)
+        {
+            _winPanelUI.SetActive(true);
+
+            Time.timeScale = 0f;
+            _isPaused = true;
+        }
+            
+
+        if (_audioManager != null)
+        {
+            _audioManager.PauseMusic();
+        }
+
+        if (_audioManager != null) _audioManager.PlayWinSound();
+    }
+
+    public void LoadMainMenu()
+    {
+        if (_winPanelUI != null)
+        {
+            _winPanelUI.SetActive(false);
+            Time.timeScale = 1f;
+        }
+
+        if (_fadeTransition != null)
+        {
+            _fadeTransition.FadeToScene(0);
+        }
+    }
+
+    public void RestartLevel()
+    {
+        if (_winPanelUI != null)
+        {
+            _winPanelUI.SetActive(false);
+            Time.timeScale = 1f;
+        }
+        if (_fadeTransition != null)
+        {
+            _fadeTransition.FadeToScene(1);
+        }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("WinManager: Quit Game called ");
     }
 
 

@@ -44,6 +44,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _collectibleSound;
     [SerializeField][Range(0f, 1f)] private float _collectibleVolume = 0.6f;
 
+    [Header("Win SFX")]
+    [SerializeField] private AudioClip _winSound;
+    [SerializeField][Range(0f, 1f)] private float _winVolume = 0.8f;
+
     [Header("Enemy SFX")]
     [SerializeField] private AudioClip _enemyShootSound;
     [SerializeField][Range(0f, 1f)] private float _enemyShootingVolume = 0.6f;
@@ -215,6 +219,17 @@ public class AudioManager : MonoBehaviour
         {
             Debug.Log("Playing enemy death sound");
             _sfxSource.PlayOneShot(_enemyDeathSound, _enemyDeathVolume);
+        }
+    }
+
+    // ========== WIN SFX ==========
+
+    public void PlayWinSound()
+    {
+        if (_winSound != null)
+        {
+            Debug.Log("Playing win sound");
+            _sfxSource.PlayOneShot(_winSound, _winVolume);
         }
     }
 

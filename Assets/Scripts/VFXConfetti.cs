@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class VFXConfetti : MonoBehaviour
 {
-    public static void SpawnConfetti(GameObject prefab, Vector3 position)
+    public static void SpawnConfettiWithTimer(GameObject prefab, Vector3 position)
     {
         if (prefab == null) return;
 
@@ -16,4 +16,6 @@ public class VFXConfetti : MonoBehaviour
 
         Object.Destroy(confetti, 6f);
     }
+
+
 }

@@ -68,7 +68,7 @@ public class PauseMenuManager : MonoBehaviour
         FadeTransition fadeTransition = FindFirstObjectByType<FadeTransition>();
         if (fadeTransition != null)
         {
-            fadeTransition.FadeToMainMenu(0);
+            fadeTransition.FadeToScene(0);
         }
     }
 }

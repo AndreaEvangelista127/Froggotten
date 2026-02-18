@@ -19,7 +19,7 @@ public class MainMenuManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.8f);
 
-        _fadeTransition.FadeToMainMenu(1);
+        _fadeTransition.FadeToScene(1);
     }
 
     public void QuitGame()

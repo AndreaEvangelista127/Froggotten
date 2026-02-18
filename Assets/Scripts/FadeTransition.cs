@@ -8,14 +8,13 @@ public class FadeTransition : MonoBehaviour
     [SerializeField] private Image fadeImage;
     [SerializeField] private float fadeDuration = 1f;
 
-    public void FadeToMainMenu(int index)
+    public void FadeToScene(int index)
     {
-        StartCoroutine(FadeAndLoadMenu(index));
+        StartCoroutine(FadeAndLoadScene(index));
     }
 
-
     /* IEnumerator that can pause and resume execution */
-    IEnumerator FadeAndLoadMenu(int index)
+    IEnumerator FadeAndLoadScene(int index)
     {
         float timer = 0f;
 
