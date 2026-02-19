@@ -172,7 +172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &217222088
 RectTransform:
   m_ObjectHideFlags: 0
@@ -187,12 +187,13 @@ RectTransform:
   m_Children:
   - {fileID: 1815605545}
   - {fileID: 405153305}
+  - {fileID: 748599616}
   m_Father: {fileID: 917943789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 12}
-  m_SizeDelta: {x: 400, y: 460}
+  m_AnchoredPosition: {x: 0, y: -55}
+  m_SizeDelta: {x: 500, y: 660}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &217222089
 MonoBehaviour:
@@ -260,14 +261,14 @@ RectTransform:
   m_GameObject: {fileID: 221495200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 405153305}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -24}
   m_SizeDelta: {x: 39, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &221495202
@@ -314,9 +315,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2015070863}
-        m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
-        m_MethodName: ResumeGame
+      - m_Target: {fileID: 1137049364}
+        m_TargetAssemblyTypeName: WinManager, Assembly-CSharp
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -920,6 +921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405153305}
+  - component: {fileID: 405153306}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -949,6 +951,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &405153306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405153304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: -100
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 100
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &450162194
 GameObject:
   m_ObjectHideFlags: 0
@@ -8646,6 +8674,41 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &748599615
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 748599616}
+  m_Layer: 5
+  m_Name: ConfettiSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &748599616
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748599615}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 217222088}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 650}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &755344177
 GameObject:
   m_ObjectHideFlags: 0
@@ -9005,9 +9068,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 550453794}
   - {fileID: 1752131919}
   - {fileID: 1354290055}
-  - {fileID: 550453794}
   - {fileID: 217222088}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11387,14 +11450,14 @@ RectTransform:
   m_GameObject: {fileID: 1089739307}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 405153305}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: 92}
   m_SizeDelta: {x: 65, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1089739309
@@ -11441,9 +11504,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2015070863}
-        m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
-        m_MethodName: ResumeGame
+      - m_Target: {fileID: 1137049364}
+        m_TargetAssemblyTypeName: WinManager, Assembly-CSharp
+        m_MethodName: RestartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11594,6 +11657,11 @@ MonoBehaviour:
   _trophyBounceForce: 20
   _confettiPrefab: {fileID: 8968654543977574098, guid: bb5dc048f1243e746a7bcdad5c22077b, type: 3}
   _confettiSpawnPoint: {fileID: 461906762}
+  _winPanelUI: {fileID: 217222087}
+  _winPanelDelay: 1
+  _continuosConfettiSpawnPoint: {fileID: 748599616}
+  _audioManager: {fileID: 1985415799}
+  _fadeTransition: {fileID: 699468115}
 --- !u!61 &1137049365
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12452,7 +12520,7 @@ RectTransform:
   m_GameObject: {fileID: 1481562735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1815605545}
@@ -12607,14 +12675,14 @@ RectTransform:
   m_GameObject: {fileID: 1588548993}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 405153305}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 50, y: -140}
   m_SizeDelta: {x: 39, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1588548995
@@ -12661,9 +12729,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2015070863}
-        m_TargetAssemblyTypeName: PauseMenuManager, Assembly-CSharp
-        m_MethodName: LoadMainMenu
+      - m_Target: {fileID: 1137049364}
+        m_TargetAssemblyTypeName: WinManager, Assembly-CSharp
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13730,6 +13798,8 @@ MonoBehaviour:
   _checkpointVolume: 0.7
   _collectibleSound: {fileID: 8300000, guid: a0fbeb571ed114dc29e75de4226e56c5, type: 3}
   _collectibleVolume: 0.6
+  _winSound: {fileID: 8300000, guid: 1053cfa16c3b2ba4b926f158fc3d3522, type: 3}
+  _winVolume: 0.8
   _enemyShootSound: {fileID: 8300000, guid: 129d539f88009f34fb3780764bd02908, type: 3}
   _enemyShootingVolume: 0.6
   _enemyDeathSound: {fileID: 8300000, guid: 4da1096c43a87c447ae9588beb16994d, type: 3}
@@ -14069,7 +14139,7 @@ RectTransform:
   m_GameObject: {fileID: 2087292858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1815605545}
