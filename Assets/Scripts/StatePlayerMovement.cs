@@ -24,6 +24,9 @@ public class StatePlayerMovement : MonoBehaviour
 
     [SerializeField] private PlayerMovement _playerMovement;
 
+    [SerializeField] private PlayerVfx _playerVfx;
+
+
     [Header("State Thresholds")]
     [SerializeField] private float velocityYThreshold = 0.5f; // Threshold per caduta
     [SerializeField] private float velocityXThreshold = 0.1f; // Threshold per movimento
@@ -138,11 +141,13 @@ public class StatePlayerMovement : MonoBehaviour
     {
         _animator.Play(runAnim);
 
+
     }
 
     private void HandleJump()
     {
         _animator.Play(jumpAnim);
+        if (_playerVfx != null) _playerVfx.PlayJumpDust();
     }
 
     private void HandleFall()
@@ -154,11 +159,15 @@ public class StatePlayerMovement : MonoBehaviour
     private void HandleDoubleJump()
     {
         _animator.Play(doubleJumpAnim);
+        if (_playerVfx != null) _playerVfx.PlayJumpDust();
+
     }
 
     private void HandleWallJump() 
     {
         _animator.Play(wallJumpAnim);
+        if (_playerVfx != null) _playerVfx.PlayJumpDust();
+
     }
 
     private void HandleWallSlide()
