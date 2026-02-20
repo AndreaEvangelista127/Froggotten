@@ -25,8 +25,12 @@ public class PauseMenuManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Pauses the game by freezing time, showing the pause UI, and pausing the music.
+    /// </summary>
     public void PauseGame()
     {
+
         if(_pauseMenuUI != null)
         {
             _pauseMenuUI.SetActive(true);
@@ -41,6 +45,9 @@ public class PauseMenuManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Resumes the game by restoring time, hiding the pause UI, and resuming the music.
+    /// </summary>
     public void ResumeGame()
     {
         if(_pauseMenuUI != null)
@@ -56,6 +63,9 @@ public class PauseMenuManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hides the pause UI, restores time, and transitions to the main menu scene.
+    /// </summary>
     public void LoadMainMenu()
     {
         if(_pauseMenuUI != null)

@@ -25,6 +25,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         _enemyRb = GetComponent<Rigidbody2D>();
     }
 
+    /// <summary>
+    /// Kills the enemy: plays the death sound and animation, disables all components,
+    /// applies a bounce effect, and destroys the object after a delay.
+    /// </summary>
     public void Die()
     {
         if (_isDead) return;
@@ -42,19 +46,18 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             _animator.SetTrigger("hit");
         }
 
-        // Blocca tutto
         DisableEnemy();
 
-        // Rimbalzo Mario-style
         ApplyDeathBounce();
 
-        // Distruggi dopo delay
         Destroy(gameObject, _deathDelay);
     }
 
+    /// <summary>
+    /// Disables all colliders, stops the rigidbody, and notifies the enemy behaviour script of death.
+    /// </summary>
     private void DisableEnemy() {
 
-        // Disabilita tutti i collider
         Collider2D[] colliders = GetComponentsInChildren<Collider2D>();
         foreach (Collider2D col in colliders)
         {
@@ -74,7 +77,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         }
     }
 
-
+    /// <summary>
+    /// Applies an upward bounce and spin to the rigidbody for a Mario-style death effect.
+    /// Unlocks all constraints to allow free rotation.
+    /// </summary>
     //TIP FOR THE FUTURE: use this method for the player and the enemys using parameters for the bounce force, rotation speed and gravity scale, so you can have different death animations for different characteter
     public void ApplyDeathBounce()
     {

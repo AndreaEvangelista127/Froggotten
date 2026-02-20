@@ -32,14 +32,15 @@ public class CollectiblesManager : MonoBehaviour
         _totalFlies = _allFlies.Length;
     }
 
+    /// <summary>
+    /// Checks if the player has collected all flies and unlocks the trophy if not already won.
+    /// </summary>
     private void CheckWinCondition()
     {
-        // Se il player ha raccolto tutte le mosche e non ha ancora vinto
         if (_collectedFlies >= _totalFlies && !_hasWon)
         {
             _hasWon = true;
-
-            Debug.Log($"CollectiblesManager: ? Tutte le mosche raccolte ({_collectedFlies}/{_totalFlies})! Trofeo sbloccato!");
+            Debug.Log("CollectiblesManager: All flies collected! Trophy unlocked.");
 
             if (_winManager != null)
             {
@@ -47,7 +48,7 @@ public class CollectiblesManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("CollectiblesManager: WinManager non assegnato!");
+                Debug.LogWarning("CollectiblesManager: WinManager not assigned!");
             }
         }
     }

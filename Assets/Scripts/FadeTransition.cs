@@ -8,12 +8,21 @@ public class FadeTransition : MonoBehaviour
     [SerializeField] private Image fadeImage;
     [SerializeField] private float fadeDuration = 1f;
 
+    /// <summary>
+    /// Starts a fade-to-black transition and loads the scene at the given index.
+    /// </summary>
+    /// <param name="index">The build index of the scene to load.</param>
     public void FadeToScene(int index)
     {
         StartCoroutine(FadeAndLoadScene(index));
     }
 
-    /* IEnumerator that can pause and resume execution */
+    /// <summary>
+    /// Gradually fades the screen to black over <see cref="_fadeDuration"/> seconds,
+    /// then loads the target scene. Uses unscaled time to work correctly when the game is paused.
+    /// </summary>
+    /// <param name="index">The build index of the scene to load after the fade completes.</param>
+    /// <returns>IEnumerator for coroutine execution.</returns>
     IEnumerator FadeAndLoadScene(int index)
     {
         float timer = 0f;

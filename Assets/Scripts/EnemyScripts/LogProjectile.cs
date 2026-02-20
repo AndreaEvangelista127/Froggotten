@@ -29,18 +29,22 @@ public class LogProjectile : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the movement direction of the projectile and flips the sprite accordingly.
+    /// </summary>
+    /// <param name="dir">The desired direction vector, which will be normalized.</param>
     public void SetDirection(Vector2 dir)
     {
         _direction = dir.normalized;
 
         if (_direction.x > 0)
         {
-            // Va a destra
+            // right
             transform.localScale = new Vector3(-1, 1, 1);  
         }
         else if (_direction.x < 0)
         {
-            // Va a sinistra
+            // Left
             transform.localScale = new Vector3(1, 1, 1);   
         }
     }
@@ -59,6 +63,9 @@ public class LogProjectile : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawns the broken projectile prefab at the current position and destroys this object.
+    /// </summary>
     private void BreakProjectile()
     {
         if (_brokenProjectilePrefab != null)

@@ -14,8 +14,8 @@ public class AudioManager : MonoBehaviour
 
     [Header("SFX")]
     [SerializeField] private AudioSource _sfxSource;
-    [SerializeField] private AudioClip _clickSound;
-    [SerializeField][Range(0f, 1f)] private float _clickVolume = 1f; 
+    //[SerializeField] private AudioClip _clickSound;
+    //[SerializeField][Range(0f, 1f)] private float _clickVolume = 1f; 
 
     [Header("Player Jump")]
     [SerializeField] private AudioClip _jumpSound;
@@ -94,7 +94,10 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    //Method to handle player state changes and control footstep sounds accordingly
+    /// <summary>
+    /// Reacts to player movement state changes, starting or stopping footsteps and playing jump sounds accordingly.
+    /// </summary>
+    /// <param name="newState">The new movement state the player has entered.</param>
     private void HandlePlayerStateChange(StatePlayerMovement.MoveState newState)
     {
         // ========= FOOTSTEP CONTROLS ==========
@@ -234,7 +237,10 @@ public class AudioManager : MonoBehaviour
     }
 
     // ========== MUSIC CONTROLS ==========
-
+    /// <summary>
+    /// Updates the music volume, refreshes the UI text, and saves the value to PlayerPrefs.
+    /// </summary>
+    /// <param name="volume">The new volume value between 0 and 1.</param>
     public void ChangeVolume(float volume)
     {
         musicSource.volume = volume;
@@ -243,7 +249,10 @@ public class AudioManager : MonoBehaviour
         // Salva il volume
         PlayerPrefs.SetFloat("MusicVolume", volume);
     }
-
+    /// <summary>
+    /// Converts a 0-1 volume value to a percentage and displays it in the UI text.
+    /// </summary>
+    /// <param name="volume">The volume value between 0 and 1.</param>
     void UpdateVolumeText(float volume)
     {
         // Converti in percentuale (0-100)
@@ -268,25 +277,25 @@ public class AudioManager : MonoBehaviour
 
     // ========== SFX CONTROLS ==========
 
-    public void PlayClickSound()
-    {
-        _sfxSource.PlayOneShot(_clickSound, _clickVolume);
-    }
+    //public void PlayClickSound()
+    //{
+    //    _sfxSource.PlayOneShot(_clickSound, _clickVolume);
+    //}
 
-    public void PlaySFX(AudioClip clip)
-    {
-        if (clip != null)
-        {
-            _sfxSource.PlayOneShot(clip);
-        }
-    }
+    //public void PlaySFX(AudioClip clip)
+    //{
+    //    if (clip != null)
+    //    {
+    //        _sfxSource.PlayOneShot(clip);
+    //    }
+    //}
 
-    public void PlaySFX(AudioClip clip, float volume)
-    {
-        if (clip != null)
-        {
-            _sfxSource.PlayOneShot(clip, volume);
-        }
-    }
+    //public void PlaySFX(AudioClip clip, float volume)
+    //{
+    //    if (clip != null)
+    //    {
+    //        _sfxSource.PlayOneShot(clip, volume);
+    //    }
+    //}
 
 }

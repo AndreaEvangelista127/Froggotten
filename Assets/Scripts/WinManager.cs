@@ -32,7 +32,6 @@ public class WinManager : MonoBehaviour
 
     private bool _isTrophyUnlocked = false;
     private bool _hasWon = false;
-    private bool _isPaused = false;
 
 
     private void Start()
@@ -46,6 +45,10 @@ public class WinManager : MonoBehaviour
             _winPanelUI.SetActive(false);
     }
 
+    /// <summary>
+    /// Unlocks the trophy, updating its visual appearance to the unlocked state.
+    /// Should be called once all required collectibles have been gathered.
+    /// </summary>
     public void UnlockTrophy()
     {
         _isTrophyUnlocked = true;
@@ -56,6 +59,9 @@ public class WinManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the trophy sprite color to the locked appearance.
+    /// </summary>
     private void SetTrophyLocked()
     {
         if (_trophySpriteRenderer != null)
@@ -64,6 +70,9 @@ public class WinManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the trophy sprite color to the unlocked appearance.
+    /// </summary>
     private void SetTrophyUnlocked()
     {
         if (_trophySpriteRenderer != null)
@@ -77,7 +86,7 @@ public class WinManager : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log($"WinManager: Player toccato il trofeo. Unlocked: {_isTrophyUnlocked}, HasWon: {_hasWon}");
+            Debug.Log($"WinManager: Player jumped on the trophy. Unlocked: {_isTrophyUnlocked}, HasWon: {_hasWon}");
 
             if (_isTrophyUnlocked && !_hasWon)
             {
@@ -87,16 +96,21 @@ public class WinManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("WinManager:  Il trofeo è ancora bloccato! Raccogli tutte le mosche per sbloccarlo.");
+                Debug.Log("WinManager:  Trophy still blocked. Collect all the flies!");
             }
         }
     }
 
+    /// <summary>
+    /// Triggers the full win sequence: plays the trophy animation, spawns confetti,
+    /// bounces the player, triggers the player despawn, and schedules the win panel display.
+    /// </summary>
+    /// <param name="player">The player GameObject that reached the trophy.</param>
     private void TriggerWinSequence(GameObject player)
     {
         _hasWon = true;
 
-        // Animazione trofeo
+        // Trophy animation
         if (_winAnimator != null)
         {
             _winAnimator.SetTrigger(_winAnimationTrigger);
@@ -111,7 +125,7 @@ public class WinManager : MonoBehaviour
             playerCollisions.BouncePlayer(_trophyBounceForce);
         }
 
-        // Despawn immediato
+        // Despawn 
         StatePlayerMovement statePlayerMovement = player.GetComponent<StatePlayerMovement>();
         if (statePlayerMovement != null)
         {
@@ -121,18 +135,21 @@ public class WinManager : MonoBehaviour
         StartCoroutine(ShowWinPanelDelayed());
     }
 
+    /// <summary>
+    /// Waits for a short delay, then displays the win panel, pauses the game, and plays the win sound.
+    /// </summary>
+    /// <returns>IEnumerator for coroutine execution.</returns>
     private IEnumerator ShowWinPanelDelayed()
     {
         yield return new WaitForSeconds(_winPanelDelay);
 
-        //spawn continuous confetti all around the panel
+        //spawn continuous confetti all around the panel (todo)
 
         if (_winPanelUI != null)
         {
             _winPanelUI.SetActive(true);
 
             Time.timeScale = 0f;
-            _isPaused = true;
         }
             
 
@@ -144,6 +161,9 @@ public class WinManager : MonoBehaviour
         if (_audioManager != null) _audioManager.PlayWinSound();
     }
 
+    /// <summary>
+    /// Hides the win panel and transitions to the main menu scene.
+    /// </summary>
     public void LoadMainMenu()
     {
         if (_winPanelUI != null)
@@ -158,6 +178,9 @@ public class WinManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Hides the win panel and restarts the current level.
+    /// </summary>
     public void RestartLevel()
     {
         if (_winPanelUI != null)
@@ -171,6 +194,9 @@ public class WinManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Quits the application.
+    /// </summary>
     public void QuitGame()
     {
         Application.Quit();

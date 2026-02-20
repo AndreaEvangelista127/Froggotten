@@ -53,6 +53,9 @@ public class EnemyLog : MonoBehaviour, IEnemy
         }
     }
 
+    /// <summary>
+    /// Moves the enemy toward the player and flips the sprite to match the movement direction.
+    /// </summary>
     private void ChasePlayer()
     {
 
@@ -79,6 +82,9 @@ public class EnemyLog : MonoBehaviour, IEnemy
         _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
     }
 
+    /// <summary>
+    /// Stops the enemy's movement, faces the player, and triggers the attack coroutine if not already attacking.
+    /// </summary>
     private void StopAndAttack()
     {
         // Stop rigidbody and animation
@@ -103,6 +109,10 @@ public class EnemyLog : MonoBehaviour, IEnemy
         }
     }
 
+    /// <summary>
+    /// Handles the attack timing: sets the attacking animation state and waits before allowing the next attack.
+    /// </summary>
+    /// <returns>IEnumerator for coroutine execution.</returns>
     IEnumerator AttackCoroutine()
     {
         _isAttacking = true;
@@ -116,6 +126,10 @@ public class EnemyLog : MonoBehaviour, IEnemy
         _isAttacking = false;
     }
 
+    /// <summary>
+    /// Instantiates a projectile at the shoot point and fires it in the direction the enemy is facing.
+    /// Called by an animation event.
+    /// </summary>
     public void ShootProjectile()
     {
         if (_isDead)
@@ -141,6 +155,10 @@ public class EnemyLog : MonoBehaviour, IEnemy
 
         }
     }
+
+    /// <summary>
+    /// Flips the enemy sprite horizontally by inverting the sprite's X scale.
+    /// </summary>
     public void Flip()
     {
         _facingRight = !_facingRight;
@@ -156,6 +174,9 @@ public class EnemyLog : MonoBehaviour, IEnemy
         _sprite.localScale = new Vector3(scaleX, 1f, 1f);
     }
 
+    /// <summary>
+    /// Disables the enemy, stopping all coroutines and freezing its behaviour on death.
+    /// </summary>
     public void OnDeath()
     {
         _isDead = true;

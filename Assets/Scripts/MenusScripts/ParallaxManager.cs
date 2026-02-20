@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class ParallaxManager : MonoBehaviour
 {
@@ -15,6 +14,11 @@ public class ParallaxManager : MonoBehaviour
         MoveLayer();
     }
 
+    /// <summary>
+    /// Scrolls each parallax layer horizontally by modifying its UV rect offset.
+    /// Each layer moves at its own speed, and the UV resets to 0 when it reaches 1
+    /// to create a seamless loop effect.
+    /// </summary>
     private void MoveLayer()
     {
         for(int i = 0; i < _parallaxLayers.Length; i++)

@@ -26,6 +26,11 @@ public class CheckPointManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Activates the checkpoint: updates the player's respawn point, triggers the flag animation,
+    /// spawns confetti VFX, and plays the checkpoint sound.
+    /// </summary>
+    /// <param name="player">The player GameObject that triggered the checkpoint.</param>
     private void ActivateCheckpoint(GameObject player)
     {
         _isActivated = true;
@@ -60,6 +65,10 @@ public class CheckPointManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resets the checkpoint to its inactive state, allowing it to be triggered again.
+    /// NOT USED IN THE CURRENT GAMEPLAY
+    /// </summary>
     public void ResetCheckPoint()
     {
        _isActivated = false;

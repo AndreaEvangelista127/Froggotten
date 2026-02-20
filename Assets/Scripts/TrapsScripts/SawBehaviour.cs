@@ -12,7 +12,9 @@ public class SawBehaviour : MonoBehaviour
 
     private Vector3[] _realDestinations;
     private int _currentDestIndex = 0;
-    const float buffer = 0.05f;
+
+    // Small threshold to detect when the saw has reached a destination point
+    private const float _buffer = 0.05f;
 
     private void Awake() 
     {
@@ -24,7 +26,10 @@ public class SawBehaviour : MonoBehaviour
         CreateChainPath();
     }
 
-
+    /// <summary>
+    /// Iterates over all destination segments and spawns chain sprites along each one,
+    /// looping the last segment back to the first to form a closed path.
+    /// </summary>
     private void CreateChainPath()
     {
         /* For each segment between two destinations, we need to calculate how many chain sprites we need to create and where to place them.
@@ -50,6 +55,12 @@ public class SawBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawns evenly spaced chain sprite instances along the segment from startPos to endPos.
+    /// Adjusts the spacing slightly so chains are always distributed uniformly across the full distance.
+    /// </summary>
+    /// <param name="startPos">The world position where the segment begins.</param>
+    /// <param name="endPos">The world position where the segment ends.</param>
     private void CreateChainsForSegment(Vector3 startPos, Vector3 endPos)
     {
         Vector3 direction = endPos - startPos; // Calculate the direction vector from startPos to endPos
@@ -91,6 +102,11 @@ public class SawBehaviour : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Moves the saw toward the current destination using the Rigidbody2D.
+    /// Advances to the next destination when within the buffer threshold, looping back to the first when the last is reached.
+    /// </summary>
+    /// <param name="destinations">Array of world positions defining the saw's patrol path.</param>
     public void MoveToNextDestination(Vector3[] destinations)
     {
 
@@ -112,7 +128,7 @@ public class SawBehaviour : MonoBehaviour
         */
         float distanceSqr = direction.sqrMagnitude; // Calculate the squared distance from the previous position to the target (sqr(a) + sqr(b))
 
-        if (distanceSqr < Mathf.Pow(buffer, 2f)) 
+        if (distanceSqr < _buffer * _buffer) 
         {
             _currentDestIndex++;
 

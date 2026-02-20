@@ -39,29 +39,34 @@ public class Collectibles : MonoBehaviour
 
             transform.position = new Vector3(newX, newY, _startPosition.z);
 
-            // Flip sprite in base alla direzione
             FlipSprite(newX);
 
             previousX = newX;
         }
     }
 
-    // Imagine that we start from previus = 0 and newX = 0, and we are moving to the right. At the last frame, we are going to have: previous >= 3.0 and newX 2.9, so now we flip
+    /// <summary>
+    /// Flips the sprite horizontally based on the horizontal movement direction.
+    /// Compares the current X position to the previous frame's X to determine direction.
+    /// </summary>
+    /// <param name="currentX">The current X position of the collectible this frame.</param>
     public void FlipSprite(float currentX)
     {
+        // Imagine that we start from previus = 0 and newX = 0, and we are moving to the right. At the last frame, we are going to have: previous >= 3.0 and newX 2.9, so now we flip
         if (currentX > previousX) 
         {
-            
             _spriteRenderer.flipX = false;
         }
         else if (currentX < previousX)
         {
-            // Si muove verso sinistra
             _spriteRenderer.flipX = true;
         }
 
     }
 
+    /// <summary>
+    /// Triggers the collect animation, plays the collectible sound, and destroys the object after a short delay.
+    /// </summary>
     public void Collect()
     {
         _animator.SetTrigger("Collect");
@@ -69,7 +74,5 @@ public class Collectibles : MonoBehaviour
         _isCollected = true;
 
         Destroy(gameObject, 0.5f);
-
-        //ADD sound effect or score increment logic here
     }
 }
