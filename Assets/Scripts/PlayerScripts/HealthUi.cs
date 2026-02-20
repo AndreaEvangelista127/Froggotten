@@ -14,16 +14,13 @@ public class HealthUi : MonoBehaviour
 
     private List<Image> _heartImages = new List<Image>();
 
-
-    private void Start()
-    {
-
-    }
-
+    /// <summary>
+    /// Instantiates the correct number of heart icons based on max health and sets their initial sprites.
+    /// Each full heart represents 1.0 HP; a remainder of 0.5 adds an extra half-heart slot.
+    /// </summary>
+    /// <param name="maxHealth">The player's maximum health value.</param>
     public void InitializeHealthUi(float maxHealth)
     {
-
-        // Ogni cuore pieno = 1.0, mezzo cuore = 0.5
         int numberOfHearts = (int)maxHealth;  // here we store only the integer part
 
         // if there is a half heart needed
@@ -43,6 +40,11 @@ public class HealthUi : MonoBehaviour
         UpdateHeartContainer(maxHealth);
     }
 
+    /// <summary>
+    /// Updates each heart sprite to reflect the player's current health.
+    /// Full hearts are shown first, followed by a half heart if needed, then empty hearts.
+    /// </summary>
+    /// <param name="currentHealth">The player's current health value.</param>
     public void UpdateHeartContainer(float currentHealth)
     {
         int fullHearts = (int)currentHealth;  

@@ -9,6 +9,10 @@ public class DespawnAnimationHelper : MonoBehaviour
         _statePlayerMovement = GetComponentInParent<StatePlayerMovement>();
     }
 
+    /// <summary>
+    /// Forwards the despawn complete event to StatePlayerMovement.
+    /// Called by the despawn animation event on the child object.
+    /// </summary>
     public void OnDespawnComplete()
     {
         if (_statePlayerMovement != null)

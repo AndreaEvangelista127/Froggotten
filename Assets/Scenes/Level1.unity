@@ -1178,7 +1178,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -24, y: 5.55, z: -10}
+  m_LocalPosition: {x: -17.203384, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16786,8 +16786,8 @@ GameObject:
   - component: {fileID: 1177653270}
   - component: {fileID: 1177653269}
   - component: {fileID: 1177653271}
-  - component: {fileID: 1177653266}
   - component: {fileID: 1177653273}
+  - component: {fileID: 1177653266}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -16804,7 +16804,7 @@ Transform:
   m_GameObject: {fileID: 1177653260}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24, y: 5.55, z: 0}
+  m_LocalPosition: {x: -24, y: -1.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16853,30 +16853,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0634c8bef05ab44822465f7ec4e860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 1177653264}
-  playerSpriteR: {fileID: 1051317703}
-  animator: {fileID: 1051317704}
-  playerCollider: {fileID: 1177653272}
-  groundCheckTransform: {fileID: 505956300}
-  groundCheckSize: {x: 0.8, y: 0.2}
-  groundLayer:
+  _rb: {fileID: 1177653264}
+  _playerSpriteR: {fileID: 1051317703}
+  _animator: {fileID: 1051317704}
+  _playerCollider: {fileID: 1177653272}
+  _groundCheckTransform: {fileID: 505956300}
+  _groundCheckSize: {x: 0.8, y: 0.2}
+  _groundLayer:
     serializedVersion: 2
     m_Bits: 448
-  speed: 10
-  jumpingForce: 15
-  doubleJumpingForce: 10
-  _canDoubleJump: 0
+  _speed: 10
+  _jumpingForce: 14
+  _doubleJumpingForce: 12
+  _canDoubleJump: 1
   _statePlayerMovement: {fileID: 1177653267}
-  maxJumpTime: 0.1
-  coyoteTime: 0.15
+  _maxJumpTime: 0.1
+  _coyoteTime: 0.15
   _wallJumpEnabled: 1
-  wallLayer:
+  _wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  wallJumpForceX: 8
-  wallJumpForceY: 15
-  wallCheckDistance: 0.2
-  wallJumpControlLockTime: 0.2
+  _wallJumpForceX: 8
+  _wallJumpForceY: 12
+  _wallCheckDistance: 0.2
+  _wallJumpControlLockTime: 0.2
   _wallSlideEnabled: 1
   _wallSlideSpeed: 2
   _glidingEnabled: 1
@@ -16962,8 +16962,8 @@ MonoBehaviour:
   _rigidBody: {fileID: 1177653264}
   _playerMovement: {fileID: 1177653265}
   _playerVfx: {fileID: 1177653273}
-  velocityYThreshold: 0.5
-  velocityXThreshold: 0.1
+  _velocityYThreshold: 0.5
+  _velocityXThreshold: 0.1
 --- !u!114 &1177653269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19813,7 +19813,7 @@ Transform:
   m_GameObject: {fileID: 2110570014}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24, y: 5.55, z: -10}
+  m_LocalPosition: {x: -24, y: -1.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

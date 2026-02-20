@@ -28,8 +28,8 @@ public class StatePlayerMovement : MonoBehaviour
 
 
     [Header("State Thresholds")]
-    [SerializeField] private float velocityYThreshold = 0.5f; // Threshold per caduta
-    [SerializeField] private float velocityXThreshold = 0.1f; // Threshold per movimento
+    [SerializeField] private float _velocityYThreshold = 0.5f; // Threshold per caduta
+    [SerializeField] private float _velocityXThreshold = 0.1f; // Threshold per movimento
 
     public MoveState currentMoveState { get; private set; }
 
@@ -42,7 +42,8 @@ public class StatePlayerMovement : MonoBehaviour
     private const string wallSlideAnim = "Wall Slide";
     private const string despawnAnim = "Despawn";
 
-    public static Action<MoveState> OnPlayerMoveStateChanged;
+    // Is a delegate that other scripts can subscribe to in order to be notified when the player's movement state changes.
+    public static Action<MoveState> OnPlayerMoveStateChanged; //not used
 
     private bool _isDespawning = false;
 
@@ -64,9 +65,9 @@ public class StatePlayerMovement : MonoBehaviour
         }
 
         // Controllo con threshold
-        bool isGrounded = Mathf.Abs(_rigidBody.linearVelocity.y) < velocityYThreshold;
-        bool isMoving = Mathf.Abs(_rigidBody.linearVelocity.x) > velocityXThreshold;
-        bool isFalling = _rigidBody.linearVelocity.y < -velocityYThreshold;
+        bool isGrounded = Mathf.Abs(_rigidBody.linearVelocity.y) < _velocityYThreshold;
+        bool isMoving = Mathf.Abs(_rigidBody.linearVelocity.x) > _velocityXThreshold;
+        bool isFalling = _rigidBody.linearVelocity.y < -_velocityYThreshold;
 
         // Logica stati
         if (isFalling)
@@ -86,7 +87,11 @@ public class StatePlayerMovement : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Transitions the player to a new movement state, triggering the appropriate
+    /// animation and VFX, then notifies all subscribers via OnPlayerMoveStateChanged.
+    /// </summary>
+    /// <param name="moveState">The new state to transition to.</param>
     public void SetMoveState(MoveState moveState)
     {
         if (currentMoveState == moveState) return;
@@ -127,7 +132,8 @@ public class StatePlayerMovement : MonoBehaviour
                 break;
         }
 
-        OnPlayerMoveStateChanged?.Invoke( moveState );//If nothing matches don't throw an error
+        //The .? operator checks if there are any subscribers to the event before invoking it, preventing potential null reference exceptions.
+        OnPlayerMoveStateChanged?.Invoke( moveState );
         currentMoveState = moveState;
     }
 
@@ -178,6 +184,11 @@ public class StatePlayerMovement : MonoBehaviour
     {
         _animator.Play(fallAnim);  
     }
+
+    /// <summary>
+    /// Triggers the despawn animation and disables player movement.
+    /// Called when the player reaches the win trophy.
+    /// </summary>
     public void TriggerDespawn()
     {
         _isDespawning = true;
@@ -190,7 +201,10 @@ public class StatePlayerMovement : MonoBehaviour
         _animator.Play(despawnAnim);
     }
 
-    //CALLED BY THE ANIMATION EVENT AT THE END OF THE DESPAWN ANIMATION
+    /// <summary>
+    /// Finalizes the despawn sequence by stopping physics, hiding the sprite, and disabling this script.
+    /// Called by an animation event at the end of the despawn animation.
+    /// </summary>
     public void OnDespawnComplete()
     {
 

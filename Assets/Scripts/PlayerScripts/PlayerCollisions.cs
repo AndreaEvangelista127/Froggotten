@@ -57,7 +57,7 @@ public class PlayerCollisions : MonoBehaviour
         }
 
         // ========== TRAPS (SAW, SPIKES, ETC) ==========
-        if (collision.CompareTag("Saw"))
+        if (collision.CompareTag("Saw") && _playerHealth != null)
         {
             if (_playerHealth != null)
             {
@@ -68,7 +68,7 @@ public class PlayerCollisions : MonoBehaviour
         }
 
         // ========== SPIKES ========== 
-        if (collision.CompareTag("Spike"))
+        if (collision.CompareTag("Spike") && _playerHealth != null)
         {
             if (_playerHealth != null)
             {
@@ -78,7 +78,10 @@ public class PlayerCollisions : MonoBehaviour
         }
     }
 
-    
+    /// <summary>
+    /// Applies a knockback force to the player directed away from the trap's position.
+    /// </summary>
+    /// <param name="trapPosition">The world position of the trap that hit the player.</param>
     private void ApplyTrapKnockback(Vector3 trapPosition)
     {
         Vector3 dir = (transform.position - trapPosition); //Direction from the trap directe to player 
@@ -88,12 +91,15 @@ public class PlayerCollisions : MonoBehaviour
         _playerMovement.ApplyKnockBack(knockBackVelocity);
     }
 
+    /// <summary>
+    /// Launches the player upward with the given force, used when stomping an enemy.
+    /// </summary>
+    /// <param name="bounceForce">The vertical force to apply.</param>
     public void BouncePlayer(float bounceForce)
     {
         _bounceForce = bounceForce;//in case we want to set different bounce forces for different enemies in the future
         _playerRb.linearVelocity = new Vector2(_playerRb.linearVelocity.x, _bounceForce);
 
-        Debug.Log("Bounce!");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

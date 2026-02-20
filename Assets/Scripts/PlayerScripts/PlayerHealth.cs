@@ -36,9 +36,12 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
+        _rb = GetComponent<Rigidbody2D>();
+
         // ============== Respawn System Initialization ==============
         _startPosition = transform.position;
         _currentCheckpoint = _startPosition;
+
 
         // ============== Health UI Initialization ==============
         _currentHealth = _maxHealth;
@@ -54,10 +57,15 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Reduces the player's health by the given amount, triggers UI and audio feedback,
+    /// and starts the hit flash effect. Calls Die() if health reaches zero.
+    /// Has no effect if the player is invulnerable or already dead.
+    /// </summary>
+    /// <param name="damage">The amount of damage to apply.</param>
     public void TakeDamage(float damage)
     {
-        if(_isInvulnerable) return;
-        if (_isDead) return;
+        if (_isInvulnerable || _isDead) return;
 
         _currentHealth -= damage;
 
@@ -65,8 +73,6 @@ public class PlayerHealth : MonoBehaviour
         {
             _currentHealth = 0;
         }
-
-        Debug.Log($" Player Health: {_currentHealth}/{_maxHealth}");
 
         if (_healthUi != null)
         {
@@ -88,6 +94,10 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Flashes the player sprite red, then alternates transparency to signal invulnerability.
+    /// Sets _isInvulnerable for the duration to prevent damage during the effect.
+    /// </summary>
     IEnumerator HitEffect()
     {
         _isInvulnerable = true;
@@ -144,25 +154,25 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Kills the player: disables movement, physics, and camera, plays the death sound, then triggers a respawn.
+    /// </summary>
     public void Die()
     {
         if (_isDead) return;
         _isDead = true;
 
-        // Blocca movimento
         if (_playerMovement != null)
         {
             _playerMovement.enabled = false;
         }
 
-        // Blocca fisica
         if (_rb != null)
         {
             _rb.linearVelocity = Vector2.zero;
-            _rb.simulated = false; // Blocca completamente il rigidbody
+            _rb.simulated = false; // Disable physics to prevent falling through the world during death animation 
         }
 
-        // Blocca camera
         if (_virtualCamera != null)
         {
             _virtualCamera.enabled = false;
@@ -175,6 +185,10 @@ public class PlayerHealth : MonoBehaviour
         Respawn();
     }
 
+    /// <summary>
+    /// Sets the respawn point to the given checkpoint position.
+    /// </summary>
+    /// <param name="newCheckpoint">The world position of the activated checkpoint.</param>
     // ============== Respawn System Methods ==============
     public void SetRespawnPoint(Vector3 newCheckpoint)
     {
@@ -182,6 +196,10 @@ public class PlayerHealth : MonoBehaviour
         _hasCheckpoint = true;
     }
 
+    /// <summary>
+    /// Resets the player's health, position, physics, and movement to allow play to continue.
+    /// Respawns at the last checkpoint if one has been activated, otherwise at the start position.
+    /// </summary>
     private void Respawn()
     {
         _isDead = false;
@@ -191,24 +209,22 @@ public class PlayerHealth : MonoBehaviour
         {
             _virtualCamera.enabled = true;
         }
-        // Ripristina health
+
         _currentHealth = _maxHealth;
         if (_healthUi != null)
         {
             _healthUi.UpdateHeartContainer(_currentHealth);
         }
 
-        // Ripristina posizione
         transform.position = _hasCheckpoint ? _currentCheckpoint : _startPosition;
 
-        // Ripristina velocità
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
             rb.linearVelocity = Vector2.zero;
+            _rb.simulated = true; // Re-enable physics after respawn
         }
 
-        // Riabilita controlli
         if (_playerMovement != null)
         {
             _playerMovement.enabled = true;

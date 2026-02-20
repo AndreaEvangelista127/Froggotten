@@ -1,43 +1,41 @@
-﻿using System.Runtime.CompilerServices;
-using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
 
     [Header("Player Component References")]
-    [SerializeField] Rigidbody2D rb;
-    [SerializeField] SpriteRenderer playerSpriteR;
-    [SerializeField] Animator animator;
-    [SerializeField] Collider2D playerCollider;
+    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private SpriteRenderer _playerSpriteR;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Collider2D _playerCollider;
 
     [Header("Ground Check")]
-    [SerializeField] Transform groundCheckTransform; // Il GameObject figlio
-    [SerializeField] Vector2 groundCheckSize = new Vector2(0.8f, 0.1f); // Dimensione del box
-    [SerializeField] LayerMask groundLayer;
+    [SerializeField] private Transform _groundCheckTransform; 
+    [SerializeField] private Vector2 _groundCheckSize = new Vector2(0.8f, 0.1f); 
+    [SerializeField] private LayerMask _groundLayer;
 
     [Header("Player Settings")]
-    [SerializeField] float speed;
-    [SerializeField] float jumpingForce;
-    [SerializeField] float doubleJumpingForce;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _jumpingForce;
+    [SerializeField] private float _doubleJumpingForce;
     [SerializeField] private bool _canDoubleJump;
     [SerializeField] private StatePlayerMovement _statePlayerMovement;
 
     [Header("Variable Jump Settings")]
-    [SerializeField] float maxJumpTime = 0.1f; // Tempo massimo per tenere premuto (in secondi)
+    [SerializeField] private float _maxJumpTime = 0.1f; 
 
     [Header("Coyote Time Settings")]
-    [SerializeField] float coyoteTime = 0.15f;
+    [SerializeField] private float _coyoteTime = 0.15f;
 
     [Header("Wall Jump Settings")]
     [SerializeField] private bool _wallJumpEnabled = true;  
-    [SerializeField] LayerMask wallLayer;
-    [SerializeField] float wallJumpForceX = 8f; // Forza orizzontale del wall jump
-    [SerializeField] float wallJumpForceY = 12f; // Forza verticale del wall jump
-    [SerializeField] float wallCheckDistance = 0.2f; // Distanza per rilevare il muro
-    [SerializeField] float wallJumpControlLockTime = 0.2f; // Tempo di blocco del controllo orizzontale dopo il wall jump
+    [SerializeField] private LayerMask _wallLayer;
+    [SerializeField] private float _wallJumpForceX = 8f; 
+    [SerializeField] private float _wallJumpForceY = 12f; 
+    [SerializeField] private float _wallCheckDistance = 0.2f;
+    // Block horizontal control for x time after a wall jump to prevent overriding the wall jump velocity with the normal horizontal movement in the fixedUpdate
+    [SerializeField] private float _wallJumpControlLockTime = 0.2f;
 
     [Header("Wall Slide Settings")]
     [SerializeField] private bool _wallSlideEnabled = true;
@@ -45,19 +43,18 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Gliding Settings")]
     [SerializeField] private bool _glidingEnabled = true;
-    [SerializeField] private float _glidingFallSpeed = 2f;  // Velocità caduta lenta
-    [SerializeField] private float _glidingHorizontalSpeed = 5f;  // Velocità movimento orizzontale
-    [SerializeField] private GameObject _lilypadSprite;  // Sprite lilypad
+    [SerializeField] private float _glidingFallSpeed = 2f;  // fall speed while gliding
+    [SerializeField] private float _glidingHorizontalSpeed = 5f;  
+    [SerializeField] private GameObject _lilypadSprite;  
 
     [Header("Knockback Settings")]
-    [SerializeField] private float _knockbackControlLockTime = 0.3f; // Tempo di blocco dopo knockback
+    // Time during which player control is locked after knockback is applied, to let the player be knocked back properly without being able to move during the knockback
+    [SerializeField] private float _knockbackControlLockTime = 0.3f; 
 
-    private float _knockbackControlTimer = 0f; // Timer per il knockback
+    private float _knockbackControlTimer = 0f; 
 
     //Player sprite dimension
-    private float _playerHalfHeight;
     private float _playerHalfWidth;
-    private float _rayLength;
 
     //Player movement
     private float _moveValue;
@@ -73,11 +70,13 @@ public class PlayerMovement : MonoBehaviour
     private bool _isGliding = false;
     private bool _isJumpButtonHeld = false;
 
-    //public varibales used for animation
+    //The same as:
+    // public bool IsGrounded{get { return GetIsGrounded(); } }
+  
     public bool IsGrounded => GetIsGrounded();
     public bool IsMoving => Mathf.Abs(_moveValue) > 0.01f;
-    public float VelocityY => rb.linearVelocityY;
-    public float VelocityX => rb.linearVelocityX;
+    public float VelocityY => _rb.linearVelocityY;
+    public float VelocityX => _rb.linearVelocityX;
     public int WallDirection => GetWallJumpDirection();
     public bool IsWallSliding => CanWallSlide();
     public bool IsGliding => _isGliding;
@@ -85,10 +84,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        _playerHalfHeight = playerCollider.bounds.extents.y; //return the width of the sprite from the center to one side, so if it was 0.5 the total width will be 1
-        _playerHalfWidth = playerCollider.bounds.extents.x;
+        // Calculate player half width using the collider bounds, we will use this for the wall check to be sure to start the raycast from the edge of the player and not from the center, otherwise we could have some issues with the wall jump when the player is close to a wall but not touching it because the raycast starts from the center and not from the edge
+        _playerHalfWidth = _playerCollider.bounds.extents.x;
 
-        playerSpriteR.flipX = false;
+        _playerSpriteR.flipX = false;
 
         if(_lilypadSprite != null)
         {
@@ -98,15 +97,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() //FOR PHYSICS
     {
-        //Debug.Log(_knockbackControlTimer);
         // ========== Apply horizontal movement only if not in wall jump control lock or knockback control lock ==========
         if (_wallJumpControlTimer <= 0 && _knockbackControlTimer <= 0) // If we are in wall jump control lock we want to block the horizontal movement to let the player jump properly in a wall jump, otherwise the wall jump direction would have been overriden by the rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y);
         {
-            rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y);
+            // Normal horizontal movement
+            _rb.linearVelocity = new Vector2(_moveValue * _speed, _rb.linearVelocity.y);
         }
         else
         {
-            // Decrementa i timer
+            // Count down control locks - horizontal input is blocked during these windows
+            // to preserve the intended direction of wall jumps and knockback
             if (_wallJumpControlTimer > 0)
             {
                 _wallJumpControlTimer -= Time.fixedDeltaTime;
@@ -120,16 +120,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (CanWallSlide())
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, -_wallSlideSpeed);
+            _rb.linearVelocity = new Vector2(_rb.linearVelocityX, -_wallSlideSpeed);
         }
 
         UpdateGliding();
 
-
         if (GetIsGrounded())
         {
             _canDoubleJump = true;
-            _coyoteTimeCounter = coyoteTime; //  Reset timer when grounded
+            _coyoteTimeCounter = _coyoteTime; //  Reset timer when grounded
 
             if (_isGliding)
             {
@@ -140,8 +139,6 @@ public class PlayerMovement : MonoBehaviour
         {
             _coyoteTimeCounter -= Time.fixedDeltaTime; // Decremet timer while in mid air
         }
-
-        //Debug.Log(rb.linearVelocity);
     }
 
     private void Update()
@@ -149,10 +146,10 @@ public class PlayerMovement : MonoBehaviour
 
         FlipSpriteX();
 
-        //checking if is jumping and 
         if (_isJumping && _jumpTimeCounter > 0)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocityX,_currentJumpForce); //we need to include this to avoid that the gravity force us to go down,
+            // Hold jump button to extend jump height up to _maxJumpTime
+            _rb.linearVelocity = new Vector2(_rb.linearVelocityX,_currentJumpForce); //we need to include this to avoid that the gravity force us to go down,
             _jumpTimeCounter -= Time.deltaTime; //until i press space he jumps but for certain amount of time limited to Time.deltaTime
         }
         else
@@ -160,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
             _isJumping = false;
         }
 
-        //GLIDING CHECK
+        // ========== Gliding Logic ==========
         if (_glidingEnabled && _isJumpButtonHeld && CanGlide() && !_isGliding)
         {
             StartGliding();
@@ -173,83 +170,73 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Reads horizontal input from the Input System and stores it for use in FixedUpdate.
+    /// </summary>
     public void Move(InputAction.CallbackContext context)
     {
         _moveValue = context.ReadValue<Vector2>().x;
-
-        //if( _moveValue != 0)
-        //{
-        //    animator.SetBool("isRunning", true);
-        //}
-        //else
-        //{
-        //    animator.SetBool("isRunning", false);
-        //}
     }
 
     public void FlipSpriteX()
     {
-        //Debug.Log($"VelocityX: {rb.linearVelocityX}, flipX: {playerSpriteR.flipX}");
+        float threshold = 0.1f; // Threshold for considering the player as moving in a direction (to avoid flipping when the player is almost still)
 
-        // if (rb.linearVelocityX > 0)
-        // {
-        //    // Moving right
-        //    playerSpriteR.flipX = false;
-        // }
-        //else if ( rb.linearVelocityX < 0) 
-        // {
-        //    //Moving left 
-        //    playerSpriteR.flipX = true;
-        //}
-        float threshold = 0.1f; // Ignora velocità sotto 0.1, facendo cosi quei movimenti impercettibili dello sprite non vengono considerati ed il player non flippa a caso
-
-        if (rb.linearVelocityX > threshold)
+        if (_rb.linearVelocityX > threshold)
         {
-            playerSpriteR.flipX = false; // Destra
+            _playerSpriteR.flipX = false; // Right
         }
-        else if (rb.linearVelocityX < -threshold)
+        else if (_rb.linearVelocityX < -threshold)
         {
-            playerSpriteR.flipX = true; // Sinistra
+            _playerSpriteR.flipX = true; // Left
         }
     }
 
 
     private bool GetIsGrounded()
     {
-        if (groundCheckTransform == null) return false;
+        if (_groundCheckTransform == null) return false;
 
         bool isGrounded = Physics2D.OverlapBox(
-            groundCheckTransform.position,
-            groundCheckSize,
+            _groundCheckTransform.position,
+            _groundCheckSize,
             0f,
-            groundLayer
+            _groundLayer
         );
 
         return isGrounded;
     }
 
+    /// <summary>
+    /// Casts rays left and right to detect adjacent walls.
+    /// </summary>
+    /// <returns>-1 if wall is on the right (jump left), 1 if wall is on the left (jump right), 0 if no wall.</returns>
     private int GetWallJumpDirection()
     {
         if (!_wallJumpEnabled) return 0;
 
-        if (Physics2D.Raycast(transform.position, Vector2.right, _playerHalfWidth + wallCheckDistance, wallLayer)) //wallCheckDistance as an offset to be sure
+        if (Physics2D.Raycast(transform.position, Vector2.right, _playerHalfWidth + _wallCheckDistance, _wallLayer)) //wallCheckDistance as an offset to be sure
         {
             return -1; //we are jumping from a wall on the right to go left so negative value
         }
-        else if(Physics2D.Raycast(transform.position, Vector2.left, _playerHalfWidth + wallCheckDistance, wallLayer)) //wallCheckDistance as an offset to be sure
+        else if(Physics2D.Raycast(transform.position, Vector2.left, _playerHalfWidth + _wallCheckDistance, _wallLayer)) //wallCheckDistance as an offset to be sure
         {
             return 1; //we are jumping from a wall on the left to go right so positive value
         }
         return 0;
     }
 
+    /// <summary>
+    /// Returns true when the player is falling against a wall while pressing toward it,
+    /// enabling the wall slide state.
+    /// </summary>
     private bool CanWallSlide()
     {
         if(!_wallSlideEnabled) return false;
 
         if(GetIsGrounded()) return false;
 
-        if(rb.linearVelocityY >= 0) return false; //only when falling
+        if(_rb.linearVelocityY >= 0) return false; //only when falling
 
         // Now we check if we are touching a wall and which side
         int wallDirection = GetWallJumpDirection();
@@ -270,6 +257,10 @@ public class PlayerMovement : MonoBehaviour
         return pressingTowardsWall;
     }
 
+    /// <summary>
+    /// Handles jump input: normal jump with coyote time, double jump, and wall jump.
+    /// Also manages jump button hold for variable jump height and gliding activation.
+    /// </summary>
     public void Jump(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -288,9 +279,10 @@ public class PlayerMovement : MonoBehaviour
                 StopGliding();
             }
 
-            if (rb.linearVelocityY > 0)
+            // Cut upward velocity on release for variable jump height
+            if (_rb.linearVelocityY > 0)
             {
-                rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);
+                _rb.linearVelocity = new Vector2(_rb.linearVelocityX, _rb.linearVelocityY * 0.5f);
             }
         }
 
@@ -309,10 +301,10 @@ public class PlayerMovement : MonoBehaviour
                 // WALL JUMP 
                 if (wallDirection != 0 && !GetIsGrounded())
                 {
-                    // Salto diagonale
-                    rb.linearVelocity = new Vector2(wallJumpForceX * wallDirection, wallJumpForceY); //OVERWRITTEN BY THE MOVE IN THE FIXEDUPDATE SO WE USE wallJumpControlLockTime
+                    // Diagonal wall jump velocity
+                    _rb.linearVelocity = new Vector2(_wallJumpForceX * wallDirection, _wallJumpForceY); //OVERWRITTEN BY THE MOVE IN THE FIXEDUPDATE SO WE USE wallJumpControlLockTime
 
-                    //  RESETTA il doppio salto invece di consumarlo
+                    // Reset double jump when wall jumping to allow the player to double jump after a wall jump, otherwise the player would have to touch the ground to reset the double jump and it would not be possible to do multiple wall jumps in a row without touching the ground
                     _canDoubleJump = true;
 
                     // If true the wall jump would be overwritten by the press and hold jump in the update method
@@ -320,7 +312,7 @@ public class PlayerMovement : MonoBehaviour
 
                     /* Blocking the horizontal movement in the fixedUpdate to let the player jump properly in a wall jump, otherwise the wall jump direction would
                     have been overriden by the rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y); */
-                    _wallJumpControlTimer = wallJumpControlLockTime;
+                    _wallJumpControlTimer = _wallJumpControlLockTime;
 
                     _statePlayerMovement.SetMoveState(StatePlayerMovement.MoveState.Wall_Jump);
 
@@ -330,27 +322,25 @@ public class PlayerMovement : MonoBehaviour
             //Instead of using grounded now we check coyote timer because we want to jump when is grounded or even if the player is mid air meanwhile coyotimer is still > 0
             if (_coyoteTimeCounter > 0f)
             {
-                //Debug.Log("FIRST JUMP");
-                rb.linearVelocity = new Vector2(rb.linearVelocityX, jumpingForce);
+                _rb.linearVelocity = new Vector2(_rb.linearVelocityX, _jumpingForce);
 
                 _isJumping = true;
-                _jumpTimeCounter = maxJumpTime;
-                _currentJumpForce = jumpingForce;
+                _jumpTimeCounter = _maxJumpTime;
+                _currentJumpForce = _jumpingForce;
 
                 _coyoteTimeCounter = 0f; //exstinguish coyote time
 
                 _statePlayerMovement.SetMoveState(StatePlayerMovement.MoveState.Jump);
 
             }
-            // Doppio salto
+            // double jump
             else if (_canDoubleJump)
             {
-                //Debug.Log("DOUBLE JUMP");
-                rb.linearVelocity = new Vector2(rb.linearVelocityX, doubleJumpingForce);
+                _rb.linearVelocity = new Vector2(_rb.linearVelocityX, _doubleJumpingForce);
 
                 _isJumping = true;
-                _jumpTimeCounter = maxJumpTime;
-                _currentJumpForce = doubleJumpingForce;
+                _jumpTimeCounter = _maxJumpTime;
+                _currentJumpForce = _doubleJumpingForce;
 
                 _canDoubleJump = false;
 
@@ -358,27 +348,19 @@ public class PlayerMovement : MonoBehaviour
 
             }
         }
-
-        //if (context.canceled)
-        //{
-        //    _isJumping = false;
-
-        //    if (rb.linearVelocityY > 0)
-        //    {
-        //        rb.linearVelocity = new Vector2(rb.linearVelocityX, rb.linearVelocityY * 0.5f);// Cut the y speed because otherwise the player will be floating a little
-        //    }
-        //}
     }
 
-    
-
+    /// <summary>
+    /// Returns true when the player is airborne, falling, not wall sliding,
+    /// and outside the wall jump control lock window.
+    /// </summary>
     public bool CanGlide()
     {
         if (!_glidingEnabled) return false;
 
         if (GetIsGrounded()) return false;
 
-        if (rb.linearVelocityY >= 0) return false;
+        if (_rb.linearVelocityY >= 0) return false;
 
         if (CanWallSlide()) return false;
 
@@ -392,7 +374,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _isGliding = true;
 
-        // Attiva sprite lilypad
         if (_lilypadSprite != null)
         {
             _lilypadSprite.SetActive(true);
@@ -403,44 +384,48 @@ public class PlayerMovement : MonoBehaviour
     {
         _isGliding = false;
 
-        // Disattiva sprite lilypad
         if (_lilypadSprite != null)
         {
             _lilypadSprite.SetActive(false);
         }
     }
 
+    /// <summary>
+    /// Caps the fall speed and applies gliding horizontal movement while the player is gliding.
+    /// </summary>
     private void UpdateGliding()
     {
         if (!_isGliding) return;
 
-        // Velocità caduta ridotta
-        if (rb.linearVelocityY < -_glidingFallSpeed)
+        // Cap the fall speed to the gliding fall speed
+        if (_rb.linearVelocityY < -_glidingFallSpeed)
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocityX, -_glidingFallSpeed);
+            _rb.linearVelocity = new Vector2(_rb.linearVelocityX, -_glidingFallSpeed);
         }
 
-        // Movimento orizzontale (leggermente ridotto rispetto a normale)
         float horizontalInput = _moveValue;
-        rb.linearVelocity = new Vector2(horizontalInput * _glidingHorizontalSpeed, rb.linearVelocityY);
+        _rb.linearVelocity = new Vector2(horizontalInput * _glidingHorizontalSpeed, _rb.linearVelocityY);
     }
 
+    /// <summary>
+    /// Applies an instant velocity to knock the player back and locks horizontal input
+    /// for a short duration to preserve the knockback feel.
+    /// </summary>
+    /// <param name="knockBackVel">The velocity vector to apply as knockback.</param>
     // https://discussions.unity.com/t/trying-to-get-a-knockback-function-to-work/951526
     public void ApplyKnockBack(Vector3 knockBackVel)
     { 
-        
-
         //Block player control to have a proper knockback feeling, otherwise the player could move during the knockback and it would feel weird
         _knockbackControlTimer = _knockbackControlLockTime;
 
         //Actual knockback
-        rb.linearVelocity = knockBackVel;      
+        _rb.linearVelocity = knockBackVel;      
 
     }
 
     private void OnDrawGizmos()
     {
-        if (playerCollider == null) return;
+        if (_playerCollider == null) return;
 
         DrawGroundCheckGizmos();
         DrawWallCheckGizmos();
@@ -450,13 +435,13 @@ public class PlayerMovement : MonoBehaviour
     // ========== GROUND CHECK VISUALIZATION ==========
     private void DrawGroundCheckGizmos()
     {
-        if (groundCheckTransform == null) return;
+        if (_groundCheckTransform == null) return;
 
         bool isGrounded = Physics2D.OverlapBox(
-            groundCheckTransform.position,
-            groundCheckSize,
+            _groundCheckTransform.position,
+            _groundCheckSize,
             0f,
-            groundLayer
+            _groundLayer
         );
 
         if (isGrounded)
@@ -468,20 +453,16 @@ public class PlayerMovement : MonoBehaviour
             Gizmos.color = Color.red;
         }
 
-        // Disegna il box
-        Gizmos.DrawWireCube(groundCheckTransform.position, groundCheckSize);
-
-        // Centro del ground check
-        //Gizmos.DrawSphere(groundCheckTransform.position, 0.05f);
+        Gizmos.DrawWireCube(_groundCheckTransform.position, _groundCheckSize);
     }
 
     // ========== WALL CHECK VISUALIZATION ==========
     private void DrawWallCheckGizmos()
     {
-        float wallCheckLen = playerCollider.bounds.extents.x + wallCheckDistance;
+        float wallCheckLen = _playerCollider.bounds.extents.x + _wallCheckDistance;
 
         // Right Wall Check
-        bool wallRight = Physics2D.Raycast(transform.position, Vector2.right, wallCheckLen, wallLayer);
+        bool wallRight = Physics2D.Raycast(transform.position, Vector2.right, wallCheckLen, _wallLayer);
         if (wallRight)
         {
             Gizmos.color = Color.cyan;
@@ -493,7 +474,7 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + Vector3.right * wallCheckLen);
 
         //Left Wall Check
-        bool wallLeft = Physics2D.Raycast(transform.position, Vector2.left, wallCheckLen, wallLayer);
+        bool wallLeft = Physics2D.Raycast(transform.position, Vector2.left, wallCheckLen, _wallLayer);
         if (wallLeft)
         {
             Gizmos.color = Color.cyan;
