@@ -24,10 +24,13 @@ public class WinManager : MonoBehaviour
     [SerializeField] private GameObject _winPanelUI;          
     [SerializeField] private float _winPanelDelay = 1f;
     [SerializeField] private Transform _continuosConfettiSpawnPoint;
+    [SerializeField] private GameObject _winFirstSelected;
 
     [Header("References")]
     [SerializeField] private AudioManager _audioManager;
     [SerializeField] private FadeTransition _fadeTransition;
+
+
 
 
     private bool _isTrophyUnlocked = false;
@@ -150,6 +153,10 @@ public class WinManager : MonoBehaviour
             _winPanelUI.SetActive(true);
 
             Time.timeScale = 0f;
+
+            // Set controller focus to the first button of the win panel
+            if (_winFirstSelected != null)
+                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(_winFirstSelected);
         }
             
 

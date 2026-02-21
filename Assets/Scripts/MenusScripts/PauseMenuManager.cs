@@ -1,28 +1,27 @@
-using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class PauseMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _pauseMenuUI;
     [SerializeField] private AudioManager _audioManager;
+    [SerializeField] private GameObject _pauseFirstSelected;
+
 
     private bool _isPaused = false;
 
-    private void Update()
+    /// <summary>
+    /// Called by the Player Input component when the Pause action is triggered.
+    /// Toggles between paused and resumed state.
+    /// </summary>
+    /// <param name="context">The input callback context from the Input System.</param>
+    public void OnPause(InputAction.CallbackContext context)
     {
-        //Escape = escape key on keyboard and "Cancel" is the default input name for start/pause
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Cancel"))
-        {
-            if (_isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
-            }
-        }
+        if (!context.performed) return;
+
+        if (_isPaused) ResumeGame();
+        else PauseGame();
     }
 
     /// <summary>
@@ -30,19 +29,17 @@ public class PauseMenuManager : MonoBehaviour
     /// </summary>
     public void PauseGame()
     {
+        if (_pauseMenuUI == null) return;
 
-        if(_pauseMenuUI != null)
-        {
-            _pauseMenuUI.SetActive(true);
-            Time.timeScale = 0f;
-            _isPaused = true;
+        _pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        _isPaused = true;
 
-            if(_audioManager != null)
-            {
-                _audioManager.PauseMusic();
-            }
-        }
+        // Set controller focus to the first element of the pause menu
+        EventSystem.current.SetSelectedGameObject(_pauseFirstSelected);
 
+        if (_audioManager != null)
+            _audioManager.PauseMusic();
     }
 
     /// <summary>
@@ -50,17 +47,16 @@ public class PauseMenuManager : MonoBehaviour
     /// </summary>
     public void ResumeGame()
     {
-        if(_pauseMenuUI != null)
-        {
-            _pauseMenuUI.SetActive(false);
-            Time.timeScale = 1f;
-            _isPaused = false;
+        if (_pauseMenuUI == null) return;
 
-            if(_audioManager != null)
-            {
-                _audioManager.ResumeMusic();
-            }
-        }
+        _pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        _isPaused = false;
+
+        EventSystem.current.SetSelectedGameObject(null);
+
+        if (_audioManager != null)
+            _audioManager.ResumeMusic();
     }
 
     /// <summary>
@@ -68,7 +64,7 @@ public class PauseMenuManager : MonoBehaviour
     /// </summary>
     public void LoadMainMenu()
     {
-        if(_pauseMenuUI != null)
+        if (_pauseMenuUI != null)
         {
             _pauseMenuUI.SetActive(false);
             Time.timeScale = 1f;
@@ -77,8 +73,6 @@ public class PauseMenuManager : MonoBehaviour
 
         FadeTransition fadeTransition = FindFirstObjectByType<FadeTransition>();
         if (fadeTransition != null)
-        {
             fadeTransition.FadeToScene(0);
-        }
     }
 }

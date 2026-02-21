@@ -8,12 +8,14 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance {  get; private set; }
 
     [Header("Music")]
-    [SerializeField] private AudioSource musicSource;
-    [SerializeField] private Slider volumeSlider;
-    [SerializeField] private TextMeshProUGUI volumeText;
+    [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private Slider _volumeSlider;
+    [SerializeField] private TextMeshProUGUI _volumeText;
 
     [Header("SFX")]
     [SerializeField] private AudioSource _sfxSource;
+    [SerializeField] private Slider _sfxVolumeSlider;
+    [SerializeField] private TextMeshProUGUI _sfxVolumeText;
     //[SerializeField] private AudioClip _clickSound;
     //[SerializeField][Range(0f, 1f)] private float _clickVolume = 1f; 
 
@@ -61,14 +63,29 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        // ========= BACKGROUND MUSIC SETUP ==========
         // Load the previusly saved volume
-        float savedVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
-        musicSource.volume = savedVolume;
-        volumeSlider.value = savedVolume;
-        UpdateVolumeText(savedVolume);
+        if (_musicSource != null && _volumeSlider != null)
+        {
+            float savedVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+            _musicSource.volume = savedVolume;
+            _volumeSlider.value = savedVolume;
+            UpdateVolumeText(savedVolume);
 
-        // when the slider value changes, call ChangeVolume
-        volumeSlider.onValueChanged.AddListener(ChangeVolume);
+            // when the slider value changes, call ChangeVolume
+            _volumeSlider.onValueChanged.AddListener(ChangeVolume);
+        }
+
+        // ========= SFX SETUP ==========
+        if(_sfxSource != null && _sfxVolumeSlider != null)
+        {
+            float savedSfxVolume = PlayerPrefs.GetFloat("SFXVolume", 1f);
+            _sfxSource.volume = savedSfxVolume;
+            _sfxVolumeSlider.value = savedSfxVolume;
+            UpdateSFXVolumeText(savedSfxVolume);
+
+            _sfxVolumeSlider.onValueChanged.AddListener(ChangeSFXVolume);
+        }
 
         // Setup footstep audio source
         if (_footstepSource != null)
@@ -243,35 +260,57 @@ public class AudioManager : MonoBehaviour
     /// <param name="volume">The new volume value between 0 and 1.</param>
     public void ChangeVolume(float volume)
     {
-        musicSource.volume = volume;
+        _musicSource.volume = volume;
         UpdateVolumeText(volume);
 
-        // Salva il volume
         PlayerPrefs.SetFloat("MusicVolume", volume);
     }
     /// <summary>
     /// Converts a 0-1 volume value to a percentage and displays it in the UI text.
     /// </summary>
     /// <param name="volume">The volume value between 0 and 1.</param>
-    void UpdateVolumeText(float volume)
+    public void UpdateVolumeText(float volume)
     {
-        // Converti in percentuale (0-100)
         int volumePercent = Mathf.RoundToInt(volume * 100);
-        volumeText.text = $"{volumePercent}%";
+        _volumeText.text = $"{volumePercent}%";
     }
+
+    /// <summary>
+    /// Updates the SFX volume, refreshes the UI text, and saves the value to PlayerPrefs.
+    /// </summary>
+    /// <param name="volume">The new volume value between 0 and 1.</param>
+    public void ChangeSFXVolume(float volume)
+    {
+        if (_sfxSource == null) return;
+
+        _sfxSource.volume = volume;
+        UpdateSFXVolumeText(volume);
+        PlayerPrefs.SetFloat("SFXVolume", volume);
+    }
+
+    /// <summary>
+    /// Converts a 0-1 SFX volume value to a percentage and displays it in the UI text.
+    /// </summary>
+    /// <param name="volume">The volume value between 0 and 1.</param>
+    private void UpdateSFXVolumeText(float volume)
+    {
+        int volumePercent = Mathf.RoundToInt(volume * 100);
+        _sfxVolumeText.text = $"{volumePercent}%";
+    }
+
     public void PauseMusic()
     {
-        if (musicSource.isPlaying)
+        if (_musicSource.isPlaying)
         {
-            musicSource.Pause();
+            _musicSource.Pause();
         }
     }
 
     public void ResumeMusic()
     {
-        if (!musicSource.isPlaying)
+        if (!_musicSource.isPlaying)
         {
-            musicSource.UnPause();
+            _musicSource.UnPause();
         }
     }
 
