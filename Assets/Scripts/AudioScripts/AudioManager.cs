@@ -90,9 +90,10 @@ public class AudioManager : MonoBehaviour
         // Setup footstep audio source
         if (_footstepSource != null)
         {
-            _footstepSource.volume = _footstepVolume;
+            float savedSfxVolume = PlayerPrefs.GetFloat("SFXVolume", 1f);
+            _footstepSource.volume = _footstepVolume * savedSfxVolume;
             _footstepSource.clip = _footstepSound;
-            _footstepSource.loop = true; 
+            _footstepSource.loop = true;
         }
     }
 
@@ -284,6 +285,15 @@ public class AudioManager : MonoBehaviour
         if (_sfxSource == null) return;
 
         _sfxSource.volume = volume;
+
+        // Two separate AudioSources are required here: _footstepSource handles the looping footstep audio,
+        // while _sfxSource handles all one-shot SFX (jumps, damage, collectibles, etc.).
+        // Using a single AudioSource for both caused PlayOneShot calls to interfere with each other,
+        // resulting in some audio clips being cut off mid-playback.
+        if (_footstepSource != null)
+            _footstepSource.volume = _footstepVolume * volume;// Footstep volume is proportional to SFX volume
+
+
         UpdateSFXVolumeText(volume);
         PlayerPrefs.SetFloat("SFXVolume", volume);
     }
