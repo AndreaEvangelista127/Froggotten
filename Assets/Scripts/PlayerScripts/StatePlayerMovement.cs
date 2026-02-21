@@ -28,8 +28,8 @@ public class StatePlayerMovement : MonoBehaviour
 
 
     [Header("State Thresholds")]
-    [SerializeField] private float _velocityYThreshold = 0.5f; // Threshold per caduta
-    [SerializeField] private float _velocityXThreshold = 0.1f; // Threshold per movimento
+    [SerializeField] private float _velocityYThreshold = 0.5f; // Threshold for falling
+    [SerializeField] private float _velocityXThreshold = 0.1f; // Threshold per movement
 
     public MoveState currentMoveState { get; private set; }
 
@@ -64,12 +64,12 @@ public class StatePlayerMovement : MonoBehaviour
             return;  
         }
 
-        // Controllo con threshold
+        // check with thresholds to determine if player is grounded, moving, or falling
         bool isGrounded = Mathf.Abs(_rigidBody.linearVelocity.y) < _velocityYThreshold;
         bool isMoving = Mathf.Abs(_rigidBody.linearVelocity.x) > _velocityXThreshold;
         bool isFalling = _rigidBody.linearVelocity.y < -_velocityYThreshold;
 
-        // Logica stati
+        // logic to determine movement state based on velocity and player input
         if (isFalling)
         {
             SetMoveState(MoveState.Fall);

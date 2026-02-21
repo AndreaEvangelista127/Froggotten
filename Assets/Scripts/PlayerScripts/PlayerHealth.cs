@@ -8,6 +8,11 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float _maxHealth = 3.5f; 
     private float _currentHealth;
 
+    [Header("Lives Settings")]
+    [SerializeField] private int _maxLives = 3;
+    [SerializeField] private LivesUI _livesUI;
+    private int _currentLives;
+
     [Header("UI")]
     [SerializeField] private HealthUi _healthUi;
 
@@ -28,15 +33,20 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private AudioManager _audioManager;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private CinemachineCamera _virtualCamera;
+    [SerializeField] private GameOverManager gameOverManager;
+
 
     private Color _originalColor;
     private bool _isDead = false;
     private Rigidbody2D _rb;
 
-
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _currentLives = _maxLives;
+
+        if (_livesUI != null)
+            _livesUI.UpdateLives(_currentLives);
 
         // ============== Respawn System Initialization ==============
         _startPosition = transform.position;
@@ -161,6 +171,8 @@ public class PlayerHealth : MonoBehaviour
     {
         if (_isDead) return;
         _isDead = true;
+        _currentLives--;
+
 
         if (_playerMovement != null)
         {
@@ -182,7 +194,18 @@ public class PlayerHealth : MonoBehaviour
         {
             _audioManager.PlayDeathSound();
         }
-        Respawn();
+
+        if (_livesUI != null)
+            _livesUI.UpdateLives(_currentLives);
+
+        if (_currentLives <= 0)
+        {
+            GameOver();
+        }
+        else
+        {
+            Respawn();
+        }
     }
 
     /// <summary>
@@ -229,5 +252,21 @@ public class PlayerHealth : MonoBehaviour
         {
             _playerMovement.enabled = true;
         }
+    }
+
+    /// <summary>
+    /// Triggered when the player runs out of lives.
+    /// Stops the game and shows the Game Over panel.
+    /// </summary>
+    private void GameOver()
+    {
+
+        if (_audioManager != null)
+            _audioManager.PauseMusic();
+
+        Time.timeScale = 0f;
+
+        if (gameOverManager != null)
+            gameOverManager.ShowGameOver();
     }
 }

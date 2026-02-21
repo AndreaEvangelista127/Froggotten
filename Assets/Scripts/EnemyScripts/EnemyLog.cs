@@ -12,6 +12,7 @@ public class EnemyLog : MonoBehaviour, IEnemy
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private float _detectionRange = 5f;
+    [SerializeField] private float _verticalTolerance = 1f;
 
     [Header("Attack")]
     [SerializeField] private float _attackRange = 3f;
@@ -38,12 +39,17 @@ public class EnemyLog : MonoBehaviour, IEnemy
         if (_playerTf == null || _isDead) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, _playerTf.position);
+        float distanceX = Mathf.Abs(_playerTf.position.x - transform.position.x);
+        float distanceY = Mathf.Abs(_playerTf.position.y - transform.position.y);
 
-        if (distanceToPlayer <= _attackRange) // we are in attack range
+        bool inDetectionRange = distanceX <= _detectionRange && distanceY <= _verticalTolerance;
+        bool inAttackRange = distanceX <= _attackRange && distanceY <= _verticalTolerance;
+
+        if (inAttackRange) // we are in attack range
         {
             StopAndAttack();
         }
-        else if (_detectionRange >= distanceToPlayer) // we are in detection range
+        else if (inDetectionRange) // we are in detection range
         {
             ChasePlayer();
         }

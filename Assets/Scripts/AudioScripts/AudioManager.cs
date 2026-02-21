@@ -153,7 +153,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void StopFootsteps()
+    public void StopFootsteps()
     {
         if (_footstepSource != null && _footstepSource.isPlaying)
         {
