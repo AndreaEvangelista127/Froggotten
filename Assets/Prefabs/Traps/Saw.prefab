@@ -326,6 +326,7 @@ MonoBehaviour:
   _sawRb: {fileID: 5375133138982617910}
   _sawChainSpritePrefab: {fileID: 1014700492046128685, guid: 68a8316439740ff48b629be7d853a10a, type: 3}
   _chainSpacing: 0.5
+  _useChainPath: 1
 --- !u!58 &1174344281682141888
 CircleCollider2D:
   m_ObjectHideFlags: 0

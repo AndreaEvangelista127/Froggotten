@@ -13,6 +13,7 @@ public class EnemyLog : MonoBehaviour, IEnemy
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private float _detectionRange = 5f;
     [SerializeField] private float _verticalTolerance = 1f;
+    [SerializeField] private bool _canMove = true;
 
     [Header("Attack")]
     [SerializeField] private float _attackRange = 3f;
@@ -23,7 +24,7 @@ public class EnemyLog : MonoBehaviour, IEnemy
 
     private Animator _animator;
     private Rigidbody2D _rb;
-    private bool _facingRight = true;
+    private bool _facingRight = false;
     private bool _isAttacking = false;
     private bool _isDead = false;
 
@@ -49,7 +50,7 @@ public class EnemyLog : MonoBehaviour, IEnemy
         {
             StopAndAttack();
         }
-        else if (inDetectionRange) // we are in detection range
+        else if (inDetectionRange && _canMove) // we are in detection range
         {
             ChasePlayer();
         }
@@ -168,15 +169,18 @@ public class EnemyLog : MonoBehaviour, IEnemy
     public void Flip()
     {
         _facingRight = !_facingRight;
+
         float scaleX;
+
         if (_facingRight)
         {
-            scaleX = -1f;
+            scaleX = -1f; // look right
         }
         else
         {
-            scaleX = 1f;
+            scaleX = 1f; // look left
         }
+
         _sprite.localScale = new Vector3(scaleX, 1f, 1f);
     }
 

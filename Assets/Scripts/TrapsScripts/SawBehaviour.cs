@@ -9,21 +9,33 @@ public class SawBehaviour : MonoBehaviour
     [SerializeField] private Rigidbody2D _sawRb;
     [SerializeField] private GameObject _sawChainSpritePrefab;
     [SerializeField] private float _chainSpacing = 0.5f;
+    [SerializeField] private bool _useChainPath = true;
+
 
     private Vector3[] _realDestinations;
     private int _currentDestIndex = 0;
 
     // Small threshold to detect when the saw has reached a destination point
-    private const float _buffer = 0.05f;
+    private const float _buffer = 0.15f;
 
     private void Awake() 
     {
+        if (_destinationPositions == null || _destinationPositions.Length == 0)
+        {
+            _realDestinations = new Vector3[0];
+            return; //no destination, the saw will remain stopped
+        }
+
         _realDestinations = new Vector3[_destinationPositions.Length];
         for (int i = 0; i < _destinationPositions.Length; i++)
         {
             _realDestinations[i] = _destinationPositions[i].position;
         }
-        CreateChainPath();
+
+        if (_useChainPath)
+        {
+            CreateChainPath();
+        }
     }
 
     /// <summary>
@@ -96,7 +108,7 @@ public class SawBehaviour : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_destinationPositions != null)
+        if (_realDestinations != null && _realDestinations.Length > 0)
         {
             MoveToNextDestination(_realDestinations);
         }
