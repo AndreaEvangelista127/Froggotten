@@ -113,6 +113,20 @@ public class PlayerCollisions : MonoBehaviour
                 playerHealth.TakeDamage(1);
             }
         }
+
+        // Moving surface
+        if (collision.collider.TryGetComponent(out IMovingSurface2D surface))
+        {
+            _playerMovement.SetMovingSurface(surface);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.TryGetComponent(out IMovingSurface2D surface))
+        {
+            _playerMovement.SetMovingSurface(null);
+        }
     }
 
     public int GetCurrentFliesCollected()

@@ -65,9 +65,9 @@ public class StatePlayerMovement : MonoBehaviour
         }
 
         // check with thresholds to determine if player is grounded, moving, or falling
-        bool isGrounded = Mathf.Abs(_rigidBody.linearVelocity.y) < _velocityYThreshold;
-        bool isMoving = Mathf.Abs(_rigidBody.linearVelocity.x) > _velocityXThreshold;
-        bool isFalling = _rigidBody.linearVelocity.y < -_velocityYThreshold;
+        bool isGrounded = _playerMovement.IsGrounded;
+        bool isMoving = _playerMovement.IsMoving;
+        bool isFalling = _rigidBody.linearVelocity.y < -_velocityYThreshold && !isGrounded;
 
         // logic to determine movement state based on velocity and player input
         if (isFalling)

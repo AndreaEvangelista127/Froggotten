@@ -45,13 +45,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool _glidingEnabled = true;
     [SerializeField] private float _glidingFallSpeed = 2f;  // fall speed while gliding
     [SerializeField] private float _glidingHorizontalSpeed = 5f;  
-    [SerializeField] private GameObject _lilypadSprite;  
+    [SerializeField] private GameObject _lilypadSprite;
+
 
     [Header("Knockback Settings")]
     // Time during which player control is locked after knockback is applied, to let the player be knocked back properly without being able to move during the knockback
     [SerializeField] private float _knockbackControlLockTime = 0.3f; 
 
-    private float _knockbackControlTimer = 0f; 
+    private float _knockbackControlTimer = 0f;
+
+    [Header("Platforms")]
+    private IMovingSurface2D _movingSurface;
+    private Vector2 _surfaceVelocity;
 
     //Player sprite dimension
     private float _playerHalfWidth;
@@ -100,8 +105,11 @@ public class PlayerMovement : MonoBehaviour
         // ========== Apply horizontal movement only if not in wall jump control lock or knockback control lock ==========
         if (_wallJumpControlTimer <= 0 && _knockbackControlTimer <= 0) // If we are in wall jump control lock we want to block the horizontal movement to let the player jump properly in a wall jump, otherwise the wall jump direction would have been overriden by the rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y);
         {
-            // Normal horizontal movement
-            _rb.linearVelocity = new Vector2(_moveValue * _speed, _rb.linearVelocity.y);
+            // Normal horizontal movement + check if player is on the platform like the 3dcontroller
+            if (_movingSurface != null) _surfaceVelocity = _movingSurface.GetVelocity();
+            else _surfaceVelocity = Vector2.zero;
+
+            _rb.linearVelocity = new Vector2((_moveValue * _speed) + _surfaceVelocity.x, _rb.linearVelocity.y);
         }
         else
         {
@@ -182,11 +190,11 @@ public class PlayerMovement : MonoBehaviour
     {
         float threshold = 0.1f; // Threshold for considering the player as moving in a direction (to avoid flipping when the player is almost still)
 
-        if (_rb.linearVelocityX > threshold)
+        if (_moveValue > threshold)
         {
             _playerSpriteR.flipX = false; // Right
         }
-        else if (_rb.linearVelocityX < -threshold)
+        else if (_moveValue < -threshold)
         {
             _playerSpriteR.flipX = true; // Left
         }
@@ -421,6 +429,17 @@ public class PlayerMovement : MonoBehaviour
         //Actual knockback
         _rb.linearVelocity = knockBackVel;      
 
+    }
+
+    /// <summary>
+    /// Setter for the MovingSurface to ensure correct movement for the player
+    /// when he is on it
+    /// </summary>
+    /// <param name="surface">Current Platform that the player is stepping on</param>
+    public void SetMovingSurface(IMovingSurface2D surface)
+    {
+        _movingSurface = surface;
+        if (surface == null) _surfaceVelocity = Vector2.zero;
     }
 
     private void OnDrawGizmos()
