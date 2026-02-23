@@ -35,13 +35,19 @@ public class MovingPlatform : MonoBehaviour, IMovingSurface2D
 
     private void Awake()
     {
+        if (_destinationPositions == null || _destinationPositions.Length == 0)
+        {
+            Debug.LogWarning("MovingPlatform: No destination positions assigned!");
+            return;
+        }
+
         _realDestinations = new Vector3[_destinationPositions.Length];
         for (int i = 0; i < _destinationPositions.Length; i++)
         {
             _realDestinations[i] = _destinationPositions[i].position;
         }
 
-        if (_useChainPath)
+        if (_useChainPath && _chainSpritePrefab != null)
         {
             CreateChainPath();
         }
@@ -49,8 +55,7 @@ public class MovingPlatform : MonoBehaviour, IMovingSurface2D
 
     private void FixedUpdate()
     {
-        if (_destinationPositions == null || _destinationPositions.Length == 0) return;
-
+        if (_rb == null || _destinationPositions == null || _destinationPositions.Length == 0) return;
         MoveToNextDestination();
 
     }
@@ -83,8 +88,7 @@ public class MovingPlatform : MonoBehaviour, IMovingSurface2D
         _rb.MovePosition((Vector2)currentPos + _platformDelta);
     }
 
-    // --- Chain path ---
-
+    // --- Chain path same desription as the saw ---
     private void CreateChainPath()
     {
         for (int i = 0; i < _realDestinations.Length; i++)

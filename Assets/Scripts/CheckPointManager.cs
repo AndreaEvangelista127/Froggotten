@@ -57,7 +57,8 @@ public class CheckPointManager : MonoBehaviour
             _flagAnimator.SetTrigger(_activationAnimationTrigger);
         }
 
-        VFXConfetti.SpawnConfettiWithTimer(_confettiPrefab, _confettiSpawnPoint.position);
+        if (_confettiSpawnPoint != null)
+            VFXConfetti.SpawnConfettiWithTimer(_confettiPrefab, _confettiSpawnPoint.position);
 
         if (_audioManager != null)
         {

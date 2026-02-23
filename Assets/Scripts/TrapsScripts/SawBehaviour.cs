@@ -32,7 +32,7 @@ public class SawBehaviour : MonoBehaviour
             _realDestinations[i] = _destinationPositions[i].position;
         }
 
-        if (_useChainPath)
+        if (_useChainPath && _sawChainSpritePrefab != null)
         {
             CreateChainPath();
         }
@@ -121,6 +121,7 @@ public class SawBehaviour : MonoBehaviour
     /// <param name="destinations">Array of world positions defining the saw's patrol path.</param>
     public void MoveToNextDestination(Vector3[] destinations)
     {
+        if (_sawRb == null) return;
 
         Vector3 target = destinations[_currentDestIndex];
         Vector3 currentPos = transform.position;

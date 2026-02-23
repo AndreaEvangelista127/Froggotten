@@ -33,11 +33,14 @@ public class EnemyLog : MonoBehaviour, IEnemy
     {
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
+
+        if (_animator == null) Debug.LogWarning("EnemyLog: Animator not found!");
+        if (_rb == null) Debug.LogWarning("EnemyLog: Rigidbody2D not found!");
     }
 
     private void Update()
     {
-        if (_playerTf == null || _isDead) return;
+        if (_playerTf == null || _isDead || _animator == null || _rb == null) return;
 
         float distanceToPlayer = Vector2.Distance(transform.position, _playerTf.position);
         float distanceX = Mathf.Abs(_playerTf.position.x - transform.position.x);
@@ -169,6 +172,8 @@ public class EnemyLog : MonoBehaviour, IEnemy
     public void Flip()
     {
         _facingRight = !_facingRight;
+
+        if (_sprite == null) return;
 
         float scaleX;
 

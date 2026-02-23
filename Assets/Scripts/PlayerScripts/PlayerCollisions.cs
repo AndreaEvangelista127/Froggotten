@@ -84,6 +84,8 @@ public class PlayerCollisions : MonoBehaviour
     /// <param name="trapPosition">The world position of the trap that hit the player.</param>
     private void ApplyTrapKnockback(Vector3 trapPosition)
     {
+        if (_playerMovement == null) return;
+
         Vector3 dir = (transform.position - trapPosition); //Direction from the trap directe to player 
 
         Vector3 knockBackVelocity = dir.normalized * _trapKnockbackForce;
@@ -97,6 +99,8 @@ public class PlayerCollisions : MonoBehaviour
     /// <param name="bounceForce">The vertical force to apply.</param>
     public void BouncePlayer(float bounceForce)
     {
+        if (_playerRb == null) return;
+
         _bounceForce = bounceForce;//in case we want to set different bounce forces for different enemies in the future
         _playerRb.linearVelocity = new Vector2(_playerRb.linearVelocity.x, _bounceForce);
 
@@ -106,11 +110,10 @@ public class PlayerCollisions : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("EnemyBody"))
         {
-            PlayerHealth playerHealth = GetComponent<PlayerHealth>();
-            if (playerHealth != null)
+            if (_playerHealth != null)
             {
                 Debug.Log("Player takes damage from enemy body!");
-                playerHealth.TakeDamage(1);
+                _playerHealth.TakeDamage(1);
             }
         }
 
@@ -125,7 +128,8 @@ public class PlayerCollisions : MonoBehaviour
     {
         if (collision.collider.TryGetComponent(out IMovingSurface2D surface))
         {
-            _playerMovement.SetMovingSurface(null);
+            if (_playerMovement != null)
+                _playerMovement.SetMovingSurface(null);
         }
     }
 

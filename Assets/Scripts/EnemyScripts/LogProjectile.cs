@@ -21,10 +21,9 @@ public class LogProjectile : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if(_rb != null)
+        if (_rb != null)
         {
             Vector2 newPosition = _rb.position + _direction * _bulletSpeed * Time.fixedDeltaTime;
-            _rb.MovePosition(_rb.position + _direction * _bulletSpeed * Time.fixedDeltaTime);
             _rb.MovePosition(newPosition);
         }
     }
@@ -53,8 +52,8 @@ public class LogProjectile : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerHealth>().TakeDamage(_damage);
-            //BreakProjectile();
+            PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
+            if (playerHealth != null) playerHealth.TakeDamage(_damage);
             Destroy(gameObject);
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Platform") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))

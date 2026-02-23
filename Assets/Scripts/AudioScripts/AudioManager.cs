@@ -165,7 +165,7 @@ public class AudioManager : MonoBehaviour
 
     private void PlayJumpSound()
     {
-        if (_jumpSound != null)
+        if (_sfxSource != null && _jumpSound != null)
         {
             _sfxSource.PlayOneShot(_jumpSound, _jumpVolume);
         }
@@ -173,7 +173,7 @@ public class AudioManager : MonoBehaviour
 
     private void PlayDoubleJumpSound()
     {
-        if (_doubleJumpSound != null)
+        if (_sfxSource != null && _doubleJumpSound != null)
         {
             _sfxSource.PlayOneShot(_doubleJumpSound, _doubleJumpVolume);
         }
@@ -181,7 +181,7 @@ public class AudioManager : MonoBehaviour
 
     private void PlayWallJumpSound()
     {
-        if (_wallJumpSound != null)
+        if (_sfxSource != null && _wallJumpSound != null)
         {
             _sfxSource.PlayOneShot(_wallJumpSound, _wallJumpVolume);
         }
@@ -199,7 +199,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayDeathSound()
     {
-        if (_deathSound != null)
+        if (_sfxSource != null && _deathSound != null)
         {
             _sfxSource.PlayOneShot(_deathSound, _deathVolume);
         }
@@ -209,7 +209,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayCheckpointSound()
     {
-        if (_checkpointSound != null)
+        if (_sfxSource != null && _checkpointSound != null)
         {
             _sfxSource.PlayOneShot(_checkpointSound, _checkpointVolume);
         }
@@ -218,7 +218,7 @@ public class AudioManager : MonoBehaviour
     // ========== COLLECTIBLE SFX ==========
     public void PlayCollectibleSound()
     {
-        if (_collectibleSound != null)
+        if (_sfxSource != null && _collectibleSound != null)
         {
             _sfxSource.PlayOneShot(_collectibleSound, _collectibleVolume);
         }
@@ -228,7 +228,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayEnemyShootSound()
     {
-        if (_enemyShootSound != null)
+        if (_sfxSource != null && _enemyShootSound != null)
         {
             _sfxSource.PlayOneShot(_enemyShootSound, _enemyShootingVolume);
         }
@@ -236,7 +236,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayEnemyDeathSound()
     {
-        if(_enemyDeathSound != null)
+        if(_sfxSource != null && _enemyDeathSound != null)
         {
             Debug.Log("Playing enemy death sound");
             _sfxSource.PlayOneShot(_enemyDeathSound, _enemyDeathVolume);
@@ -247,7 +247,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayWinSound()
     {
-        if (_winSound != null)
+        if (_sfxSource != null && _winSound != null)
         {
             Debug.Log("Playing win sound");
             _sfxSource.PlayOneShot(_winSound, _winVolume);
@@ -261,6 +261,8 @@ public class AudioManager : MonoBehaviour
     /// <param name="volume">The new volume value between 0 and 1.</param>
     public void ChangeVolume(float volume)
     {
+        if (_musicSource == null) return;
+
         _musicSource.volume = volume;
         UpdateVolumeText(volume);
 
@@ -272,6 +274,8 @@ public class AudioManager : MonoBehaviour
     /// <param name="volume">The volume value between 0 and 1.</param>
     public void UpdateVolumeText(float volume)
     {
+        if (_volumeText == null) return;
+
         int volumePercent = Mathf.RoundToInt(volume * 100);
         _volumeText.text = $"{volumePercent}%";
     }
@@ -304,6 +308,8 @@ public class AudioManager : MonoBehaviour
     /// <param name="volume">The volume value between 0 and 1.</param>
     private void UpdateSFXVolumeText(float volume)
     {
+        if (_sfxVolumeText == null) return;
+
         int volumePercent = Mathf.RoundToInt(volume * 100);
         _sfxVolumeText.text = $"{volumePercent}%";
     }

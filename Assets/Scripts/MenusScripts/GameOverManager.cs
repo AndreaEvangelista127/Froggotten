@@ -26,7 +26,8 @@ public class GameOverManager : MonoBehaviour
         if (_audioManager != null)
             _audioManager.StopFootsteps();
 
-        EventSystem.current.SetSelectedGameObject(_firstSelected);
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(_firstSelected);
     }
 
     /// <summary>
@@ -35,7 +36,8 @@ public class GameOverManager : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        _fadeTransition.FadeToScene(1);
+        if (_fadeTransition != null)
+            _fadeTransition.FadeToScene(1);
     }
 
     /// <summary>
@@ -44,7 +46,8 @@ public class GameOverManager : MonoBehaviour
     public void LoadMainMenu()
     {
         Time.timeScale = 1f;
-        _fadeTransition.FadeToScene(0);
+        if (_fadeTransition != null)
+            _fadeTransition.FadeToScene(0);
     }
 
     /// <summary>

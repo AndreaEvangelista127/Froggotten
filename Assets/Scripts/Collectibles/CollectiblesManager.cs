@@ -22,6 +22,8 @@ public class CollectiblesManager : MonoBehaviour
 
     private void Update()
     {
+        if (_playerCollisions == null) return;
+
         _collectedFlies = _playerCollisions._currentFliesCollected;
 
         CheckWinCondition();
@@ -29,6 +31,12 @@ public class CollectiblesManager : MonoBehaviour
 
     private void CountAllFlies()
     {
+        if (_allFlies == null)
+        {
+            _totalFlies = 0;
+            Debug.LogWarning("CollectiblesManager: _allFlies array not assigned!");
+            return;
+        }
         _totalFlies = _allFlies.Length;
     }
 

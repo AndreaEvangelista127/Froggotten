@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class WinManager : MonoBehaviour
 {
@@ -29,9 +30,6 @@ public class WinManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private AudioManager _audioManager;
     [SerializeField] private FadeTransition _fadeTransition;
-
-
-
 
     private bool _isTrophyUnlocked = false;
     private bool _hasWon = false;
@@ -119,7 +117,9 @@ public class WinManager : MonoBehaviour
             _winAnimator.SetTrigger(_winAnimationTrigger);
         }
 
-        VFXConfetti.SpawnConfettiWithTimer(_confettiPrefab, _confettiSpawnPoint.position);
+        if (_confettiSpawnPoint != null)
+
+            VFXConfetti.SpawnConfettiWithTimer(_confettiPrefab, _confettiSpawnPoint.position);
 
         // Bounce player
         PlayerCollisions playerCollisions = player.GetComponent<PlayerCollisions>();
@@ -155,8 +155,8 @@ public class WinManager : MonoBehaviour
             Time.timeScale = 0f;
 
             // Set controller focus to the first button of the win panel
-            if (_winFirstSelected != null)
-                UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(_winFirstSelected);
+            if (EventSystem.current != null && _winFirstSelected != null)
+                EventSystem.current.SetSelectedGameObject(_winFirstSelected);
         }
             
 

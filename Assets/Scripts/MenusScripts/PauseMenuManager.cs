@@ -7,6 +7,8 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private GameObject _pauseMenuUI;
     [SerializeField] private AudioManager _audioManager;
     [SerializeField] private GameObject _pauseFirstSelected;
+    [SerializeField] private FadeTransition _fadeTransition;
+
 
 
     private bool _isPaused = false;
@@ -53,7 +55,9 @@ public class PauseMenuManager : MonoBehaviour
         Time.timeScale = 1f;
         _isPaused = false;
 
-        EventSystem.current.SetSelectedGameObject(null);
+        // After opening the pause menu the first button where the controller is going to be, would be _pausefirstselected
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(_pauseFirstSelected);
 
         if (_audioManager != null)
             _audioManager.ResumeMusic();
@@ -71,8 +75,7 @@ public class PauseMenuManager : MonoBehaviour
             _isPaused = false;
         }
 
-        FadeTransition fadeTransition = FindFirstObjectByType<FadeTransition>();
-        if (fadeTransition != null)
-            fadeTransition.FadeToScene(0);
+        if (_fadeTransition != null)
+            _fadeTransition.FadeToScene(0);
     }
 }

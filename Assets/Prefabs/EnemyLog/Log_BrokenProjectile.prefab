@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2028436169
-  m_SortingLayer: 6
+  m_SortingLayer: 1
   m_SortingOrder: 4
   m_Sprite: {fileID: 5157668563614570575, guid: c311c0181264099438b146cd005da065, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -129,9 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891c2a7332c61a449b51c9e89c5306b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialVelocity: {x: -3, y: 4}
-  rotationSpeed: 360
-  lifetime: 2
+  _initialVelocity: {x: 2, y: 3}
+  _rotationSpeed: 360
+  _lifetime: 2
 --- !u!61 &801727915263559666
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -162,7 +162,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -288,7 +288,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2028436169
-  m_SortingLayer: 6
+  m_SortingLayer: 1
   m_SortingOrder: 4
   m_Sprite: {fileID: 7899032702449895438, guid: c311c0181264099438b146cd005da065, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -340,9 +340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 891c2a7332c61a449b51c9e89c5306b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialVelocity: {x: 3, y: 4}
-  rotationSpeed: -360
-  lifetime: 2
+  _initialVelocity: {x: 2, y: 3}
+  _rotationSpeed: 360
+  _lifetime: 2
 --- !u!61 &782670080015223792
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -373,7 +373,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

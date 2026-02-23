@@ -13,6 +13,8 @@ public class LivesUI : MonoBehaviour
     /// <param name="currentLives">The number of lives remaining.</param>
     public void UpdateLives(int currentLives)
     {
+        if (_livesText == null) return;
+
         _livesText.text = $" x {currentLives}";
     }
 }

@@ -21,11 +21,13 @@ public class MainMenuManager : MonoBehaviour
     /// </summary>
     IEnumerator FrogFallAndLoad()
     {
-        _frogRb.gravityScale = 100;
+        if (_frogRb != null)
+            _frogRb.gravityScale = 100;
 
         yield return new WaitForSeconds(0.8f);
 
-        _fadeTransition.FadeToScene(1);
+        if (_fadeTransition != null)
+            _fadeTransition.FadeToScene(1);
     }
 
     /// <summary>

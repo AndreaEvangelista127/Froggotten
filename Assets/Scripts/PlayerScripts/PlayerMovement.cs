@@ -65,8 +65,8 @@ public class PlayerMovement : MonoBehaviour
     private float _moveValue;
 
     //Jump Variables
-    private bool _isJumping; // Se sta saltando
-    private float _jumpTimeCounter; // Quanto tempo sta tenendo premuto
+    private bool _isJumping; 
+    private float _jumpTimeCounter; 
     private float _currentJumpForce;
     private float _coyoteTimeCounter;
     private float _wallJumpControlTimer;
@@ -77,24 +77,26 @@ public class PlayerMovement : MonoBehaviour
 
     //The same as:
     // public bool IsGrounded{get { return GetIsGrounded(); } }
-  
     public bool IsGrounded => GetIsGrounded();
     public bool IsMoving => Mathf.Abs(_moveValue) > 0.01f;
     public float VelocityY => _rb.linearVelocityY;
     public float VelocityX => _rb.linearVelocityX;
-    public int WallDirection => GetWallJumpDirection();
+    public int WallDirection => GetJumpDirectionFromWall();
     public bool IsWallSliding => CanWallSlide();
     public bool IsGliding => _isGliding;
 
 
     private void Start()
     {
+        if (_rb == null) Debug.LogWarning("PlayerMovement: Rigidbody2D not assigned!");
+        if (_playerCollider == null) Debug.LogWarning("PlayerMovement: Collider2D not assigned!");
+
         // Calculate player half width using the collider bounds, we will use this for the wall check to be sure to start the raycast from the edge of the player and not from the center, otherwise we could have some issues with the wall jump when the player is close to a wall but not touching it because the raycast starts from the center and not from the edge
         _playerHalfWidth = _playerCollider.bounds.extents.x;
 
-        _playerSpriteR.flipX = false;
+        if (_playerSpriteR != null) _playerSpriteR.flipX = false;
 
-        if(_lilypadSprite != null)
+        if (_lilypadSprite != null)
         {
             _lilypadSprite.SetActive(false); 
         }
@@ -102,6 +104,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() //FOR PHYSICS
     {
+        if (_rb == null) return;
+
         // ========== Apply horizontal movement only if not in wall jump control lock or knockback control lock ==========
         if (_wallJumpControlTimer <= 0 && _knockbackControlTimer <= 0) // If we are in wall jump control lock we want to block the horizontal movement to let the player jump properly in a wall jump, otherwise the wall jump direction would have been overriden by the rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y);
         {
@@ -151,6 +155,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (_rb == null) return;
 
         FlipSpriteX();
 
@@ -188,6 +193,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void FlipSpriteX()
     {
+        if (_playerSpriteR == null) return;
+
         float threshold = 0.1f; // Threshold for considering the player as moving in a direction (to avoid flipping when the player is almost still)
 
         if (_moveValue > threshold)
@@ -219,13 +226,13 @@ public class PlayerMovement : MonoBehaviour
     /// Casts rays left and right to detect adjacent walls.
     /// </summary>
     /// <returns>-1 if wall is on the right (jump left), 1 if wall is on the left (jump right), 0 if no wall.</returns>
-    private int GetWallJumpDirection()
+    private int GetJumpDirectionFromWall()
     {
         if (!_wallJumpEnabled) return 0;
 
         if (Physics2D.Raycast(transform.position, Vector2.right, _playerHalfWidth + _wallCheckDistance, _wallLayer)) //wallCheckDistance as an offset to be sure
         {
-            return -1; //we are jumping from a wall on the right to go left so negative value
+            return -1; //we are jumping from a wall on the right to go left so negative moving value
         }
         else if(Physics2D.Raycast(transform.position, Vector2.left, _playerHalfWidth + _wallCheckDistance, _wallLayer)) //wallCheckDistance as an offset to be sure
         {
@@ -247,7 +254,7 @@ public class PlayerMovement : MonoBehaviour
         if(_rb.linearVelocityY >= 0) return false; //only when falling
 
         // Now we check if we are touching a wall and which side
-        int wallDirection = GetWallJumpDirection();
+        int wallDirection = GetJumpDirectionFromWall();
         if(wallDirection == 0) return false; //not touching any wall
 
         // If we are touching a wall we need to check if we are moving towards it
@@ -304,7 +311,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (_wallJumpEnabled)
             {
-            int wallDirection = GetWallJumpDirection();
+            int wallDirection = GetJumpDirectionFromWall();
 
                 // WALL JUMP 
                 if (wallDirection != 0 && !GetIsGrounded())
@@ -322,7 +329,8 @@ public class PlayerMovement : MonoBehaviour
                     have been overriden by the rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y); */
                     _wallJumpControlTimer = _wallJumpControlLockTime;
 
-                    _statePlayerMovement.SetMoveState(StatePlayerMovement.MoveState.Wall_Jump);
+                    if (_statePlayerMovement != null)
+                        _statePlayerMovement.SetMoveState(StatePlayerMovement.MoveState.Wall_Jump);
 
                     return; //without returning the player would override the wall jump with the double jump
                 }
@@ -338,7 +346,8 @@ public class PlayerMovement : MonoBehaviour
 
                 _coyoteTimeCounter = 0f; //exstinguish coyote time
 
-                _statePlayerMovement.SetMoveState(StatePlayerMovement.MoveState.Jump);
+                if (_statePlayerMovement != null)
+                    _statePlayerMovement.SetMoveState(StatePlayerMovement.MoveState.Jump);
 
             }
             // double jump
@@ -352,7 +361,8 @@ public class PlayerMovement : MonoBehaviour
 
                 _canDoubleJump = false;
 
-                _statePlayerMovement.SetMoveState(StatePlayerMovement.MoveState.Double_Jump);
+                if (_statePlayerMovement != null)
+                    _statePlayerMovement.SetMoveState(StatePlayerMovement.MoveState.Double_Jump);
 
             }
         }

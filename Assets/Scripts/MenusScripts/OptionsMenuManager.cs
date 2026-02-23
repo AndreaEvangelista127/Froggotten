@@ -14,8 +14,11 @@ public class OptionsMenuManager : MonoBehaviour
     /// </summary>
     public void OpenOptions()
     {
+        if (_optionsPanel == null) return;
+
         _optionsPanel.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(_musicSlider.gameObject);
+        if (EventSystem.current != null && _musicSlider != null)
+            EventSystem.current.SetSelectedGameObject(_musicSlider.gameObject);
     }
 
     /// <summary>
@@ -24,7 +27,10 @@ public class OptionsMenuManager : MonoBehaviour
     /// </summary>
     public void CloseOptions()
     {
+        if (_optionsPanel == null) return;
+
         _optionsPanel.SetActive(false);
-        EventSystem.current.SetSelectedGameObject(_firstMainMenuButton);
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(_firstMainMenuButton);
     }
 }

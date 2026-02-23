@@ -29,7 +29,7 @@ public class StatePlayerMovement : MonoBehaviour
 
     [Header("State Thresholds")]
     [SerializeField] private float _velocityYThreshold = 0.5f; // Threshold for falling
-    [SerializeField] private float _velocityXThreshold = 0.1f; // Threshold per movement
+    //[SerializeField] private float _velocityXThreshold = 0.1f; // Threshold per movement
 
     public MoveState currentMoveState { get; private set; }
 
@@ -63,6 +63,8 @@ public class StatePlayerMovement : MonoBehaviour
             SetMoveState(MoveState.Wall_Slide);
             return;  
         }
+
+        if (_playerMovement == null || _rigidBody == null) return;
 
         // check with thresholds to determine if player is grounded, moving, or falling
         bool isGrounded = _playerMovement.IsGrounded;
@@ -140,30 +142,38 @@ public class StatePlayerMovement : MonoBehaviour
 
     private void HandleIdle()
     {
+        if (_animator == null) return;
+
         _animator.Play(idleAnim);
     }
 
     private void HandleRun()
     {
+        if (_animator == null) return;
+
         _animator.Play(runAnim);
-
-
     }
 
     private void HandleJump()
     {
+        if (_animator == null) return;
+
         _animator.Play(jumpAnim);
         if (_playerVfx != null) _playerVfx.PlayJumpDust();
     }
 
     private void HandleFall()
     {
+        if (_animator == null) return;
+
         _animator.Play(fallAnim);
 
     }
 
     private void HandleDoubleJump()
     {
+        if (_animator == null) return;
+
         _animator.Play(doubleJumpAnim);
         if (_playerVfx != null) _playerVfx.PlayJumpDust();
 
@@ -171,17 +181,22 @@ public class StatePlayerMovement : MonoBehaviour
 
     private void HandleWallJump() 
     {
+        if (_animator == null) return;
+
         _animator.Play(wallJumpAnim);
         if (_playerVfx != null) _playerVfx.PlayJumpDust();
-
     }
 
     private void HandleWallSlide()
     {
+        if (_animator == null) return;
+
         _animator.Play(wallSlideAnim);
     }
     private void HandleGliding()
     {
+        if (_animator == null) return;
+
         _animator.Play(fallAnim);  
     }
 
@@ -197,6 +212,8 @@ public class StatePlayerMovement : MonoBehaviour
         {
             _playerMovement.enabled = false;
         }
+
+        if (_animator == null) return;
 
         _animator.Play(despawnAnim);
     }

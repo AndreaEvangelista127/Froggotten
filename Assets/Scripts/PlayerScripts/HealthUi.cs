@@ -21,6 +21,12 @@ public class HealthUi : MonoBehaviour
     /// <param name="maxHealth">The player's maximum health value.</param>
     public void InitializeHealthUi(float maxHealth)
     {
+        if (_heartPrefab == null)
+        {
+            Debug.LogWarning("HealthUi: Heart prefab not assigned!");
+            return;
+        }
+
         int numberOfHearts = (int)maxHealth;  // here we store only the integer part
 
         // if there is a half heart needed
@@ -34,7 +40,10 @@ public class HealthUi : MonoBehaviour
         {
             GameObject heart = Instantiate(_heartPrefab, transform);
             Image heartImage = heart.GetComponent<Image>();
-            _heartImages.Add(heartImage);
+            if (heartImage != null)
+                _heartImages.Add(heartImage);
+            else
+                Debug.LogWarning("HealthUi: Heart prefab is missing an Image component!");
         }
 
         UpdateHeartContainer(maxHealth);
@@ -55,22 +64,19 @@ public class HealthUi : MonoBehaviour
             hasHalfHeart = true;
         }
 
-        // Aggiorna ogni cuore
+        // Update every heart
         for (int i = 0; i < _heartImages.Count; i++)
         {
             if (i < fullHearts) // if the player still has full hearts
             {
-                // Cuore pieno
                 _heartImages[i].sprite = _fullHeart;
             }
             else if (i == fullHearts && hasHalfHeart == true) //As soon as u finish checking the full hearts, check if there is a half heart
             {
-                // Mezzo cuore
                 _heartImages[i].sprite = _halfHeart;
             }
             else
             {
-                // Cuore vuoto
                 _heartImages[i].sprite = _emptyHeart; //otherwise empty heart
             }
         }

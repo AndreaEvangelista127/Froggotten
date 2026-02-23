@@ -241,11 +241,10 @@ public class PlayerHealth : MonoBehaviour
 
         transform.position = _hasCheckpoint ? _currentCheckpoint : _startPosition;
 
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (_rb != null)
         {
-            rb.linearVelocity = Vector2.zero;
-            _rb.simulated = true; // Re-enable physics after respawn
+            _rb.linearVelocity = Vector2.zero;
+            _rb.simulated = true; //re-eneble physics after respawn
         }
 
         if (_playerMovement != null)

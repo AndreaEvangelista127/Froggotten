@@ -52,6 +52,8 @@ public class Collectibles : MonoBehaviour
     /// <param name="currentX">The current X position of the collectible this frame.</param>
     public void FlipSprite(float currentX)
     {
+        if (_spriteRenderer == null) return;
+
         // Imagine that we start from previus = 0 and newX = 0, and we are moving to the right. At the last frame, we are going to have: previous >= 3.0 and newX 2.9, so now we flip
         if (currentX > previousX) 
         {
@@ -69,10 +71,9 @@ public class Collectibles : MonoBehaviour
     /// </summary>
     public void Collect()
     {
-        _animator.SetTrigger("Collect");
+        if (_animator != null) _animator.SetTrigger("Collect");
         if (_audioManager != null) _audioManager.PlayCollectibleSound();
         _isCollected = true;
-
         Destroy(gameObject, 0.5f);
     }
 }
