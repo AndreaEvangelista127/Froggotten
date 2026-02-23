@@ -58,7 +58,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "Keyboard",
                     "id": "1cd19b90-2401-41c6-9e95-1a3d74c126ab",
                     "path": "2DVector",
                     "interactions": "",
@@ -113,7 +113,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "2D Vector",
+                    "name": "GamePad",
                     "id": "2bbe1398-ecbb-460e-80e4-ccbaf8ea4f2d",
                     "path": "2DVector",
                     "interactions": "",
