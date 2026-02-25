@@ -41595,7 +41595,7 @@ PrefabInstance:
       objectReference: {fileID: 550453796}
     - target: {fileID: 2862411762742142763, guid: 6b60f62715f824444b1e0f086f7dbbd7, type: 3}
       propertyPath: _maxLives
-      value: 99
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2862411762742142763, guid: 6b60f62715f824444b1e0f086f7dbbd7, type: 3}
       propertyPath: _audioManager
@@ -41613,6 +41613,18 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2015070863}
+    - target: {fileID: 4134189169478266611, guid: 6b60f62715f824444b1e0f086f7dbbd7, type: 3}
+      propertyPath: _doubleJumpingForce
+      value: 11.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520225380421731162, guid: 6b60f62715f824444b1e0f086f7dbbd7, type: 3}
+      propertyPath: _sawDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4520225380421731162, guid: 6b60f62715f824444b1e0f086f7dbbd7, type: 3}
+      propertyPath: _spikeDamage
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5818219642837837037, guid: 6b60f62715f824444b1e0f086f7dbbd7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -35
