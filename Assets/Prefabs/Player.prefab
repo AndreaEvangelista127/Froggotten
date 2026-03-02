@@ -5023,9 +5023,9 @@ GameObject:
   - component: {fileID: 4134189169478266611}
   - component: {fileID: 992963951620282353}
   - component: {fileID: 4520225380421731162}
-  - component: {fileID: 8679079770365640241}
   - component: {fileID: 2862411762742142763}
   - component: {fileID: 8499945199555340838}
+  - component: {fileID: 8679079770365640241}
   - component: {fileID: 4052842973100307301}
   m_Layer: 0
   m_Name: Player
@@ -5140,7 +5140,7 @@ MonoBehaviour:
     m_Bits: 448
   _speed: 10
   _jumpingForce: 12
-  _doubleJumpingForce: 10.5
+  _doubleJumpingForce: 11.5
   _canDoubleJump: 1
   _statePlayerMovement: {fileID: 992963951620282353}
   _maxJumpTime: 0.1
@@ -5177,7 +5177,6 @@ MonoBehaviour:
   _playerMovement: {fileID: 4134189169478266611}
   _playerVfx: {fileID: 8499945199555340838}
   _velocityYThreshold: 0.5
-  _velocityXThreshold: 0.1
 --- !u!114 &4520225380421731162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5190,11 +5189,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139d66076dfe7c549a2ef97e38a83391, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bounceForce: 10
-  _sawDamage: 0.5
-  _spikeDamage: 1
-  _trapKnockbackForce: 8
+  _bounceForce: 15
+  _sawDamage: 1
+  _spikeDamage: 0.5
+  _trapKnockbackForce: 12
   _currentFliesCollected: 0
+--- !u!114 &2862411762742142763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808940102878646774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db0cc2c0e8650544b913fd195725b5f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 3
+  _maxLives: 10
+  _livesUI: {fileID: 0}
+  _healthUi: {fileID: 0}
+  _numberOfFlashes: 2
+  _spriteRenderer: {fileID: 7342360625211366568}
+  _hitFlashDuration: 0.1
+  _startPosition: {x: -17, y: 13, z: 0}
+  _audioManager: {fileID: 0}
+  _playerMovement: {fileID: 4134189169478266611}
+  _virtualCamera: {fileID: 0}
+  gameOverManager: {fileID: 0}
+--- !u!114 &8499945199555340838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808940102878646774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 275e0df896efed64291c0ae8250625d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dustParticle: {fileID: 5529003094800833336}
 --- !u!114 &8679079770365640241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5255,40 +5291,6 @@ MonoBehaviour:
   UseImpactDirection: 1
   ScaleImpactWithMass: 0
   ScaleImpactWithSpeed: 1
---- !u!114 &2862411762742142763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808940102878646774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db0cc2c0e8650544b913fd195725b5f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 3
-  _healthUi: {fileID: 0}
-  _numberOfFlashes: 2
-  _spriteRenderer: {fileID: 7342360625211366568}
-  _hitFlashDuration: 0.1
-  _startPosition: {x: -17, y: 13, z: 0}
-  _audioManager: {fileID: 0}
-  _playerMovement: {fileID: 4134189169478266611}
-  _virtualCamera: {fileID: 0}
---- !u!114 &8499945199555340838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808940102878646774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 275e0df896efed64291c0ae8250625d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dustParticle: {fileID: 5529003094800833336}
 --- !u!114 &4052842973100307301
 MonoBehaviour:
   m_ObjectHideFlags: 0

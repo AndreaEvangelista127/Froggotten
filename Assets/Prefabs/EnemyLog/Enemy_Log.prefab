@@ -241,7 +241,7 @@ MonoBehaviour:
   _verticalTolerance: 1
   _canMove: 1
   _attackRange: 10
-  _timeBetweenAttacks: 2
+  _timeBetweenAttacks: 1.5
   _audioManager: {fileID: 3221527684202101439, guid: 2dffb78d9acc3bf4e95cb30bb1cd1ca0, type: 3}
 --- !u!114 &2956320675676488649
 MonoBehaviour:

@@ -11,6 +11,9 @@ public class CollectiblesManager : MonoBehaviour
     [SerializeField] private WinManager _winManager;
     [SerializeField] private PlayerCollisions _playerCollisions;
 
+    [Header("Debug")]
+    [SerializeField] private bool _cheatWin = false;
+
 
     private bool _hasWon = false;
 
@@ -22,6 +25,15 @@ public class CollectiblesManager : MonoBehaviour
 
     private void Update()
     {
+        if (_cheatWin)
+        {
+            _cheatWin = false;
+            _hasWon = true;
+            if (_winManager != null)
+                _winManager.UnlockTrophy();
+            return;
+        }
+
         if (_playerCollisions == null) return;
 
         _collectedFlies = _playerCollisions._currentFliesCollected;

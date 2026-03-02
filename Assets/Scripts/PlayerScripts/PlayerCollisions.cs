@@ -41,6 +41,7 @@ public class PlayerCollisions : MonoBehaviour
 
                 enemy.Die();
                 BouncePlayer(_bounceForce);
+                _playerMovement.ResetJumps();
             }
         }
 

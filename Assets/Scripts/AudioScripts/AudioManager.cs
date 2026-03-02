@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
@@ -16,8 +17,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _sfxSource;
     [SerializeField] private Slider _sfxVolumeSlider;
     [SerializeField] private TextMeshProUGUI _sfxVolumeText;
-    //[SerializeField] private AudioClip _clickSound;
-    //[SerializeField][Range(0f, 1f)] private float _clickVolume = 1f; 
+    [SerializeField] private AudioClip _sfxPreviewSound;
+    [SerializeField][Range(0f, 1f)] private float _sfxPreviewVolume = 0.8f;
 
     [Header("Player Jump")]
     [SerializeField] private AudioClip _jumpSound;
@@ -60,6 +61,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private StatePlayerMovement _statePlayerMovement;
 
     private StatePlayerMovement.MoveState _currentState = StatePlayerMovement.MoveState.None;
+
+    private Coroutine _sfxPreviewCoroutine;
 
     private void Start()
     {
@@ -300,6 +303,12 @@ public class AudioManager : MonoBehaviour
 
         UpdateSFXVolumeText(volume);
         PlayerPrefs.SetFloat("SFXVolume", volume);
+
+        // Cancel previous preview and restart — plays only when slider stops moving
+        if (_sfxPreviewCoroutine != null)
+            StopCoroutine(_sfxPreviewCoroutine);
+
+        _sfxPreviewCoroutine = StartCoroutine(PreviewSFXVolumeDelayed());
     }
 
     /// <summary>
@@ -312,6 +321,19 @@ public class AudioManager : MonoBehaviour
 
         int volumePercent = Mathf.RoundToInt(volume * 100);
         _sfxVolumeText.text = $"{volumePercent}%";
+    }
+
+    /// <summary>
+    /// Plays a short preview sound when the SFX volume changes,
+    /// so the player can hear the new volume level in real time.
+    /// </summary>
+    private void PreviewSFXVolume()
+    {
+        if (_sfxSource == null || _sfxPreviewSound == null) return;
+
+        // Stop any currently playing preview to avoid overlapping
+        _sfxSource.Stop();
+        _sfxSource.PlayOneShot(_sfxPreviewSound, _sfxPreviewVolume);
     }
 
     public void PauseMusic()
@@ -330,27 +352,16 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // ========== SFX CONTROLS ==========
+    /// <summary>
+    /// Waits until the SFX slider stops moving, then plays a short preview sound
+    /// so the player can hear the current volume level without overlapping clips.
+    /// Uses WaitForSecondsRealtime to work correctly when Time.timeScale is 0 (pause menu).
+    /// </summary>
+    private IEnumerator PreviewSFXVolumeDelayed()
+    {
+        yield return new WaitForSecondsRealtime(0.2f);
 
-    //public void PlayClickSound()
-    //{
-    //    _sfxSource.PlayOneShot(_clickSound, _clickVolume);
-    //}
-
-    //public void PlaySFX(AudioClip clip)
-    //{
-    //    if (clip != null)
-    //    {
-    //        _sfxSource.PlayOneShot(clip);
-    //    }
-    //}
-
-    //public void PlaySFX(AudioClip clip, float volume)
-    //{
-    //    if (clip != null)
-    //    {
-    //        _sfxSource.PlayOneShot(clip, volume);
-    //    }
-    //}
-
+        if (_sfxSource != null && _sfxPreviewSound != null)
+            _sfxSource.PlayOneShot(_sfxPreviewSound, _sfxPreviewVolume);
+    }
 }

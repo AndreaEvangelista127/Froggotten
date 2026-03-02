@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using TMPro;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class WinManager : MonoBehaviour
@@ -25,7 +26,11 @@ public class WinManager : MonoBehaviour
     [SerializeField] private GameObject _winPanelUI;          
     [SerializeField] private float _winPanelDelay = 1f;
     [SerializeField] private Transform _continuosConfettiSpawnPoint;
-    [SerializeField] private GameObject _winFirstSelected;
+    
+
+    [Header("Timer")]
+    [SerializeField] private GameTimer _gameTimer;
+    [SerializeField] private TextMeshProUGUI _finalTimeText;
 
     [Header("References")]
     [SerializeField] private AudioManager _audioManager;
@@ -154,11 +159,11 @@ public class WinManager : MonoBehaviour
 
             Time.timeScale = 0f;
 
-            // Set controller focus to the first button of the win panel
-            if (EventSystem.current != null && _winFirstSelected != null)
-                EventSystem.current.SetSelectedGameObject(_winFirstSelected);
         }
-            
+
+        // Stop the timer and display the final time on the win panel
+        if (_gameTimer != null && _finalTimeText != null)
+            _finalTimeText.text = $"Time: {_gameTimer.StopAndGetTime()}";
 
         if (_audioManager != null)
         {

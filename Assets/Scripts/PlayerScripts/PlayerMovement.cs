@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _glidingHorizontalSpeed = 5f;  
     [SerializeField] private GameObject _lilypadSprite;
 
-
     [Header("Knockback Settings")]
     // Time during which player control is locked after knockback is applied, to let the player be knocked back properly without being able to move during the knockback
     [SerializeField] private float _knockbackControlLockTime = 0.3f; 
@@ -280,7 +279,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (context.started)
         {
-            _isJumpButtonHeld = true;
+            _isJumpButtonHeld = true; //Used for Gliding
         }
 
         if (context.canceled)
@@ -288,13 +287,12 @@ public class PlayerMovement : MonoBehaviour
             _isJumpButtonHeld = false;
             _isJumping = false;
 
-
             if (_isGliding)
             {
                 StopGliding();
             }
 
-            // Cut upward velocity on release for variable jump height
+            //If we are holding the space button we're going to have a full jump but as soon as we stop pressing the space button we cut the velocity
             if (_rb.linearVelocityY > 0)
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocityX, _rb.linearVelocityY * 0.5f);
@@ -313,7 +311,7 @@ public class PlayerMovement : MonoBehaviour
             {
             int wallDirection = GetJumpDirectionFromWall();
 
-                // WALL JUMP 
+                /* ---- WALL JUMP ---- */
                 if (wallDirection != 0 && !GetIsGrounded())
                 {
                     // Diagonal wall jump velocity
@@ -336,6 +334,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
             //Instead of using grounded now we check coyote timer because we want to jump when is grounded or even if the player is mid air meanwhile coyotimer is still > 0
+            /* ---- JUMP ---- */
             if (_coyoteTimeCounter > 0f)
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocityX, _jumpingForce);
@@ -350,7 +349,7 @@ public class PlayerMovement : MonoBehaviour
                     _statePlayerMovement.SetMoveState(StatePlayerMovement.MoveState.Jump);
 
             }
-            // double jump
+            /* ---- DOUBLE JUMP  ---- */
             else if (_canDoubleJump)
             {
                 _rb.linearVelocity = new Vector2(_rb.linearVelocityX, _doubleJumpingForce);
@@ -423,6 +422,15 @@ public class PlayerMovement : MonoBehaviour
 
         float horizontalInput = _moveValue;
         _rb.linearVelocity = new Vector2(horizontalInput * _glidingHorizontalSpeed, _rb.linearVelocityY);
+    }
+
+    /// <summary>
+    /// The player has the possibility to double jump during the bounce after killing an enemy
+    /// </summary>
+    public void ResetJumps()
+    {
+        _canDoubleJump = true;
+        _isJumping = false;
     }
 
     /// <summary>

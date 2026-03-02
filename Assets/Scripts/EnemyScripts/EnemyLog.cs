@@ -3,6 +3,8 @@ using System.Collections;
 
 public class EnemyLog : MonoBehaviour, IEnemy
 {
+    private enum EnemyState { Idle, Chase, Attack } //Enemy States
+
     [Header("References")]
     [SerializeField] private Transform _sprite;
     [SerializeField] private GameObject _projectilePrefab;
@@ -19,14 +21,19 @@ public class EnemyLog : MonoBehaviour, IEnemy
     [SerializeField] private float _attackRange = 3f;
     [SerializeField] private float _timeBetweenAttacks = 1.5f;
 
-    [Header("Audio Manager")]
+    [Header("Audio")]
     [SerializeField] private AudioManager _audioManager;
 
     private Animator _animator;
     private Rigidbody2D _rb;
     private bool _facingRight = false;
-    private bool _isAttacking = false;
     private bool _isDead = false;
+
+    //This 2 variables are used to avoid the log to start the shooting anim but now shotting the projectile
+    private bool _isAttackCoroutineRunning = false;
+    private bool _attackAnimationComplete = false;
+
+    private EnemyState _currentState = EnemyState.Idle;
 
 
     private void Awake()
@@ -38,54 +45,73 @@ public class EnemyLog : MonoBehaviour, IEnemy
         if (_rb == null) Debug.LogWarning("EnemyLog: Rigidbody2D not found!");
     }
 
+
+
     private void Update()
     {
         if (_playerTf == null || _isDead || _animator == null || _rb == null) return;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, _playerTf.position);
+        //Each frame we check in which state the log needs to be based on the player distance
+        EnemyState newState = GetStateFromDistance();
+
+        if (newState != _currentState)
+            TransitionToState(newState);
+
+        ExecuteCurrentState();
+    }
+
+    // ========== STATE MACHINE ==========
+
+    /// <summary>
+    /// Determines the appropriate state based on the player's distance and position.
+    /// </summary>
+    private EnemyState GetStateFromDistance()
+    {
         float distanceX = Mathf.Abs(_playerTf.position.x - transform.position.x);
         float distanceY = Mathf.Abs(_playerTf.position.y - transform.position.y);
 
-        bool inDetectionRange = distanceX <= _detectionRange && distanceY <= _verticalTolerance;
-        bool inAttackRange = distanceX <= _attackRange && distanceY <= _verticalTolerance;
+        bool inVerticalRange = distanceY <= _verticalTolerance;
 
-        if (inAttackRange) // we are in attack range
-        {
-            StopAndAttack();
-        }
-        else if (inDetectionRange && _canMove) // we are in detection range
-        {
-            ChasePlayer();
-        }
-        else
-        {
-            Idle();
-        }
+        if (distanceX <= _attackRange && inVerticalRange)
+            return EnemyState.Attack;
+
+        if (distanceX <= _detectionRange && inVerticalRange && _canMove)
+            return EnemyState.Chase;
+
+        return EnemyState.Idle;
     }
 
     /// <summary>
-    /// Moves the enemy toward the player and flips the sprite to match the movement direction.
+    /// Handles state transitions, stopping ongoing actions when leaving a state.
     /// </summary>
-    private void ChasePlayer()
+    /// <param name="newState">The state to transition into.</param>
+    private void TransitionToState(EnemyState newState)
     {
+        // Exit current state
+        if (_currentState == EnemyState.Attack)
+            StopAttack();
 
-        _animator.SetBool("isRunning", true);
+        _currentState = newState;
+    }
 
-        // Move towards player
-        Vector2 direction = (_playerTf.position - transform.position).normalized;
-        _rb.linearVelocity = new Vector2(direction.x * _moveSpeed, _rb.linearVelocity.y);
-
-        // Flip sprite based on movement direction
-        if (direction.x > 0 && !_facingRight)
+    /// <summary>
+    /// Executes the logic for the current active state each frame.
+    /// </summary>
+    private void ExecuteCurrentState()
+    {
+        switch (_currentState)
         {
-            Flip();
-        }
-        else if (direction.x < 0 && _facingRight)
-        {
-            Flip();
+            case EnemyState.Idle: Idle(); break;
+            case EnemyState.Chase: ChasePlayer(); break;
+            case EnemyState.Attack: StopAndAttack(); break;
         }
     }
 
+    // ========== STATE BEHAVIOURS ==========
+
+    /// <summary>
+    /// Stops the enemy's movement and plays the idle animation.
+    /// </summary>
     private void Idle()
     {
         _animator.SetBool("isRunning", false);
@@ -93,78 +119,108 @@ public class EnemyLog : MonoBehaviour, IEnemy
     }
 
     /// <summary>
+    /// Moves the enemy toward the player and flips the sprite to match the movement direction.
+    /// </summary>
+    private void ChasePlayer()
+    {
+        _animator.SetBool("isRunning", true);
+
+        Vector2 direction = (_playerTf.position - transform.position).normalized;
+        _rb.linearVelocity = new Vector2(direction.x * _moveSpeed, _rb.linearVelocity.y);
+
+        if (direction.x > 0 && !_facingRight) Flip();
+        else if (direction.x < 0 && _facingRight) Flip();
+    }
+
+    /// <summary>
     /// Stops the enemy's movement, faces the player, and triggers the attack coroutine if not already attacking.
     /// </summary>
     private void StopAndAttack()
     {
-        // Stop rigidbody and animation
         _animator.SetBool("isRunning", false);
         _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
 
-        // Flip sprite towards player
         Vector2 direction = (_playerTf.position - transform.position).normalized;
-        if (direction.x > 0 && !_facingRight)
-        {
-            Flip();
-        }
-        else if (direction.x < 0 && _facingRight)
-        {
-            Flip();
-        }
+        if (direction.x > 0 && !_facingRight) Flip();
+        else if (direction.x < 0 && _facingRight) Flip();
 
-        // attack check
-        if (!_isAttacking)
-        {
+        if (!_isAttackCoroutineRunning)
             StartCoroutine(AttackCoroutine());
-        }
     }
 
-    /// <summary>
-    /// Handles the attack timing: sets the attacking animation state and waits before allowing the next attack.
-    /// </summary>
-    /// <returns>IEnumerator for coroutine execution.</returns>
-    IEnumerator AttackCoroutine()
-    {
-        _isAttacking = true;
+    // ========== ATTACK ==========
 
+    /// <summary>
+    /// Handles the attack cycle: plays the attack animation and waits for
+    /// the animation to complete before resetting.
+    /// </summary>
+    private IEnumerator AttackCoroutine()
+    {
+        _isAttackCoroutineRunning = true;
+        _attackAnimationComplete = false;
         _animator.SetBool("isAttacking", true);
 
-        yield return new WaitForSeconds(_timeBetweenAttacks);
+        // Wait until the animation signals completion or timeout as fallback
+        float timeout = _timeBetweenAttacks + 1f;
+        float elapsed = 0f;
+        while (!_attackAnimationComplete && elapsed < timeout)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
 
         _animator.SetBool("isAttacking", false);
 
-        _isAttacking = false;
+        // Cooldown before next attack
+        yield return new WaitForSeconds(_timeBetweenAttacks);
+        _isAttackCoroutineRunning = false;
     }
 
     /// <summary>
-    /// Instantiates a projectile at the shoot point and fires it in the direction the enemy is facing.
-    /// Called by an animation event.
+    /// Interrupts the current attack immediately.
+    /// Called when the player leaves the attack range mid-attack.
+    /// </summary>
+    private void StopAttack()
+    {
+        StopAllCoroutines();
+        _isAttackCoroutineRunning = false;
+        _attackAnimationComplete = false;
+        _animator.SetBool("isAttacking", false);
+    }
+
+    /// <summary>
+    /// Instantiates a projectile at the shoot point, fired in the direction the enemy is facing.
+    /// Called by an Animation Event during the attack animation.
+    /// The projectile is always spawned if the animation event fires, regardless of state.
     /// </summary>
     public void ShootProjectile()
     {
-        if (_isDead)
+        if (_isDead) return;
+        if (_projectilePrefab == null || _shootPoint == null) return;
+
+        GameObject projectile = Instantiate(_projectilePrefab, _shootPoint.position, Quaternion.identity);
+
+        if (_audioManager != null)
+            _audioManager.PlayEnemyShootSound();
+
+        LogProjectile projScript = projectile.GetComponent<LogProjectile>();
+        if (projScript != null)
         {
-            return;
-        }
-
-        if (_projectilePrefab != null && _shootPoint != null)
-        {
-            GameObject projectile = Instantiate(_projectilePrefab, _shootPoint.position, Quaternion.identity);
-
-            if (_audioManager != null)
-            {
-                _audioManager.PlayEnemyShootSound();
-            }
-
-            LogProjectile projScript = projectile.GetComponent<LogProjectile>();
-            if (projScript != null)
-            {
-                Vector2 dir = _facingRight ? Vector2.right : Vector2.left;
-                projScript.SetDirection(dir);
-            }
-
+            Vector2 dir = _facingRight ? Vector2.right : Vector2.left;
+            projScript.SetDirection(dir);
         }
     }
+
+    /// <summary>
+    /// Called by an Animation Event at the end of the attack animation.
+    /// Signals the coroutine that the animation has completed and the cycle can reset.
+    /// </summary>
+    public void OnAttackAnimationEnd()
+    {
+        _attackAnimationComplete = true;
+    }
+
+    // ========== UTILITIES ==========
 
     /// <summary>
     /// Flips the enemy sprite horizontally by inverting the sprite's X scale.
@@ -175,22 +231,11 @@ public class EnemyLog : MonoBehaviour, IEnemy
 
         if (_sprite == null) return;
 
-        float scaleX;
-
-        if (_facingRight)
-        {
-            scaleX = -1f; // look right
-        }
-        else
-        {
-            scaleX = 1f; // look left
-        }
-
-        _sprite.localScale = new Vector3(scaleX, 1f, 1f);
+        _sprite.localScale = new Vector3(_facingRight ? -1f : 1f, 1f, 1f);
     }
 
     /// <summary>
-    /// Disables the enemy, stopping all coroutines and freezing its behaviour on death.
+    /// Disables the enemy on death, stopping all coroutines and freezing its behaviour.
     /// </summary>
     public void OnDeath()
     {
@@ -198,5 +243,4 @@ public class EnemyLog : MonoBehaviour, IEnemy
         StopAllCoroutines();
         this.enabled = false;
     }
-
 }
