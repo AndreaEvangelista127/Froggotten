@@ -119,7 +119,7 @@ public class PlayerCollisions : MonoBehaviour
         }
 
         // Moving surface
-        if (collision.collider.TryGetComponent(out IMovingSurface2D surface))
+        if (collision.collider.TryGetComponent(out ISurface2D surface))
         {
             _playerMovement.SetMovingSurface(surface);
         }
@@ -127,7 +127,7 @@ public class PlayerCollisions : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.collider.TryGetComponent(out IMovingSurface2D surface))
+        if (collision.collider.TryGetComponent(out ISurface2D surface))
         {
             if (_playerMovement != null)
                 _playerMovement.SetMovingSurface(null);

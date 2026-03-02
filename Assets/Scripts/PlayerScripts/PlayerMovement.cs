@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
     private float _knockbackControlTimer = 0f;
 
     [Header("Platforms")]
-    private IMovingSurface2D _movingSurface;
+    private ISurface2D _movingSurface;
     private Vector2 _surfaceVelocity;
 
     //Player sprite dimension
@@ -454,7 +454,7 @@ public class PlayerMovement : MonoBehaviour
     /// when he is on it
     /// </summary>
     /// <param name="surface">Current Platform that the player is stepping on</param>
-    public void SetMovingSurface(IMovingSurface2D surface)
+    public void SetMovingSurface(ISurface2D surface)
     {
         _movingSurface = surface;
         if (surface == null) _surfaceVelocity = Vector2.zero;

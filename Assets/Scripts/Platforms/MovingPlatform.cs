@@ -7,7 +7,7 @@ using UnityEngine;
 /// can query the platform's current velocity and add it to their own movement,
 /// creating the illusion of being carried by the platform without parenting.
 /// </summary>
-public class MovingPlatform : MonoBehaviour, IMovingSurface2D
+public class MovingPlatform : MonoBehaviour, ISurface2D
 {
     [Header("References")]
     [SerializeField] private Rigidbody2D _rb;
