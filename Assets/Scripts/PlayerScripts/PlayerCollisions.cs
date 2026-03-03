@@ -29,6 +29,8 @@ public class PlayerCollisions : MonoBehaviour
         _playerMovement = GetComponent<PlayerMovement>();
     }
 
+    // We use OnTrigger when we need to detect an overlap without physics. The object doesn't block movement, you go through it (collectibles, detection areas, effect areas, enemy hitbox)
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // ========== ENEMY HEAD ==========
@@ -56,42 +58,41 @@ public class PlayerCollisions : MonoBehaviour
                 Debug.Log($"Flies collected: {_currentFliesCollected}");
             }
         }
-
-        // ========== TRAPS (SAW, SPIKES, ETC) ==========
-        if (collision.CompareTag("Saw") && _playerHealth != null)
-        {
-            if (_playerHealth != null)
-            {
-                _playerHealth.TakeDamage(_sawDamage);
-
-                ApplyTrapKnockback(collision.transform.position);
-            }
-        }
-
-        // ========== SPIKES ========== 
-        if (collision.CompareTag("Spike") && _playerHealth != null)
-        {
-            if (_playerHealth != null)
-            {
-                _playerHealth.TakeDamage(_spikeDamage);
-                ApplyTrapKnockback(collision.transform.position);
-            }
-        }
     }
 
-    /// <summary>
-    /// Applies a knockback force to the player directed away from the trap's position.
-    /// </summary>
-    /// <param name="trapPosition">The world position of the trap that hit the player.</param>
-    private void ApplyTrapKnockback(Vector3 trapPosition)
+    // We use OnCollision when we need real physics. The object is blocking the movement and generate contacts (terrain, walls, platforms, traps)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (_playerMovement == null) return;
+        // ========== ENEMYS ==========
+        if (collision.gameObject.CompareTag("EnemyBody"))
+        {
+            if (_playerHealth != null)
+            {
+                Debug.Log("Player takes damage from enemy body!");
+                _playerHealth.TakeDamage(1);
+            }
+        }
 
-        Vector3 dir = (transform.position - trapPosition); //Direction from the trap directe to player 
+        // ========== TRAPS (SAW, SPIKES, ETC) ==========> We're using OnCollisionEnter2D instead of OnTriggerEnter2D because we can use collision.contact to have the exact point where the player collided, having a precise knockback
+        if (collision.gameObject.CompareTag("Spike") && _playerHealth != null)
+        {
+            _playerHealth.TakeDamage(_spikeDamage);
+            Vector2 knockbackDir = collision.contacts[0].normal;
+            _playerMovement.ApplyKnockBack(knockbackDir * _trapKnockbackForce);
+        }
 
-        Vector3 knockBackVelocity = dir.normalized * _trapKnockbackForce;
+        if (collision.gameObject.CompareTag("Saw") && _playerHealth != null)
+        {
+            _playerHealth.TakeDamage(_sawDamage);
+            Vector2 knockbackDir = collision.contacts[0].normal;
+            _playerMovement.ApplyKnockBack(knockbackDir * _trapKnockbackForce);
+        }
 
-        _playerMovement.ApplyKnockBack(knockBackVelocity);
+        // ========== PLATFORMS ==========
+        if (collision.collider.TryGetComponent(out ISurface2D surface))
+        {
+            _playerMovement.SetMovingSurface(surface);
+        }
     }
 
     /// <summary>
@@ -107,23 +108,6 @@ public class PlayerCollisions : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("EnemyBody"))
-        {
-            if (_playerHealth != null)
-            {
-                Debug.Log("Player takes damage from enemy body!");
-                _playerHealth.TakeDamage(1);
-            }
-        }
-
-        // Moving surface
-        if (collision.collider.TryGetComponent(out ISurface2D surface))
-        {
-            _playerMovement.SetMovingSurface(surface);
-        }
-    }
 
     private void OnCollisionExit2D(Collision2D collision)
     {

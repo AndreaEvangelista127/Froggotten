@@ -20,9 +20,11 @@ public class FallingPlatform : MonoBehaviour, ISurface2D
     [SerializeField] private float _squishDuration = 0.1f;
     [SerializeField] private float _recoverDuration = 0.3f;
 
+
     private Vector3 _startPosition;
     private Vector2 _platformDelta;
     private float _squishOffset = 0f;
+    private ParticleSystem _particleSystem;
 
 
     private bool _isActivated = false;  // true when player landed, starts fall sequence
@@ -37,6 +39,7 @@ public class FallingPlatform : MonoBehaviour, ISurface2D
     private void Start()
     {
         _startPosition = transform.position;
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
     }
     private void Update()
     {
@@ -114,6 +117,7 @@ public class FallingPlatform : MonoBehaviour, ISurface2D
         yield return StartCoroutine(SquishEffect()); // wait for squish to finish
 
         _animator.SetTrigger("TurnOff");
+        _particleSystem.Stop();
 
         yield return new WaitForSeconds(_fallDelay);
         DisablePlatform();
