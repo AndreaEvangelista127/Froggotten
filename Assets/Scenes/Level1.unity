@@ -1418,6 +1418,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1086835840}
     m_Modifications:
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _playerTf
+      value: 
+      objectReference: {fileID: 1177653262}
     - target: {fileID: 2956320675676488649, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
       propertyPath: _audioManager
       value: 
@@ -1566,6 +1570,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1086835840}
     m_Modifications:
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _playerTf
+      value: 
+      objectReference: {fileID: 1177653262}
     - target: {fileID: 2956320675676488649, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
       propertyPath: _audioManager
       value: 
@@ -3689,6 +3697,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1086835840}
     m_Modifications:
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _canMove
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _playerTf
+      value: 
+      objectReference: {fileID: 1177653262}
     - target: {fileID: 2956320675676488649, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
       propertyPath: _audioManager
       value: 
@@ -4609,6 +4625,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1086835840}
     m_Modifications:
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _playerTf
+      value: 
+      objectReference: {fileID: 1177653262}
     - target: {fileID: 2956320675676488649, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
       propertyPath: _audioManager
       value: 
@@ -20419,7 +20439,7 @@ MonoBehaviour:
   - {fileID: 1028619322}
   _winManager: {fileID: 811161710}
   _playerCollisions: {fileID: 1177653270}
-  _cheatWin: 1
+  _cheatWin: 0
 --- !u!4 &793276662
 Transform:
   m_ObjectHideFlags: 0
@@ -33627,6 +33647,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1086835840}
     m_Modifications:
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _playerTf
+      value: 
+      objectReference: {fileID: 1177653262}
     - target: {fileID: 2956320675676488649, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
       propertyPath: _audioManager
       value: 
@@ -34417,6 +34441,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1086835840}
     m_Modifications:
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _canMove
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _playerTf
+      value: 
+      objectReference: {fileID: 1177653262}
     - target: {fileID: 2956320675676488649, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
       propertyPath: _audioManager
       value: 
@@ -35289,6 +35321,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1086835840}
     m_Modifications:
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _playerTf
+      value: 
+      objectReference: {fileID: 1177653262}
     - target: {fileID: 2956320675676488649, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
       propertyPath: _audioManager
       value: 
@@ -35527,7 +35563,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1313881315
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -37833,6 +37869,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1086835840}
     m_Modifications:
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _canMove
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _playerTf
+      value: 
+      objectReference: {fileID: 1177653262}
     - target: {fileID: 2956320675676488649, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
       propertyPath: _audioManager
       value: 
@@ -38299,6 +38343,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1086835840}
     m_Modifications:
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _playerTf
+      value: 
+      objectReference: {fileID: 1177653262}
     - target: {fileID: 2956320675676488649, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
       propertyPath: _audioManager
       value: 
@@ -39711,6 +39759,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1086835840}
     m_Modifications:
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _playerTf
+      value: 
+      objectReference: {fileID: 1177653262}
     - target: {fileID: 2956320675676488649, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
       propertyPath: _audioManager
       value: 
@@ -41331,6 +41383,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1086835840}
     m_Modifications:
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _canMove
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2446536339598274384, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
+      propertyPath: _playerTf
+      value: 
+      objectReference: {fileID: 1177653262}
     - target: {fileID: 2956320675676488649, guid: 32727db100d4b7a40abf7244f2fd6e0f, type: 3}
       propertyPath: _audioManager
       value: 
@@ -42331,7 +42391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8756420196146171198, guid: d45b56d48559a5a418eea4a5af54a092, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
