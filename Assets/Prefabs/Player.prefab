@@ -5214,7 +5214,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 7342360625211366568}
   _hitFlashDuration: 0.1
   _startPosition: {x: -17, y: 13, z: 0}
-  _audioManager: {fileID: 0}
+  _audioManager: {fileID: 3221527684202101439, guid: 2dffb78d9acc3bf4e95cb30bb1cd1ca0, type: 3}
   _playerMovement: {fileID: 4134189169478266611}
   _virtualCamera: {fileID: 0}
   gameOverManager: {fileID: 0}

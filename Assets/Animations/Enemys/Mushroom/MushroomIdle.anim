@@ -30,13 +30,13 @@ AnimationClip:
       value: {fileID: 4883129791460916795, guid: a6465882e447a7346b1d80709f6094be, type: 3}
     - time: 0.16666667
       value: {fileID: 4278371960119211202, guid: a6465882e447a7346b1d80709f6094be, type: 3}
-    - time: 0.21666667
+    - time: 0.2
       value: {fileID: 8644832591467991550, guid: a6465882e447a7346b1d80709f6094be, type: 3}
     - time: 0.25
       value: {fileID: -7152759390613953277, guid: a6465882e447a7346b1d80709f6094be, type: 3}
     - time: 0.28333333
       value: {fileID: 6456874251884481089, guid: a6465882e447a7346b1d80709f6094be, type: 3}
-    - time: 0.31666666
+    - time: 0.33333334
       value: {fileID: -2526832996998184344, guid: a6465882e447a7346b1d80709f6094be, type: 3}
     - time: 0.36666667
       value: {fileID: 4392827059107796345, guid: a6465882e447a7346b1d80709f6094be, type: 3}
@@ -49,7 +49,7 @@ AnimationClip:
     - time: 0.53333336
       value: {fileID: 1126353366029582468, guid: a6465882e447a7346b1d80709f6094be, type: 3}
     attribute: m_Sprite
-    path: 
+    path: Model
     classID: 212
     script: {fileID: 0}
     flags: 2
@@ -61,7 +61,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
+      path: 374627805
       attribute: 0
       script: {fileID: 0}
       typeID: 212

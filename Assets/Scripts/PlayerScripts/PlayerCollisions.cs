@@ -37,7 +37,10 @@ public class PlayerCollisions : MonoBehaviour
 
         if (collision.CompareTag("EnemyHead"))
         {
+            Debug.Log("EnemyHead hit!");
+
             IDamageable enemy = collision.GetComponentInParent<IDamageable>();
+
             if (enemy != null)
             {
 

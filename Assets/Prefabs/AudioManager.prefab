@@ -344,6 +344,8 @@ MonoBehaviour:
   _sfxSource: {fileID: 2317527537733123464}
   _sfxVolumeSlider: {fileID: 0}
   _sfxVolumeText: {fileID: 0}
+  _sfxPreviewSound: {fileID: 8300000, guid: 5708d77107cb74dd287928a1b3c2fd33, type: 3}
+  _sfxPreviewVolume: 0.8
   _jumpSound: {fileID: 8300000, guid: 3907b9a66967648e0bd353f41fa2b1e5, type: 3}
   _jumpVolume: 1
   _doubleJumpSound: {fileID: 8300000, guid: 5708d77107cb74dd287928a1b3c2fd33, type: 3}

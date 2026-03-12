@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class EnemyLog : MonoBehaviour, IEnemy
+
+// Using abstract gives us the upportunity to have a model/blueprint that the enemys are going to inherit to avoid duplicated code
+public class EnemyLog : EnemyBase
 {
     private enum EnemyState { Idle, Chase, Attack } //Enemy States
 
     [Header("References")]
-    [SerializeField] private Transform _sprite;
     [SerializeField] private GameObject _projectilePrefab;
     [SerializeField] private Transform _shootPoint;
-    [SerializeField] private Transform _playerTf;
 
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 2f;
@@ -24,31 +24,15 @@ public class EnemyLog : MonoBehaviour, IEnemy
     [Header("Audio")]
     [SerializeField] private AudioManager _audioManager;
 
-    private Animator _animator;
-    private Rigidbody2D _rb;
-    private bool _facingRight = false;
-    private bool _isDead = false;
-
     //This 2 variables are used to avoid the log to start the shooting anim but now shotting the projectile
     private bool _isAttackCoroutineRunning = false;
     private bool _attackAnimationComplete = false;
 
     private EnemyState _currentState = EnemyState.Idle;
 
-
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-        _rb = GetComponent<Rigidbody2D>();
-
-        if (_animator == null) Debug.LogWarning("EnemyLog: Animator not found!");
-        if (_rb == null) Debug.LogWarning("EnemyLog: Rigidbody2D not found!");
-    }
-
-
-
     private void Update()
     {
+
         if (_playerTf == null || _isDead || _animator == null || _rb == null) return;
 
         //Each frame we check in which state the log needs to be based on the player distance
@@ -195,6 +179,8 @@ public class EnemyLog : MonoBehaviour, IEnemy
     /// </summary>
     public void ShootProjectile()
     {
+        Debug.Log($"ShootProjectile called - isDead: {_isDead} - prefab: {_projectilePrefab != null} - shootPoint: {_shootPoint != null}");
+
         if (_isDead) return;
         if (_projectilePrefab == null || _shootPoint == null) return;
 
@@ -220,27 +206,4 @@ public class EnemyLog : MonoBehaviour, IEnemy
         _attackAnimationComplete = true;
     }
 
-    // ========== UTILITIES ==========
-
-    /// <summary>
-    /// Flips the enemy sprite horizontally by inverting the sprite's X scale.
-    /// </summary>
-    public void Flip()
-    {
-        _facingRight = !_facingRight;
-
-        if (_sprite == null) return;
-
-        _sprite.localScale = new Vector3(_facingRight ? -1f : 1f, 1f, 1f);
-    }
-
-    /// <summary>
-    /// Disables the enemy on death, stopping all coroutines and freezing its behaviour.
-    /// </summary>
-    public void OnDeath()
-    {
-        _isDead = true;
-        StopAllCoroutines();
-        this.enabled = false;
-    }
 }

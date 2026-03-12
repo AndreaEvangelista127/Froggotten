@@ -41,10 +41,6 @@ public class FallingPlatform : MonoBehaviour, ISurface2D
         _startPosition = transform.position;
         _particleSystem = GetComponentInChildren<ParticleSystem>();
     }
-    private void Update()
-    {
-        Debug.Log($"isActivated: {_isActivated} | pos: {transform.position.y} | startPos: {_startPosition.y}");
-    }
 
     private void FixedUpdate()
     {

@@ -37,7 +37,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
         if(_audioManager != null)
         {
-            Debug.Log("EnemyHealth: Playing death sound");
             _audioManager.PlayEnemyDeathSound();
         }
 
@@ -70,7 +69,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
             _enemyRb.angularVelocity = 0f;
         }
 
-        IEnemy enemyScript = GetComponent<IEnemy>();
+        EnemyBase enemyScript = GetComponent<EnemyBase>();
         if (enemyScript != null)
         {
             enemyScript.OnDeath();
@@ -81,7 +80,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     /// Applies an upward bounce and spin to the rigidbody for a Mario-style death effect.
     /// Unlocks all constraints to allow free rotation.
     /// </summary>
-    //TIP FOR THE FUTURE: use this method for the player and the enemys using parameters for the bounce force, rotation speed and gravity scale, so you can have different death animations for different characteter
     public void ApplyDeathBounce()
     {
 

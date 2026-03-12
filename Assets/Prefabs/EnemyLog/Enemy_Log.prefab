@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6415043275522751676}
   - component: {fileID: 6211928104139002175}
   - component: {fileID: 4499039888284133596}
-  - component: {fileID: 8947002792339219569}
+  - component: {fileID: 2446536339598274384}
   - component: {fileID: 2956320675676488649}
   - component: {fileID: 7948043152332215222}
   m_Layer: 0
@@ -220,7 +220,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.9}
   m_EdgeRadius: 0
---- !u!114 &8947002792339219569
+--- !u!114 &2446536339598274384
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,9 +233,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite: {fileID: 1264191843055083308}
+  _playerTf: {fileID: 5818219642837837037, guid: 6b60f62715f824444b1e0f086f7dbbd7, type: 3}
   _projectilePrefab: {fileID: 9104689023663857749, guid: f2f8d7b450071b74880afd418194152a, type: 3}
   _shootPoint: {fileID: 3697809031995858657}
-  _playerTf: {fileID: 5818219642837837037, guid: 6b60f62715f824444b1e0f086f7dbbd7, type: 3}
   _moveSpeed: 2
   _detectionRange: 15
   _verticalTolerance: 1
