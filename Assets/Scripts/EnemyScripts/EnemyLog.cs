@@ -24,11 +24,19 @@ public class EnemyLog : EnemyBase
     [Header("Audio")]
     [SerializeField] private AudioManager _audioManager;
 
+    private bool _facingRight = false;
+
     //This 2 variables are used to avoid the log to start the shooting anim but now shotting the projectile
     private bool _isAttackCoroutineRunning = false;
     private bool _attackAnimationComplete = false;
 
     private EnemyState _currentState = EnemyState.Idle;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        Flip(_facingRight); 
+    }
 
     private void Update()
     {
@@ -112,8 +120,16 @@ public class EnemyLog : EnemyBase
         Vector2 direction = (_playerTf.position - transform.position).normalized;
         _rb.linearVelocity = new Vector2(direction.x * _moveSpeed, _rb.linearVelocity.y);
 
-        if (direction.x > 0 && !_facingRight) Flip();
-        else if (direction.x < 0 && _facingRight) Flip();
+        if (direction.x > 0 && !_facingRight) 
+        {
+            _facingRight = true; 
+            Flip(_facingRight); 
+        }
+        else if (direction.x < 0 && _facingRight) 
+        {
+            _facingRight = false; 
+            Flip(_facingRight); 
+        }
     }
 
     /// <summary>
@@ -125,8 +141,8 @@ public class EnemyLog : EnemyBase
         _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
 
         Vector2 direction = (_playerTf.position - transform.position).normalized;
-        if (direction.x > 0 && !_facingRight) Flip();
-        else if (direction.x < 0 && _facingRight) Flip();
+        if (direction.x > 0 && !_facingRight) { _facingRight = true; Flip(_facingRight); }
+        else if (direction.x < 0 && _facingRight) { _facingRight = false; Flip(_facingRight); }
 
         if (!_isAttackCoroutineRunning)
             StartCoroutine(AttackCoroutine());

@@ -6,7 +6,7 @@ public class EnemyMushroom : EnemyBase
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 2f;
 
-    [Header("Detection")]
+    [Header("Wall Detection")]
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private LayerMask _wallLayer;
     [SerializeField] private float _wallCheckDistance = 0.2f;
@@ -14,11 +14,16 @@ public class EnemyMushroom : EnemyBase
     // Horizontal offset from the center of the collider to cast the precipice ray from the edge
     [SerializeField] private float _precipiceCheckOffsetX = 0.3f;
 
+    [Header("Enemy Detection")]
+    [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private float _enemyCheckDistance = 0.5f;
+
     [Header("Idle Settings")]
     [SerializeField] private float _idleDuration = 1.5f;
 
     private bool _isIdle = false;
-    private bool _movingRight = false;
+
+    private bool _isFacingRight = false;
 
     private Collider2D _collider;
 
@@ -28,13 +33,16 @@ public class EnemyMushroom : EnemyBase
         _collider = GetComponent<Collider2D>();
 
         if (_collider == null) Debug.LogWarning("EnemyMushroom: Collider2D not found!");
+
+        
+        Flip(_isFacingRight); //Put the sprite in the correct facing direction dictacted by this script
     }
 
     private void Update()
     {
         if (_isDead || _isIdle) return;
 
-        if (HitsWall() || IsAtPrecipice())
+        if (HitsWall() || IsAtPrecipice() || HitsEnemy())
         {
             StartCoroutine(IdleAndFlip());
             return;
@@ -42,6 +50,7 @@ public class EnemyMushroom : EnemyBase
 
         Move();
     }
+
 
     // ======== MOVEMENT ========
 
@@ -52,10 +61,7 @@ public class EnemyMushroom : EnemyBase
     {
         _animator.SetBool("isRunning", true);
 
-        float direction = 1f; // Moving right
-
-        if (!_movingRight) //if moving right is false, means that he needs to go left
-            direction = -1f;
+        float direction = _isFacingRight ? 1f : -1f;
 
         _rb.linearVelocity = new Vector2(direction * _moveSpeed, _rb.linearVelocity.y);
     }
@@ -70,8 +76,9 @@ public class EnemyMushroom : EnemyBase
 
         yield return new WaitForSeconds(_idleDuration);
 
-        _movingRight = !_movingRight;
-        Flip();
+        _isFacingRight = !_isFacingRight;
+
+        Flip(_isFacingRight); //Flip the sprite
 
         _isIdle = false;
     }
@@ -87,7 +94,7 @@ public class EnemyMushroom : EnemyBase
         
         float direction = 1f;// Moving right
 
-        if (!_movingRight)//if moving right is false, means that he needs to go left
+        if (_isFacingRight == false)//if moving right is false, means that he needs to go left
             direction = -1f;
 
         float halfWidth = _collider.bounds.extents.x;
@@ -100,16 +107,35 @@ public class EnemyMushroom : EnemyBase
         );
     }
 
+    private bool HitsEnemy()
+    {
+        float direction = 1f;
+
+        if(_isFacingRight == false) direction = -1f;
+        
+        float halfWidth = _collider.bounds.extents.x;
+        float halfHeight = _collider.bounds.extents.y;
+
+        Vector2 rayOrigin = new Vector2(transform.position.x + halfWidth * direction, transform.position.y - halfHeight);
+
+        return Physics2D.Raycast(
+            rayOrigin,
+            new Vector2(direction, 0f),
+            _enemyCheckDistance,
+            _enemyLayer
+        );
+
+    }
+
     /// <summary>
     /// Casts a ray downward from the edge of the collider in the movement direction.
     /// Returns true if no ground is detected below, meaning a precipice is ahead.
     /// </summary>
     private bool IsAtPrecipice()
     {
-        
         float direction = 1f;// Moving right
 
-        if (!_movingRight)//if moving right is false, means that he needs to go left
+        if (_isFacingRight == false)//if moving right is false, means that he needs to go left
             direction = -1f;
 
         float halfWidth = _collider.bounds.extents.x;
@@ -126,62 +152,39 @@ public class EnemyMushroom : EnemyBase
         return !groundDetected;
     }
 
+    //Helper method to draw rays in the editor for debugging
+    private void DrawRayGizmo(Vector3 origin, Vector3 direction, float distance, LayerMask layer, Color hitColor, Color clearColor)
+    {
+        bool hit = Physics2D.Raycast(origin, direction, distance, layer);
+        Gizmos.color = hit ? hitColor : clearColor;
+        Gizmos.DrawLine(origin, origin + direction * distance);
+    }
+
     // ========== GIZMOS ==========
 
     private void OnDrawGizmos()
     {
         if (_collider == null)
             _collider = GetComponent<Collider2D>();
-
         if (_collider == null) return;
 
-        // Convert bool direction to float: right = 1, left = -1
-        float direction = 1f;
-        if (!_movingRight)
-            direction = -1f;
-
+        float dir = _isFacingRight ? 1f : -1f;
         float halfWidth = _collider.bounds.extents.x;
         float halfHeight = _collider.bounds.extents.y;
 
-        // ===== Wall check ray =====
-        bool wallHit = Physics2D.Raycast(
-            transform.position,
-            new Vector2(direction, 0f),
-            halfWidth + _wallCheckDistance,
-            _wallLayer
-        );
+        // Wall check
+        DrawRayGizmo(transform.position, new Vector3(dir, 0f), halfWidth + _wallCheckDistance, _wallLayer, Color.red, Color.blue);
 
-        // Red if wall detected, blue if clear
-        if (wallHit)
-            Gizmos.color = Color.red;
-        else
-            Gizmos.color = Color.blue;
+        // Enemy check
+        Vector3 enemyRayOrigin = new Vector3(transform.position.x + halfWidth * dir, transform.position.y - halfHeight, 0f);
+         DrawRayGizmo(enemyRayOrigin, new Vector3(dir, 0f), _enemyCheckDistance, _enemyLayer, Color.yellow, Color.cyan);
 
-        Gizmos.DrawLine(
-            transform.position,
-            transform.position + new Vector3(direction * (halfWidth + _wallCheckDistance), 0f, 0f)
-        );
-
-        // ===== Precipice check ray =====
+        // Precipice check
         Vector3 precipiceOrigin = new Vector3(
-            transform.position.x + (halfWidth + _precipiceCheckOffsetX) * direction,
+            transform.position.x + (halfWidth + _precipiceCheckOffsetX) * dir,
             transform.position.y - halfHeight,
             0f
         );
-
-        bool groundDetected = Physics2D.Raycast(
-            precipiceOrigin,
-            Vector2.down,
-            _precipiceCheckDistance,
-            _groundLayer
-        );
-
-        // Green if ground detected, red if precipice
-        if (groundDetected)
-            Gizmos.color = Color.green;
-        else
-            Gizmos.color = Color.red;
-
-        Gizmos.DrawLine(precipiceOrigin, precipiceOrigin + Vector3.down * _precipiceCheckDistance);
+        DrawRayGizmo(precipiceOrigin, Vector3.down, _precipiceCheckDistance, _groundLayer, Color.green, Color.red);
     }
 }

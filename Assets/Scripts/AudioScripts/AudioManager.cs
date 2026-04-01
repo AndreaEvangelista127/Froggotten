@@ -6,7 +6,6 @@ using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance {  get; private set; }
 
     [Header("Music")]
     [SerializeField] private AudioSource _musicSource;
@@ -70,7 +69,7 @@ public class AudioManager : MonoBehaviour
         // Load the previusly saved volume
         if (_musicSource != null && _volumeSlider != null)
         {
-            float savedVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+            float savedVolume = PlayerPrefs.GetFloat("MusicVolume", 0.5f); 
             _musicSource.volume = savedVolume;
             _volumeSlider.value = savedVolume;
             UpdateVolumeText(savedVolume);
@@ -98,53 +97,32 @@ public class AudioManager : MonoBehaviour
             _footstepSource.clip = _footstepSound;
             _footstepSource.loop = true;
         }
+
     }
 
     private void Update()
     {
-        if(_statePlayerMovement != null)
-        {
-            StatePlayerMovement.MoveState newState = _statePlayerMovement.currentMoveState;
+        if (_statePlayerMovement == null) return;
 
-            //if the state has changed, update the current state 
-            if (newState != _currentState)
-            {
-                HandlePlayerStateChange(newState);
-                _currentState = newState;
-            }
+        StatePlayerMovement.MoveState newState = _statePlayerMovement.currentMoveState;
+        if (newState != _currentState)
+        {
+            HandleFootstepStateChange(newState);
+            _currentState = newState;
         }
+
     }
 
     /// <summary>
-    /// Reacts to player movement state changes, starting or stopping footsteps and playing jump sounds accordingly.
+    /// Reacts to player movement state changes, starting or stopping footsteps.
     /// </summary>
     /// <param name="newState">The new movement state the player has entered.</param>
-    private void HandlePlayerStateChange(StatePlayerMovement.MoveState newState)
+    private void HandleFootstepStateChange(StatePlayerMovement.MoveState newState)
     {
-        // ========= FOOTSTEP CONTROLS ==========
         if (newState == StatePlayerMovement.MoveState.Run)
-        {
             StartFootsteps();
-        }
         else
-        {
             StopFootsteps();
-        }
-
-        // ========= JUMP SFX CONTROLS ==========
-        if (newState == StatePlayerMovement.MoveState.Jump)
-        {
-            PlayJumpSound();
-        }
-        else if (newState == StatePlayerMovement.MoveState.Double_Jump)
-        {
-            PlayDoubleJumpSound();
-        }
-        else if (newState == StatePlayerMovement.MoveState.Wall_Jump)
-        {
-            PlayWallJumpSound();
-        }
-
     }
 
     // ========== FOOTSTEP PLAY ==========
@@ -166,7 +144,7 @@ public class AudioManager : MonoBehaviour
 
     // ========== JUMP SFX ==========
 
-    private void PlayJumpSound()
+    public void PlayJumpSound()
     {
         if (_sfxSource != null && _jumpSound != null)
         {
@@ -174,7 +152,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void PlayDoubleJumpSound()
+    public void PlayDoubleJumpSound()
     {
         if (_sfxSource != null && _doubleJumpSound != null)
         {
@@ -182,7 +160,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private void PlayWallJumpSound()
+    public void PlayWallJumpSound()
     {
         if (_sfxSource != null && _wallJumpSound != null)
         {
@@ -321,19 +299,6 @@ public class AudioManager : MonoBehaviour
 
         int volumePercent = Mathf.RoundToInt(volume * 100);
         _sfxVolumeText.text = $"{volumePercent}%";
-    }
-
-    /// <summary>
-    /// Plays a short preview sound when the SFX volume changes,
-    /// so the player can hear the new volume level in real time.
-    /// </summary>
-    private void PreviewSFXVolume()
-    {
-        if (_sfxSource == null || _sfxPreviewSound == null) return;
-
-        // Stop any currently playing preview to avoid overlapping
-        _sfxSource.Stop();
-        _sfxSource.PlayOneShot(_sfxPreviewSound, _sfxPreviewVolume);
     }
 
     public void PauseMusic()

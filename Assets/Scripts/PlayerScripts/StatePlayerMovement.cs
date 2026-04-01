@@ -26,6 +26,9 @@ public class StatePlayerMovement : MonoBehaviour
 
     [SerializeField] private PlayerVfx _playerVfx;
 
+    [SerializeField] private AudioManager _audioManager;
+
+
 
     [Header("State Thresholds")]
     [SerializeField] private float _velocityYThreshold = 0.5f; // Threshold for falling
@@ -43,7 +46,7 @@ public class StatePlayerMovement : MonoBehaviour
     private const string despawnAnim = "Despawn";
 
     // Is a delegate that other scripts can subscribe to in order to be notified when the player's movement state changes.
-    public static Action<MoveState> OnPlayerMoveStateChanged; //not used
+    public static Action<MoveState> OnPlayerMoveStateChanged; 
 
     private bool _isDespawning = false;
 
@@ -160,6 +163,7 @@ public class StatePlayerMovement : MonoBehaviour
 
         _animator.Play(jumpAnim);
         if (_playerVfx != null) _playerVfx.PlayJumpDust();
+        if (_audioManager != null) _audioManager.PlayJumpSound();
     }
 
     private void HandleFall()
@@ -176,6 +180,7 @@ public class StatePlayerMovement : MonoBehaviour
 
         _animator.Play(doubleJumpAnim);
         if (_playerVfx != null) _playerVfx.PlayJumpDust();
+        if (_audioManager != null) _audioManager.PlayDoubleJumpSound();
 
     }
 
@@ -185,6 +190,8 @@ public class StatePlayerMovement : MonoBehaviour
 
         _animator.Play(wallJumpAnim);
         if (_playerVfx != null) _playerVfx.PlayJumpDust();
+        if (_audioManager != null) _audioManager.PlayWallJumpSound();
+
     }
 
     private void HandleWallSlide()
