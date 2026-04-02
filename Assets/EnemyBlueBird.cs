@@ -5,6 +5,8 @@ public class EnemyBlueBird : EnemyBase
     [SerializeField] private float _moveSpeed = 3f; // How fast the bird moves horizontally
     [SerializeField] private float _amplitude = 1f; // How far left and right the bird moves from its starting position
 
+    [SerializeField] private bool _moveVertically = false;
+
     private Vector3 _startingPosition; // The initial position of the bird, used as the center point for horizontal movement
 
     private bool _isFacingRight = false;
@@ -22,13 +24,20 @@ public class EnemyBlueBird : EnemyBase
     private void Update()
     {
         if (_isDead) return;
-        MoveHorizontally();
+
+        if (_moveVertically)
+        {
+            MoveVertically();
+        }
+        else
+        {
+            MoveHorizontally();
+        }
+
     }
 
     private void MoveHorizontally()
     {
-        //_animator.SetBool("isRunning", true);
-
         transform.position = new Vector3(_startingPosition.x + Mathf.Sin(Time.time * _moveSpeed) * _amplitude, transform.position.y, transform.position.z);
 
         float cosValue = Mathf.Cos(Time.time * _moveSpeed); //when the sin is at the max or min, the cos is 0, so we can use that to flip the bird when it reaches the end of its movement range
@@ -47,6 +56,6 @@ public class EnemyBlueBird : EnemyBase
 
     private void MoveVertically()
     {
-        // Optional: Implement vertical movement if desired, such as bobbing up and down
+        transform.position = new Vector3(transform.position.x, Mathf.Sin(Time.time * _moveSpeed) * _amplitude, transform.position.z);
     }
 }

@@ -60,6 +60,7 @@ public class EnemyMushroom : EnemyBase
     private void Move()
     {
         _animator.SetBool("isRunning", true);
+        PlayDustParticle();
 
         float direction = _isFacingRight ? 1f : -1f;
 
@@ -73,6 +74,8 @@ public class EnemyMushroom : EnemyBase
         //Stop Horizontal movement
         _rb.linearVelocity = new Vector2(0, _rb.linearVelocity.y);
         _animator.SetBool("isRunning", false);
+
+        StopDustParticle();
 
         yield return new WaitForSeconds(_idleDuration);
 
