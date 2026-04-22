@@ -18,7 +18,7 @@ public abstract class EnemyBase : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody2D>();
         _dustParticle = GetComponentInChildren<ParticleSystem>();
-        Debug.Log(_dustParticle);
+        //Debug.Log(_dustParticle);
     }
 
     // NOTE: All sprites face left by default (scale 1f = left).

@@ -6,8 +6,6 @@ public class GameOverManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _firstSelected;
     [SerializeField] private FadeTransition _fadeTransition;
-    [SerializeField] private AudioManager _audioManager;
-
 
     private void Start()
     {
@@ -23,8 +21,7 @@ public class GameOverManager : MonoBehaviour
         if (_gameOverPanel != null)
             _gameOverPanel.SetActive(true);
 
-        if (_audioManager != null)
-            _audioManager.StopFootsteps();
+        AudioManager.Instance.StopFootsteps();
 
         if (EventSystem.current != null)
             EventSystem.current.SetSelectedGameObject(_firstSelected);

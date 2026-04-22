@@ -21,9 +21,6 @@ public class EnemyLog : EnemyBase
     [SerializeField] private float _attackRange = 3f;
     [SerializeField] private float _timeBetweenAttacks = 1.5f;
 
-    [Header("Audio")]
-    [SerializeField] private AudioManager _audioManager;
-
     private bool _facingRight = false;
 
     //This 2 variables are used to avoid the log to start the shooting anim but now shotting the projectile
@@ -202,8 +199,7 @@ public class EnemyLog : EnemyBase
 
         GameObject projectile = Instantiate(_projectilePrefab, _shootPoint.position, Quaternion.identity);
 
-        if (_audioManager != null)
-            _audioManager.PlayEnemyShootSound();
+        AudioManager.Instance.PlayEnemyShootSound();
 
         LogProjectile projScript = projectile.GetComponent<LogProjectile>();
         if (projScript != null)

@@ -6,7 +6,6 @@ using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
-
     [Header("Music")]
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private Slider _volumeSlider;
@@ -62,6 +61,21 @@ public class AudioManager : MonoBehaviour
     private StatePlayerMovement.MoveState _currentState = StatePlayerMovement.MoveState.None;
 
     private Coroutine _sfxPreviewCoroutine;
+
+    public static AudioManager Instance { get; private set; }
+
+    protected void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        //DontDestroyOnLoad(gameObject);
+
+
+    }
 
     private void Start()
     {
@@ -172,8 +186,9 @@ public class AudioManager : MonoBehaviour
 
     public void PlayTakeDamageSound()
     {
-        if (_takeDamageSound != null)
+        if (_sfxSource != null && _takeDamageSound != null)
         {
+            Debug.Log($"Before PlayOneShot — enabled: {_sfxSource.enabled} | active: {_sfxSource.gameObject.activeInHierarchy}");
             _sfxSource.PlayOneShot(_takeDamageSound, _takeDamageVolume);
         }
     }

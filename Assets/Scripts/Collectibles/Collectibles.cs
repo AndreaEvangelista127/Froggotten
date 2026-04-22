@@ -9,9 +9,6 @@ public class Collectibles : MonoBehaviour
     [SerializeField] private float _verticalDistance = 0.3f;
     [SerializeField] private float _horizontalDistance = 0.5f;
 
-    [Header("Audio Source")]
-    [SerializeField] private AudioManager _audioManager;
-
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private Vector3 _startPosition;
@@ -72,7 +69,7 @@ public class Collectibles : MonoBehaviour
     public void Collect()
     {
         if (_animator != null) _animator.SetTrigger("Collect");
-        if (_audioManager != null) _audioManager.PlayCollectibleSound();
+        AudioManager.Instance.PlayCollectibleSound();
         _isCollected = true;
         Destroy(gameObject, 0.5f);
     }

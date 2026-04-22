@@ -201,9 +201,7 @@ public class WinManager : MonoBehaviour
             Time.timeScale = 1f;
         }
         if (_fadeTransition != null)
-        {
-            _fadeTransition.FadeToScene(1);
-        }
+            _fadeTransition.FadeToScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 
     /// <summary>

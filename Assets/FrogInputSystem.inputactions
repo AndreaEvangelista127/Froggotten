@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "name": "NanoInputSystem",
+    "name": "FrogInputSystem",
     "maps": [
         {
             "name": "Player",

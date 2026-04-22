@@ -78,4 +78,16 @@ public class PauseMenuManager : MonoBehaviour
         if (_fadeTransition != null)
             _fadeTransition.FadeToScene(0);
     }
+
+    public void RestartLevel()
+    {
+        if (_pauseMenuUI != null)
+        {
+            _pauseMenuUI.SetActive(false);
+            Time.timeScale = 1f;
+            _isPaused = false;
+        }
+        if (_fadeTransition != null)
+            _fadeTransition.FadeToScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+    }
 }

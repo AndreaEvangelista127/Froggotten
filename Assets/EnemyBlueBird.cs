@@ -38,7 +38,7 @@ public class EnemyBlueBird : EnemyBase
 
     private void MoveHorizontally()
     {
-        transform.position = new Vector3(_startingPosition.x + Mathf.Sin(Time.time * _moveSpeed) * _amplitude, transform.position.y, transform.position.z);
+        transform.position = new Vector3(_startingPosition.x + Mathf.Sin(Time.time * _moveSpeed) * _amplitude, _startingPosition.y, transform.position.z);
 
         float cosValue = Mathf.Cos(Time.time * _moveSpeed); //when the sin is at the max or min, the cos is 0, so we can use that to flip the bird when it reaches the end of its movement range
 
@@ -56,6 +56,6 @@ public class EnemyBlueBird : EnemyBase
 
     private void MoveVertically()
     {
-        transform.position = new Vector3(transform.position.x, Mathf.Sin(Time.time * _moveSpeed) * _amplitude, transform.position.z);
+        transform.position = new Vector3(_startingPosition.x, Mathf.Sin(Time.time * _moveSpeed) * _amplitude, transform.position.z);
     }
 }
