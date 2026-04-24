@@ -60,7 +60,6 @@ public class Collectibles : MonoBehaviour
         {
             _spriteRenderer.flipX = true;
         }
-
     }
 
     /// <summary>

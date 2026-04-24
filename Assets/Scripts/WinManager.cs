@@ -96,9 +96,7 @@ public class WinManager : MonoBehaviour
 
             if (_isTrophyUnlocked && !_hasWon)
             {
-
                 TriggerWinSequence(collision.gameObject);
-
             }
             else
             {
@@ -115,6 +113,8 @@ public class WinManager : MonoBehaviour
     private void TriggerWinSequence(GameObject player)
     {
         _hasWon = true;
+
+        LevelManager.Instance.UnlockNextLevel(); // Notify the LevelManager that the level has been completed
 
         // Trophy animation
         if (_winAnimator != null)
@@ -213,5 +213,21 @@ public class WinManager : MonoBehaviour
         Debug.Log("WinManager: Quit Game called ");
     }
 
+    //Method used by the "Next Level" button in the win panel, to load the next level in the build settings order
+    public void LoadNextLevel()
+    {
+        if (_winPanelUI != null)
+        {
+            _winPanelUI.SetActive(false);
+            Time.timeScale = 1f;
+        }
+
+        if (_fadeTransition != null)
+        {
+            _fadeTransition.FadeToScene(
+                UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex + 1
+            );
+        }
+    }
 
 }
