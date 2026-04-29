@@ -123,21 +123,28 @@ public class WinManager : MonoBehaviour
         }
 
         if (_confettiSpawnPoint != null)
-
+        {
             VFXConfetti.SpawnConfettiWithTimer(_confettiPrefab, _confettiSpawnPoint.position);
+        }
 
         // Bounce player
-        PlayerCollisions playerCollisions = player.GetComponent<PlayerCollisions>();
-        if (playerCollisions != null)
+        if (player.TryGetComponent(out PlayerCollisions playerCollisions))
         {
             playerCollisions.BouncePlayer(_trophyBounceForce);
         }
+        else
+        {
+            Debug.LogWarning("WinManager: PlayerCollisions component not found on player.");
+        }
 
         // Despawn 
-        StatePlayerMovement statePlayerMovement = player.GetComponent<StatePlayerMovement>();
-        if (statePlayerMovement != null)
+        if (player.TryGetComponent(out StatePlayerMovement statePlayerMovement))
         {
             statePlayerMovement.TriggerDespawn();
+        }
+        else
+        {
+            Debug.LogWarning("WinManager: StatePlayerMovement component not found on player.");
         }
 
         StartCoroutine(ShowWinPanelDelayed());
