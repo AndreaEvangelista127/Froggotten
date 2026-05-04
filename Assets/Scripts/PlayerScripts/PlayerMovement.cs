@@ -103,6 +103,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() //FOR PHYSICS
     {
+        if (PauseMenuManager.IsGamePaused) return;
+
         if (_rb == null) return;
 
         // ========== Apply horizontal movement only if not in wall jump control lock or knockback control lock ==========
@@ -154,6 +156,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenuManager.IsGamePaused) return;
+
         if (_rb == null) return;
 
         FlipSpriteX();
@@ -187,6 +191,8 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public void Move(InputAction.CallbackContext context)
     {
+        //to avoid the player to be able to move during the pause
+        if (PauseMenuManager.IsGamePaused) return; 
         _moveValue = context.ReadValue<Vector2>().x;
     }
 
@@ -277,6 +283,8 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public void Jump(InputAction.CallbackContext context)
     {
+        if (PauseMenuManager.IsGamePaused) return;
+
         if (context.started)
         {
             _isJumpButtonHeld = true; //Used for Gliding

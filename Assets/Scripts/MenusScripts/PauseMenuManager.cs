@@ -9,6 +9,8 @@ public class PauseMenuManager : MonoBehaviour
     [SerializeField] private GameObject _pauseFirstSelected;
     [SerializeField] private FadeTransition _fadeTransition;
 
+    //to stop the player movement when the game is paused, we can check this variable in the player movement script
+    public static bool IsGamePaused { get; private set; }
 
 
     private bool _isPaused = false;
@@ -36,9 +38,11 @@ public class PauseMenuManager : MonoBehaviour
         _pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         _isPaused = true;
+        IsGamePaused = true;
 
         // Set controller focus to the first element of the pause menu
-        EventSystem.current.SetSelectedGameObject(_pauseFirstSelected);
+        if (EventSystem.current != null)
+            EventSystem.current.SetSelectedGameObject(_pauseFirstSelected);
 
         if (_audioManager != null)
             _audioManager.PauseMusic();
@@ -54,6 +58,7 @@ public class PauseMenuManager : MonoBehaviour
         _pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         _isPaused = false;
+        IsGamePaused = false;
 
         // After opening the pause menu the first button where the controller is going to be, would be _pausefirstselected
         if (EventSystem.current != null)
@@ -73,6 +78,7 @@ public class PauseMenuManager : MonoBehaviour
             _pauseMenuUI.SetActive(false);
             Time.timeScale = 1f;
             _isPaused = false;
+            IsGamePaused = false;
         }
 
         if (_fadeTransition != null)
@@ -86,8 +92,20 @@ public class PauseMenuManager : MonoBehaviour
             _pauseMenuUI.SetActive(false);
             Time.timeScale = 1f;
             _isPaused = false;
+            IsGamePaused = false;
         }
         if (_fadeTransition != null)
             _fadeTransition.FadeToScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
+
+    /// <summary>
+    /// Called by the Player Input component when the Cancel action is triggered.
+    /// Closes the pause menu if currently paused (B button on Xbox gamepad).
+    /// </summary>
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
+        if (_isPaused) ResumeGame();
+    }
+
 }

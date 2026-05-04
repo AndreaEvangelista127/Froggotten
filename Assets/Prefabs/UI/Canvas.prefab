@@ -384,6 +384,7 @@ GameObject:
   - component: {fileID: 1726372658572564327}
   - component: {fileID: 6111722263448523739}
   - component: {fileID: 6020358062819590139}
+  - component: {fileID: 6922501046696342148}
   m_Layer: 5
   m_Name: WinPanelMenu
   m_TagString: Untagged
@@ -452,6 +453,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6922501046696342148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698808548917822262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e6ce77324fcc541b325b8df80f8b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &891259561228850665
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,9 +601,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.84313726, b: 0, a: 1}
-    m_PressedColor: {r: 1, g: 0.54901963, b: 0, a: 1}
-    m_SelectedColor: {r: 1, g: 0.54901963, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}
+    m_PressedColor: {r: 0.77254903, g: 0.4392157, b: 0, a: 1}
+    m_SelectedColor: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -652,7 +665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -140}
+  m_AnchoredPosition: {x: 50, y: -138}
   m_SizeDelta: {x: 39, y: 16}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1071967445824339438
@@ -1807,6 +1820,7 @@ GameObject:
   - component: {fileID: 872186644650286891}
   - component: {fileID: 1122955720567964046}
   - component: {fileID: 8014434645119018515}
+  - component: {fileID: 780853489942387750}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -1873,6 +1887,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &780853489942387750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475767756337179823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9e6ce77324fcc541b325b8df80f8b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3520465039218305129
 GameObject:
   m_ObjectHideFlags: 0
@@ -3218,9 +3244,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 1264303620533619795, guid: 7b02e8442d57b0841ae74baef8d2b31e, type: 3}
+    m_HighlightedSprite: {fileID: -4174340124414896003, guid: 7b02e8442d57b0841ae74baef8d2b31e, type: 3}
     m_PressedSprite: {fileID: -2387012593355286796, guid: 7b02e8442d57b0841ae74baef8d2b31e, type: 3}
-    m_SelectedSprite: {fileID: 1264303620533619795, guid: 7b02e8442d57b0841ae74baef8d2b31e, type: 3}
+    m_SelectedSprite: {fileID: -4174340124414896003, guid: 7b02e8442d57b0841ae74baef8d2b31e, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -3866,7 +3892,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -24}
+  m_AnchoredPosition: {x: 50, y: -23}
   m_SizeDelta: {x: 37, y: 14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3395034046587672544
@@ -4156,9 +4182,9 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.84313726, b: 0, a: 1}
-    m_PressedColor: {r: 1, g: 0.54901963, b: 0, a: 1}
-    m_SelectedColor: {r: 1, g: 0.54901963, b: 0, a: 1}
+    m_HighlightedColor: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}
+    m_PressedColor: {r: 0.77254903, g: 0.4392157, b: 0, a: 1}
+    m_SelectedColor: {r: 0.49019608, g: 0.49019608, b: 0.49019608, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
