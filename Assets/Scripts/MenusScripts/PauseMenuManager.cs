@@ -14,6 +14,13 @@ public class PauseMenuManager : MonoBehaviour
 
 
     private bool _isPaused = false;
+    private void Awake()
+    {
+        // Reset static state on scene reload to avoid stale pause state
+        IsGamePaused = false;
+        _isPaused = false;
+        Time.timeScale = 1f;
+    }
 
     /// <summary>
     /// Called by the Player Input component when the Pause action is triggered.
@@ -88,12 +95,12 @@ public class PauseMenuManager : MonoBehaviour
     public void RestartLevel()
     {
         if (_pauseMenuUI != null)
-        {
             _pauseMenuUI.SetActive(false);
-            Time.timeScale = 1f;
-            _isPaused = false;
-            IsGamePaused = false;
-        }
+
+        Time.timeScale = 1f;
+        _isPaused = false;
+        IsGamePaused = false;
+
         if (_fadeTransition != null)
             _fadeTransition.FadeToScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }

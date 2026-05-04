@@ -263,7 +263,7 @@ public class PlayerHealth : MonoBehaviour
         if (_audioManager != null)
             _audioManager.PauseMusic();
 
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
 
         if (gameOverManager != null)
             gameOverManager.ShowGameOver();

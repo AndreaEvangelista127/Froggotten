@@ -6,6 +6,8 @@ public class GameOverManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private GameObject _firstSelected;
     [SerializeField] private FadeTransition _fadeTransition;
+    [SerializeField] private int _mainMenuSceneIndex = 0;
+
 
     private void Start()
     {
@@ -25,6 +27,8 @@ public class GameOverManager : MonoBehaviour
 
         if (EventSystem.current != null)
             EventSystem.current.SetSelectedGameObject(_firstSelected);
+
+        Time.timeScale = 0f;
     }
 
     /// <summary>
@@ -34,7 +38,7 @@ public class GameOverManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         if (_fadeTransition != null)
-            _fadeTransition.FadeToScene(1);
+            _fadeTransition.FadeToScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 
     /// <summary>
@@ -44,7 +48,7 @@ public class GameOverManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         if (_fadeTransition != null)
-            _fadeTransition.FadeToScene(0);
+            _fadeTransition.FadeToScene(_mainMenuSceneIndex);
     }
 
     /// <summary>

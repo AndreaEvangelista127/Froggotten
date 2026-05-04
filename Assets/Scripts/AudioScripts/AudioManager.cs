@@ -188,7 +188,7 @@ public class AudioManager : MonoBehaviour
     {
         if (_sfxSource != null && _takeDamageSound != null)
         {
-            Debug.Log($"Before PlayOneShot — enabled: {_sfxSource.enabled} | active: {_sfxSource.gameObject.activeInHierarchy}");
+            Debug.Log($"Before PlayOneShot ï¿½ enabled: {_sfxSource.enabled} | active: {_sfxSource.gameObject.activeInHierarchy}");
             _sfxSource.PlayOneShot(_takeDamageSound, _takeDamageVolume);
         }
     }
@@ -297,7 +297,7 @@ public class AudioManager : MonoBehaviour
         UpdateSFXVolumeText(volume);
         PlayerPrefs.SetFloat("SFXVolume", volume);
 
-        // Cancel previous preview and restart — plays only when slider stops moving
+        // Cancel previous preview and restart ï¿½ plays only when slider stops moving
         if (_sfxPreviewCoroutine != null)
             StopCoroutine(_sfxPreviewCoroutine);
 
@@ -343,5 +343,10 @@ public class AudioManager : MonoBehaviour
 
         if (_sfxSource != null && _sfxPreviewSound != null)
             _sfxSource.PlayOneShot(_sfxPreviewSound, _sfxPreviewVolume);
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.Save();
     }
 }
