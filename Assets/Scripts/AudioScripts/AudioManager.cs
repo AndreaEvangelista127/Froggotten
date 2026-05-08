@@ -188,7 +188,6 @@ public class AudioManager : MonoBehaviour
     {
         if (_sfxSource != null && _takeDamageSound != null)
         {
-            Debug.Log($"Before PlayOneShot � enabled: {_sfxSource.enabled} | active: {_sfxSource.gameObject.activeInHierarchy}");
             _sfxSource.PlayOneShot(_takeDamageSound, _takeDamageVolume);
         }
     }
