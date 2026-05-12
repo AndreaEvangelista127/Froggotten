@@ -22,7 +22,8 @@ public class LevelManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        PlayerPrefs.DeleteAll();
+        //Call ResetAllProgress() to clear all progress and unlock only the tutorial level for testing purposes.
+        //ResetAllProgress();
         UnlockLevel(0); // Ensure the tutorial level is unlocked by default
     }
 
@@ -60,6 +61,12 @@ public class LevelManager : MonoBehaviour
         }
         PlayerPrefs.SetInt(UnlockKeyPrefix + levelIndex, 1); // Mark the level as unlocked by setting it to 1
         PlayerPrefs.Save(); // Save the changes to PlayerPrefs
+    }
+
+    public void ResetAllProgress()
+    {
+        PlayerPrefs.DeleteAll();
+        UnlockLevel(0);
     }
 
 }

@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelSelectUI : MonoBehaviour
@@ -45,13 +44,21 @@ public class LevelSelectUI : MonoBehaviour
             // Update the button's appearance and interactivity based on whether the level is unlocked
             Image buttonImage = levelButtons[i].GetComponent<Image>();
 
+            /*Without this line the transition checkbox in the button component  with animation will cause the button to show the unlocked sprite even if the
+            level is locked, because the animation will override the sprite change.
+            By disabling the animator when the level is locked, we ensure that the button shows the correct locked sprite.*/
+            if (levelButtons[i].TryGetComponent<Animator>(out Animator anim))
+                anim.enabled = unlocked;
+
             if (unlocked)
             {
                 buttonImage.sprite = _originalSprites[i];
+
             }
             else
             {
                 buttonImage.sprite = lockedSprite;
+
             }
 
             levelButtons[i].interactable = unlocked;

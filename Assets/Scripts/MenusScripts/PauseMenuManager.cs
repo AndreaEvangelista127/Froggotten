@@ -40,6 +40,7 @@ public class PauseMenuManager : MonoBehaviour
     /// </summary>
     public void PauseGame()
     {
+
         if (_pauseMenuUI == null) return;
 
         _pauseMenuUI.SetActive(true);

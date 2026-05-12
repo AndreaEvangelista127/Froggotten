@@ -111,9 +111,10 @@ public class PlayerMovement : MonoBehaviour
         if (_wallJumpControlTimer <= 0 && _knockbackControlTimer <= 0) // If we are in wall jump control lock we want to block the horizontal movement to let the player jump properly in a wall jump, otherwise the wall jump direction would have been overriden by the rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y);
         {
             // Normal horizontal movement + check if player is on the platform like the 3dcontroller
-            if (_movingSurface != null) _surfaceVelocity = _movingSurface.GetVelocity();
+            if (_movingSurface != null) _surfaceVelocity = _movingSurface.GetVelocity(); // If we are on a moving surface add its velocity to the player velocity to have the player moving with the platform
             else _surfaceVelocity = Vector2.zero;
 
+            // HORIZONTAL MOVEMENT
             _rb.linearVelocity = new Vector2((_moveValue * _speed) + _surfaceVelocity.x, _rb.linearVelocity.y);
         }
         else
@@ -162,6 +163,7 @@ public class PlayerMovement : MonoBehaviour
 
         FlipSpriteX();
 
+        
         if (_isJumping && _jumpTimeCounter > 0)
         {
             // Hold jump button to extend jump height up to _maxJumpTime
@@ -247,6 +249,21 @@ public class PlayerMovement : MonoBehaviour
     }
 
     /// <summary>
+    /// Returns true if the player is pressing the input directionally towards the detected wall.
+    /// wallDirection: -1 = wall on right, 1 = wall on left (same convention as GetJumpDirectionFromWall)
+    /// </summary>
+    private bool IsPushingTowardsWall(int wallDirection)
+    {
+        if (wallDirection == -1 && _moveValue > 0.1f)  // wall on right, pressing right
+            return true;
+
+        if (wallDirection == 1 && _moveValue < -0.1f)  // wall on left, pressing left
+            return true;
+
+        return false;
+    }
+
+    /// <summary>
     /// Returns true when the player is falling against a wall while pressing toward it,
     /// enabling the wall slide state.
     /// </summary>
@@ -262,19 +279,7 @@ public class PlayerMovement : MonoBehaviour
         int wallDirection = GetJumpDirectionFromWall();
         if(wallDirection == 0) return false; //not touching any wall
 
-        // If we are touching a wall we need to check if we are moving towards it
-        bool pressingTowardsWall = false;
-
-        if (wallDirection == -1 && _moveValue > 0.1f)  // right wall, pressing right
-        {
-            pressingTowardsWall = true;
-        }
-        else if (wallDirection == 1 && _moveValue < -0.1f)  // left wall, pressing left
-        {
-            pressingTowardsWall = true;
-        }
-
-        return pressingTowardsWall;
+        return IsPushingTowardsWall(wallDirection);
     }
 
     /// <summary>
@@ -320,7 +325,7 @@ public class PlayerMovement : MonoBehaviour
             int wallDirection = GetJumpDirectionFromWall();
 
                 /* ---- WALL JUMP ---- */
-                if (wallDirection != 0 && !GetIsGrounded())
+                if (wallDirection != 0 && !GetIsGrounded() && IsPushingTowardsWall(wallDirection))
                 {
                     // Diagonal wall jump velocity
                     _rb.linearVelocity = new Vector2(_wallJumpForceX * wallDirection, _wallJumpForceY); //OVERWRITTEN BY THE MOVE IN THE FIXEDUPDATE SO WE USE wallJumpControlLockTime
