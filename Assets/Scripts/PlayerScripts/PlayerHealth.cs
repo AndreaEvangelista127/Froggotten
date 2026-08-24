@@ -33,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private AudioManager _audioManager;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private CinemachineCamera _virtualCamera;
-    [SerializeField] private GameOverManager gameOverManager;
+    [SerializeField] private GameManager gameOverManager;
 
 
     private Color _originalColor;
