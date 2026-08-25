@@ -10,14 +10,23 @@ public abstract class TrapBase : MonoBehaviour, IDamageDealer
 
     public float Damage => _damage;
 
-    // We use OnCollisionEnter2D (not Trigger) because we need collision.contacts
-    // to get the exact contact point and compute a correct knockback direction.
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Player")) return;
 
-        PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
-        PlayerMovement playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
+        Vector2 knockbackDir = collision.contacts[0].normal;
+        ApplyDamage(collision.gameObject, knockbackDir);
+    }
+
+    /// <summary>
+    /// Applies damage and knockback to the player. Shared by both solid traps
+    /// (called from OnCollisionEnter2D, direction = contact normal) and
+    /// walk-over traps (called from OnTriggerX2D, direction = a fixed vector).
+    /// </summary>
+    protected void ApplyDamage(GameObject player, Vector2 knockbackDirection)
+    {
+        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
 
         if (playerHealth == null) return;
 
@@ -25,8 +34,7 @@ public abstract class TrapBase : MonoBehaviour, IDamageDealer
 
         if (playerMovement != null)
         {
-            Vector2 knockbackDir = collision.contacts[0].normal;
-            playerMovement.ApplyKnockBack(knockbackDir * _knockbackForce);
+            playerMovement.ApplyKnockBack(knockbackDirection * _knockbackForce);
         }
     }
 }

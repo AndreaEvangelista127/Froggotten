@@ -14,10 +14,8 @@ public class PlayerVfx : MonoBehaviour
 
     public void PlayJumpDust()
     {
-        Debug.Log("Jump dust event triggered");
         if (_jumpDustParticle != null)
         {
-            Debug.Log("Jump dust particle is not null, playing particle system");
             _jumpDustParticle.Play();
         }
     }

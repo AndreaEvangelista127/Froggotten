@@ -192,8 +192,6 @@ public class EnemyLog : EnemyBase
     /// </summary>
     public void ShootProjectile()
     {
-        Debug.Log($"ShootProjectile called - isDead: {_isDead} - prefab: {_projectilePrefab != null} - shootPoint: {_shootPoint != null}");
-
         if (_isDead) return;
         if (_projectilePrefab == null || _shootPoint == null) return;
 

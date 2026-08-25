@@ -1,8 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
-/// Fire trap. Behaves like a standard TrapBase but can add its own VFX/animation
-/// on top of the shared damage logic.
+/// Fire trap with a solid (non-trigger) collider — the player physically rests
+/// on top of it, like Spike/Saw. Warning/Active/Idle phases are driven by
+/// Animator triggers; damage is only applied while in the Active phase.
 /// </summary>
 public class FireTrap : TrapBase
 {
@@ -12,6 +14,7 @@ public class FireTrap : TrapBase
         Warning,
         Active
     }
+
     [Header("Fire Trap Timing")]
     [SerializeField] private float _warningDuration = 0.5f;
     [SerializeField] private float _shutdownDelay = 1f;
@@ -19,41 +22,69 @@ public class FireTrap : TrapBase
     [Header("Fire Trap Animation")]
     [SerializeField] private Animator _fireTrapAnimator;
 
-    // Write on the animator 3 trigger parameters: "Idle", "Warning", "Burn"
-
     private TrapState _currentState = TrapState.Idle;
     private Coroutine _shutdownRoutine;
 
-    /// <summary>
-    /// Check if the player collides with the trap. If so, trigger the "Burn" animation but
-    /// if the trap was already in the "Burn" state, stop the shutdown routine and restart it 
-    /// to keep the trap active for a longer time.
-    /// </summary>
-    /// <param name="collision"></param>
+    // Only handles state transitions here. No damage is applied on Enter:
+    // the player might just be stepping on an Idle or Warning trap.
     protected override void OnCollisionEnter2D(Collision2D collision)
     {
-        base.OnCollisionEnter2D(collision); // keep shared damage/knockback behaviour
+        if (!collision.gameObject.CompareTag("Player")) return;
 
-        if (collision.gameObject.CompareTag("Player") && _fireTrapAnimator != null)
+        if (_currentState == TrapState.Idle)
         {
-            _fireTrapAnimator.SetTrigger("Burn");
+            StartCoroutine(ActivateTrap());
+        }
+        else if (_currentState == TrapState.Active && _shutdownRoutine != null)
+        {
+            // Player came back before the fire turned off: cancel the shutdown.
+            StopCoroutine(_shutdownRoutine);
+            _shutdownRoutine = null;
         }
     }
 
-    // if the player is in the active state, call the base OnCollisionEnter2D to apply damage and knockback.
+    // Damage is applied every physics frame the player stays in contact,
+    // but only while the trap is actually Active.
     private void OnCollisionStay2D(Collision2D collision)
     {
-        
+        if (!collision.gameObject.CompareTag("Player")) return;
+
+        if (_currentState == TrapState.Active)
+        {
+            Vector2 knockbackDir = collision.contacts[0].normal;
+            ApplyDamage(collision.gameObject, knockbackDir); // shared method from TrapBase
+        }
     }
 
-    // If the player leaves the trap, check if the trap is in the active state
-    // and if the shutdown routine == null, start the shutdown routine to return to the idle state after a delay.
     private void OnCollisionExit2D(Collision2D collision)
     {
-        
+        if (!collision.gameObject.CompareTag("Player")) return;
+        Debug.Log("Player exited fire trap");
+        Debug.Log($"Current state: {_currentState}, Shutdown routine: {_shutdownRoutine}");
+
+        if (_currentState == TrapState.Active || _currentState == TrapState.Warning && _shutdownRoutine == null)
+        {    
+            _shutdownRoutine = StartCoroutine(ShutdownTrap());
+        }
     }
 
-    //Activation sequence
+    public IEnumerator ActivateTrap()
+    {
+        _currentState = TrapState.Warning;
+        _fireTrapAnimator.SetTrigger("Warning");
 
-    //Shutdown sequence
+        yield return new WaitForSeconds(_warningDuration);
+
+        _fireTrapAnimator.SetTrigger("Burn");
+        _currentState = TrapState.Active;
+    }
+
+    public IEnumerator ShutdownTrap()
+    {
+        yield return new WaitForSeconds(_shutdownDelay);
+
+        _currentState = TrapState.Idle;
+        _fireTrapAnimator.SetTrigger("Idle");
+        _shutdownRoutine = null;
+    }
 }
