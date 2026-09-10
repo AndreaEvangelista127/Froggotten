@@ -35,7 +35,6 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private CinemachineCamera _virtualCamera;
     [SerializeField] private GameManager gameOverManager;
 
-
     private Color _originalColor;
     private bool _isDead = false;
     private Rigidbody2D _rb;
@@ -73,9 +72,9 @@ public class PlayerHealth : MonoBehaviour
     /// Has no effect if the player is invulnerable or already dead.
     /// </summary>
     /// <param name="damage">The amount of damage to apply.</param>
-    public void TakeDamage(float damage)
+    public bool TakeDamage(float damage)
     {
-        if (_isInvulnerable || _isDead) return;
+        if (_isInvulnerable || _isDead) return false;
 
         _currentHealth -= damage;
 
@@ -102,6 +101,8 @@ public class PlayerHealth : MonoBehaviour
         {
             StartCoroutine(HitEffect());
         }
+
+        return true;
     }
 
     /// <summary>

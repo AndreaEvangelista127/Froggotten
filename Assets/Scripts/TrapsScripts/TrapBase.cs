@@ -13,28 +13,41 @@ public abstract class TrapBase : MonoBehaviour, IDamageDealer
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Player")) return;
+        ApplyDamageAndKnockback(collision);
+    }
 
-        Vector2 knockbackDir = collision.contacts[0].normal;
-        ApplyDamage(collision.gameObject, knockbackDir);
+    protected void ApplyDamageAndKnockback(Collision2D collision)
+    {
+        ApplyDamageAndKnockback(collision.gameObject, GetKnockbackDirection(collision));
     }
 
     /// <summary>
-    /// Applies damage and knockback to the player. Shared by both solid traps
-    /// (called from OnCollisionEnter2D, direction = contact normal) and
-    /// walk-over traps (called from OnTriggerX2D, direction = a fixed vector).
+    /// Overload for trigger-based contact (no Collision2D/contacts available,
+    /// e.g. FireTrap's separate flame hitbox). Same damage/i-frame logic,
+    /// knockback direction is passed in directly instead of computed from contacts.
     /// </summary>
-    protected void ApplyDamage(GameObject player, Vector2 knockbackDirection)
+    protected void ApplyDamageAndKnockback(GameObject target, Vector2 knockbackDirection)
     {
-        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        PlayerHealth playerHealth = target.GetComponent<PlayerHealth>();
+        PlayerMovement playerMovement = target.GetComponent<PlayerMovement>();
 
         if (playerHealth == null) return;
 
-        playerHealth.TakeDamage(_damage);
+        bool damageApplied = playerHealth.TakeDamage(_damage);
 
-        if (playerMovement != null)
+        if (damageApplied && playerMovement != null)
         {
             playerMovement.ApplyKnockBack(knockbackDirection * _knockbackForce);
         }
+    }
+
+    /// <summary>
+    /// Default knockback direction: straight away from the contact surface.
+    /// Override in traps where the contact normal alone isn't reliable
+    /// (e.g. flat traps the player stands directly on top of).
+    /// </summary>
+    protected virtual Vector2 GetKnockbackDirection(Collision2D collision)
+    {
+        return collision.contacts[0].normal;
     }
 }
