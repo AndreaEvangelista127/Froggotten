@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 4f8b438458fa30041865000691e86423
-timeCreated: 1487812905
+guid: 7423e39a946df624b9ac2478f69d04c0
+timeCreated: 1487538540
 licenseType: Store
-DefaultImporter:
+NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -11,5 +11,5 @@ AssetOrigin:
   productId: 89451
   packageName: Main menu with Parallax Effect FREE
   packageVersion: 1.0
-  assetPath: Assets/Main menu with parallax FREE/Main Menu Demo.unity
+  assetPath: Assets/Main menu with parallax FREE/Assets/arrow/Inactive.anim
   uploadId: 177355

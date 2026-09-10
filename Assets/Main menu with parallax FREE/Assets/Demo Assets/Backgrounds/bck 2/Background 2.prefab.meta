@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 4f8b438458fa30041865000691e86423
-timeCreated: 1487812905
+guid: 9f3b3abc86ec87e40aef9561422c4828
+timeCreated: 1487726301
 licenseType: Store
-DefaultImporter:
+NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -11,5 +11,6 @@ AssetOrigin:
   productId: 89451
   packageName: Main menu with Parallax Effect FREE
   packageVersion: 1.0
-  assetPath: Assets/Main menu with parallax FREE/Main Menu Demo.unity
+  assetPath: Assets/Main menu with parallax FREE/Assets/Demo Assets/Backgrounds/bck
+    2/Background 2.prefab
   uploadId: 177355

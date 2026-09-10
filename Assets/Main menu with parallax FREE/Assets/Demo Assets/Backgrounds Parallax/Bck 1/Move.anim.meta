@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 4f8b438458fa30041865000691e86423
-timeCreated: 1487812905
+guid: e4d9197770b3dc046a3990294e6c0f1c
+timeCreated: 1487711090
 licenseType: Store
-DefaultImporter:
+NativeFormatImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -11,5 +11,6 @@ AssetOrigin:
   productId: 89451
   packageName: Main menu with Parallax Effect FREE
   packageVersion: 1.0
-  assetPath: Assets/Main menu with parallax FREE/Main Menu Demo.unity
+  assetPath: Assets/Main menu with parallax FREE/Assets/Demo Assets/Backgrounds Parallax/Bck
+    1/Move.anim
   uploadId: 177355

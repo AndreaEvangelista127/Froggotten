@@ -1,8 +1,12 @@
 fileFormatVersion: 2
-guid: 4f8b438458fa30041865000691e86423
-timeCreated: 1487812905
+guid: 50c9ea3ee27be93448a284ae619498fe
+timeCreated: 1493568903
 licenseType: Store
-DefaultImporter:
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
@@ -11,5 +15,5 @@ AssetOrigin:
   productId: 89451
   packageName: Main menu with Parallax Effect FREE
   packageVersion: 1.0
-  assetPath: Assets/Main menu with parallax FREE/Main Menu Demo.unity
+  assetPath: Assets/Main menu with parallax FREE/Editor/MenuEditor.cs
   uploadId: 177355
