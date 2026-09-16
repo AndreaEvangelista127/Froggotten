@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class WinManager : MonoBehaviour
 {
@@ -128,14 +127,7 @@ public class WinManager : MonoBehaviour
         }
 
         // Bounce player
-        if (player.TryGetComponent(out PlayerCollisions playerCollisions))
-        {
-            playerCollisions.BouncePlayer(_trophyBounceForce);
-        }
-        else
-        {
-            Debug.LogWarning("WinManager: PlayerCollisions component not found on player.");
-        }
+        BounceUtility.BouncePlayer(player, _trophyBounceForce);
 
         // Despawn 
         if (player.TryGetComponent(out StatePlayerMovement statePlayerMovement))

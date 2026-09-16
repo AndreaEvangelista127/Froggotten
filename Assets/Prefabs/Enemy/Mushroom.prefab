@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4321068013320557674}
   - component: {fileID: 6609051203581561932}
+  - component: {fileID: 3687959297659142561}
   m_Layer: 0
   m_Name: Head
   m_TagString: EnemyHead
@@ -78,6 +79,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.4537773, y: 0.18695557}
   m_EdgeRadius: 0
+--- !u!114 &3687959297659142561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721363266525452000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015f2ee5dd0f30c499893a1942f51fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounceForce: 20
 --- !u!1 &4249019299804325164
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,6 +305,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprite: {fileID: 6417992919197801362}
   _playerTf: {fileID: 0}
+  _damage: 1
+  _knockbackForce: 5
   _moveSpeed: 3
   _groundLayer:
     serializedVersion: 2
@@ -323,7 +339,6 @@ MonoBehaviour:
   _bounceForce: 4
   _bounceRotationSpeed: 720
   _deathGravityScale: 3
-  _audioManager: {fileID: 0}
 --- !u!95 &1172674764691047658
 Animator:
   serializedVersion: 7

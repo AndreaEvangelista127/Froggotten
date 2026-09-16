@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4518288413473247104}
   - component: {fileID: 4661676669959161793}
+  - component: {fileID: 6062033679755895411}
   m_Layer: 0
   m_Name: Head
   m_TagString: EnemyHead
@@ -66,7 +67,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.17223358, y: 0.72961044}
+  m_Offset: {x: -0.1832447, y: 0.72961044}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,8 +77,21 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.7474861, y: 0.18742275}
+  m_Size: {x: 1.1806183, y: 0.18742275}
   m_EdgeRadius: 0
+--- !u!114 &6062033679755895411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4152204124803625582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015f2ee5dd0f30c499893a1942f51fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounceForce: 20
 --- !u!1 &4637977542805618245
 GameObject:
   m_ObjectHideFlags: 0
@@ -203,9 +217,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprite: {fileID: 1660950461717087630}
   _playerTf: {fileID: 0}
+  _damage: 1
+  _knockbackForce: 5
   _moveSpeed: 1
-  _amplitude: 5
-  _moveVertically: 0
+  _amplitude: 1
+  _moveVertically: 1
 --- !u!114 &8819957452985247272
 MonoBehaviour:
   m_ObjectHideFlags: 0

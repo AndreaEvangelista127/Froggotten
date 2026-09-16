@@ -132,6 +132,8 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        UpdateGroundedSurface();
+
         if (CanWallSlide())
         {
             _rb.linearVelocity = new Vector2(_rb.linearVelocityX, -_wallSlideSpeed);
@@ -186,6 +188,22 @@ public class PlayerMovement : MonoBehaviour
             StopGliding();
         }
 
+    }
+
+    private void UpdateGroundedSurface()
+    {
+        if(_groundCheckTransform == null) return;
+
+        Collider2D groundHit = Physics2D.OverlapBox(_groundCheckTransform.position, _groundCheckSize, 0f, _groundLayer);
+
+        if(groundHit != null && groundHit.TryGetComponent(out ISurface2D surface))
+        {
+            SetMovingSurface(surface);
+        }
+        else
+        {
+            SetMovingSurface(null);
+        }
     }
 
     /// <summary>
@@ -451,7 +469,6 @@ public class PlayerMovement : MonoBehaviour
     /// for a short duration to preserve the knockback feel.
     /// </summary>
     /// <param name="knockBackVel">The velocity vector to apply as knockback.</param>
-    // https://discussions.unity.com/t/trying-to-get-a-knockback-function-to-work/951526
     public void ApplyKnockBack(Vector3 knockBackVel)
     { 
         //Block player control to have a proper knockback feeling, otherwise the player could move during the knockback and it would feel weird
@@ -459,7 +476,6 @@ public class PlayerMovement : MonoBehaviour
 
         //Actual knockback
         _rb.linearVelocity = knockBackVel;      
-
     }
 
     /// <summary>

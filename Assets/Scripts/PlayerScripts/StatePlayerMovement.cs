@@ -47,11 +47,13 @@ public class StatePlayerMovement : MonoBehaviour
 
     private bool _isDespawning = false;
 
+    private bool _explicitAirborneState = false; // Indicates if the player is in airborne state due to an explicit action (like jumping) rather than bouncing off an enemy or falling off a platform.
+
     private void Update()
     {
-
         if (_isDespawning) return;
 
+        
         if (_playerMovement != null && _playerMovement.IsGliding)
         {
             SetMoveState(MoveState.Gliding);
@@ -66,18 +68,18 @@ public class StatePlayerMovement : MonoBehaviour
 
         if (_playerMovement == null || _rigidBody == null) return;
 
-        // check with thresholds to determine if player is grounded, moving, or falling
+        // Check with thresholds to determine if player is grounded, moving, or falling
         bool isGrounded = _playerMovement.IsGrounded;
         bool isMoving = _playerMovement.IsMoving;
         bool isFalling = _rigidBody.linearVelocity.y < -_velocityYThreshold && !isGrounded;
 
+        bool isRisingInAir = !isGrounded && _rigidBody.linearVelocity.y > _velocityYThreshold;
+
         // logic to determine movement state based on velocity and player input
-        if (isFalling)
+        if (isGrounded)
         {
-            SetMoveState(MoveState.Fall);
-        }
-        else if (isGrounded)
-        {
+            _explicitAirborneState = false;
+
             if (isMoving)
             {
                 SetMoveState(MoveState.Run);
@@ -86,6 +88,14 @@ public class StatePlayerMovement : MonoBehaviour
             {
                 SetMoveState(MoveState.Idle);
             }
+        }
+        else if (isFalling)
+        {
+            SetMoveState(MoveState.Fall);
+        }
+        else if (isRisingInAir && _explicitAirborneState == false) // only true when the player is rising in the air due to an external force (like knockback or bounce pads) and not due to their own jump input
+        {
+            SetMoveState(MoveState.Jump);
         }
     }
 
@@ -161,6 +171,8 @@ public class StatePlayerMovement : MonoBehaviour
         _animator.Play(jumpAnim);
         if (_playerVfx != null) _playerVfx.PlayJumpDust();
         AudioManager.Instance.PlayJumpSound();
+
+        _explicitAirborneState = true; // claims this air session, blocks re-triggering from Update's fallback
     }
 
     private void HandleFall()
@@ -179,6 +191,7 @@ public class StatePlayerMovement : MonoBehaviour
         if (_playerVfx != null) _playerVfx.PlayJumpDust();
         AudioManager.Instance.PlayDoubleJumpSound();
 
+        _explicitAirborneState = true; // claims this air session
     }
 
     private void HandleWallJump() 
@@ -188,6 +201,8 @@ public class StatePlayerMovement : MonoBehaviour
         _animator.Play(wallJumpAnim);
         if (_playerVfx != null) _playerVfx.PlayJumpDust();
         AudioManager.Instance.PlayWallJumpSound();
+
+        _explicitAirborneState = true; // claims this air session
 
     }
 

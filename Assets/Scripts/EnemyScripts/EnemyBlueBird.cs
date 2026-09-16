@@ -56,6 +56,6 @@ public class EnemyBlueBird : EnemyBase
 
     private void MoveVertically()
     {
-        transform.position = new Vector3(_startingPosition.x, Mathf.Sin(Time.time * _moveSpeed) * _amplitude, transform.position.z);
+        transform.position = new Vector3(_startingPosition.x, _startingPosition.y + Mathf.Sin(Time.time * _moveSpeed) * _amplitude, transform.position.z);
     }
 }

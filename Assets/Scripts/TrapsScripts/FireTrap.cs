@@ -36,6 +36,11 @@ public class FireTrap : TrapBase
         }
     }
 
+    protected override void OnCollisionStay2D(Collision2D collision)
+    {
+        
+    }
+
     // Only handles state transitions here. No damage is applied on Enter:
     // the player might just be stepping on an Idle or Warning trap.
     protected override void OnCollisionEnter2D(Collision2D collision)
@@ -121,7 +126,7 @@ public class FireTrap : TrapBase
     /// normal points almost straight up and just drops them back onto the same spot.
     /// Push up AND sideways instead, so they actually leave the danger zone.
     /// </summary>
-    protected Vector2 GetKnockbackDirection(Transform other)
+    protected override Vector2 GetKnockbackDirection(Transform other)
     {
         // Example: Fire trap at x = 5 and player at x = 3: offsetX = 3 - 5 = -2, horizontalSign = -1 (push left)
         float offsetX = other.position.x - transform.position.x;

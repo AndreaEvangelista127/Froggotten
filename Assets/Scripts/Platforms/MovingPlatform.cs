@@ -62,7 +62,7 @@ public class MovingPlatform : MonoBehaviour, ISurface2D
 
     /// <summary>
     /// Moves the platform toward the current destination point using MovePosition.
-    /// Calculates and stores _platformDelta — the exact displacement applied this frame —
+    /// Calculates and stores _platformDelta ï¿½ the exact displacement applied this frame ï¿½
     /// which is later used by GetVelocity() to inform the player of how fast the platform is moving.
     /// Uses a dynamic buffer to prevent the platform from overshooting at high speeds.
     /// </summary>

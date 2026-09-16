@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SawBehaviour : MonoBehaviour
+public class SawBehaviour : TrapBase
 {
     [SerializeField] private float _speed = 5f;
     [SerializeField] private Animator _sawAnimator;

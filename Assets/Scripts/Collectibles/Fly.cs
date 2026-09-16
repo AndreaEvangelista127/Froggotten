@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 
-public class Collectibles : MonoBehaviour
+public class Fly : MonoBehaviour
 {
 
     [Header("Movement")]
@@ -12,34 +13,36 @@ public class Collectibles : MonoBehaviour
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private Vector3 _startPosition;
-    private float previousX;
+    private float _previousX;
     private bool _isCollected = false;
-    
+
+    public event Action<Fly> Collected;
+
 
     public void Awake()
     {
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _startPosition = transform.position;
-        previousX = _startPosition.x;
+        _previousX = _startPosition.x;
     }
 
     private void Update()
     {
-        if (!_isCollected)
-        {
-            // Vertical movement
-            float newY = _startPosition.y + Mathf.Sin(Time.time * _verticalSpeed) * _verticalDistance;
+        if (_isCollected)
+            return;
 
-            // Horizontal movement
-            float newX = _startPosition.x + Mathf.Sin(Time.time * _horizontalSpeed) * _horizontalDistance;
+        float newY = _startPosition.y +
+                     Mathf.Sin(Time.time * _verticalSpeed) * _verticalDistance;
 
-            transform.position = new Vector3(newX, newY, _startPosition.z);
+        float newX = _startPosition.x +
+                     Mathf.Sin(Time.time * _horizontalSpeed) * _horizontalDistance;
 
-            FlipSprite(newX);
+        transform.position = new Vector3(newX, newY, _startPosition.z);
 
-            previousX = newX;
-        }
+        FlipSprite(newX);
+
+        _previousX = newX;
     }
 
     /// <summary>
@@ -52,11 +55,11 @@ public class Collectibles : MonoBehaviour
         if (_spriteRenderer == null) return;
 
         // Imagine that we start from previus = 0 and newX = 0, and we are moving to the right. At the last frame, we are going to have: previous >= 3.0 and newX 2.9, so now we flip
-        if (currentX > previousX) 
+        if (currentX > _previousX) 
         {
             _spriteRenderer.flipX = false;
         }
-        else if (currentX < previousX)
+        else if (currentX < _previousX)
         {
             _spriteRenderer.flipX = true;
         }
@@ -67,9 +70,27 @@ public class Collectibles : MonoBehaviour
     /// </summary>
     public void Collect()
     {
-        if (_animator != null) _animator.SetTrigger("Collect");
-        AudioManager.Instance.PlayCollectibleSound();
+        if (_isCollected)
+            return;
+
         _isCollected = true;
+
+        _animator?.SetTrigger("Collect");
+
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.PlayCollectibleSound();
+
+        Collected?.Invoke(this); // Notify subscribers that this collectible has been collected
+
         Destroy(gameObject, 0.5f);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            Collect();
+        }
+    }
+
 }

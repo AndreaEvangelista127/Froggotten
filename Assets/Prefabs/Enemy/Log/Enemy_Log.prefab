@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9091650394484154863}
   - component: {fileID: 5354503319238733505}
+  - component: {fileID: 5498793614731606245}
   m_Layer: 0
   m_Name: Head
   m_TagString: EnemyHead
@@ -66,7 +67,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.02457285, y: 0}
+  m_Offset: {x: -0.00075912476, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -76,8 +77,21 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.9508543, y: 0.3}
+  m_Size: {x: 1.1076736, y: 0.3}
   m_EdgeRadius: 0
+--- !u!114 &5498793614731606245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148280447894669828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015f2ee5dd0f30c499893a1942f51fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bounceForce: 20
 --- !u!1 &2424400405180129205
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +247,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sprite: {fileID: 1264191843055083308}
-  _playerTf: {fileID: 5818219642837837037, guid: 6b60f62715f824444b1e0f086f7dbbd7, type: 3}
+  _playerTf: {fileID: 0}
+  _damage: 1
+  _knockbackForce: 5
   _projectilePrefab: {fileID: 9104689023663857749, guid: f2f8d7b450071b74880afd418194152a, type: 3}
   _shootPoint: {fileID: 3697809031995858657}
   _moveSpeed: 2
@@ -242,7 +258,6 @@ MonoBehaviour:
   _canMove: 1
   _attackRange: 10
   _timeBetweenAttacks: 1.5
-  _audioManager: {fileID: 3221527684202101439, guid: 2dffb78d9acc3bf4e95cb30bb1cd1ca0, type: 3}
 --- !u!114 &2956320675676488649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,7 +275,6 @@ MonoBehaviour:
   _bounceForce: 4
   _bounceRotationSpeed: 720
   _deathGravityScale: 3
-  _audioManager: {fileID: 3221527684202101439, guid: 2dffb78d9acc3bf4e95cb30bb1cd1ca0, type: 3}
 --- !u!95 &7948043152332215222
 Animator:
   serializedVersion: 7

@@ -13,9 +13,6 @@ public class HintZone : MonoBehaviour
     [SerializeField] private int _requiredFliesBeforeHint = 1;
     [SerializeField] private bool _alwaysShow = false;
 
-    [Header("References")]
-    [SerializeField] private PlayerCollisions _playerCollisions;
-
     private Canvas _hintCanvas;
 
     private void Start()
@@ -56,12 +53,6 @@ public class HintZone : MonoBehaviour
     {
         if (_alwaysShow) return true;
 
-        if (_playerCollisions == null)
-        {
-            Debug.LogWarning("HintZone: PlayerCollisions not assigned and _alwaysShow is false.");
-            return false;
-        }
-
-        return _playerCollisions._currentFliesCollected < _requiredFliesBeforeHint;
+        return true; // NEED FIX
     }
 }

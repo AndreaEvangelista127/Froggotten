@@ -10,12 +10,25 @@ public abstract class TrapBase : MonoBehaviour, IDamageDealer
 
     public float Damage => _damage;
 
+
+    // Same reasoning as EnemyBase: without this, staying pinned against a trap
+    // past the end of i-frames would leave the player permanently immune to it.
+    protected virtual void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Player")) return;
+        ApplyDamageAndKnockback(collision);
+    }
+
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Player")) return;
         ApplyDamageAndKnockback(collision);
     }
 
+    /// <summary>
+    /// Default damage/knockback application for collision-based contact. Uses the first contact point to compute knockback direction.
+    /// </summary>
+    /// <param name="collision"></param>
     protected void ApplyDamageAndKnockback(Collision2D collision)
     {
         ApplyDamageAndKnockback(collision.gameObject, GetKnockbackDirection(collision));
@@ -28,17 +41,7 @@ public abstract class TrapBase : MonoBehaviour, IDamageDealer
     /// </summary>
     protected void ApplyDamageAndKnockback(GameObject target, Vector2 knockbackDirection)
     {
-        PlayerHealth playerHealth = target.GetComponent<PlayerHealth>();
-        PlayerMovement playerMovement = target.GetComponent<PlayerMovement>();
-
-        if (playerHealth == null) return;
-
-        bool damageApplied = playerHealth.TakeDamage(_damage);
-
-        if (damageApplied && playerMovement != null)
-        {
-            playerMovement.ApplyKnockBack(knockbackDirection * _knockbackForce);
-        }
+        DamageUtility.ApplyDamageAndKnockback(target, _damage, knockbackDirection, _knockbackForce);
     }
 
     /// <summary>
@@ -48,6 +51,10 @@ public abstract class TrapBase : MonoBehaviour, IDamageDealer
     /// </summary>
     protected virtual Vector2 GetKnockbackDirection(Collision2D collision)
     {
-        return collision.contacts[0].normal;
+        return (collision.transform.position - transform.position).normalized;
+    }
+    protected virtual Vector2 GetKnockbackDirection(Transform other)
+    {
+        return (other.position - transform.position).normalized;
     }
 }

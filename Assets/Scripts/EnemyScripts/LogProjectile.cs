@@ -7,6 +7,7 @@ public class LogProjectile : MonoBehaviour
     [SerializeField] private float _bulletSpeed = 5f;
     [SerializeField] private float _damage = 0.5f;
     [SerializeField] private float _lifetime = 5f;
+    [SerializeField] private float _knockbackForce = 5f;
 
     [Header("Break Sprites")]
     [SerializeField] private GameObject _brokenProjectilePrefab;
@@ -52,8 +53,9 @@ public class LogProjectile : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
-            if (playerHealth != null) playerHealth.TakeDamage(_damage);
+            //PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
+            //if (playerHealth != null) playerHealth.TakeDamage(_damage);
+            DamageUtility.ApplyDamageAndKnockback(collision.gameObject, _damage, _direction, _knockbackForce);
             Destroy(gameObject);
         }
         else if(collision.gameObject.layer == LayerMask.NameToLayer("Ground") || collision.gameObject.layer == LayerMask.NameToLayer("Platform") || collision.gameObject.layer == LayerMask.NameToLayer("Wall"))

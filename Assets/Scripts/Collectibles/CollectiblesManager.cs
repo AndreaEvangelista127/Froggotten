@@ -3,13 +3,12 @@ using UnityEngine;
 public class CollectiblesManager : MonoBehaviour
 {
     [Header("Collectibles Tracking")]
-    [SerializeField] private Collectibles[] _allFlies;
+    [SerializeField] private Fly[] _allFlies;
     private int _totalFlies = 0;
     private int _collectedFlies = 0;
 
     [Header("References")]
     [SerializeField] private WinManager _winManager;
-    [SerializeField] private PlayerCollisions _playerCollisions;
 
     [Header("Debug")]
     [SerializeField] private bool _cheatWin = false;
@@ -20,25 +19,20 @@ public class CollectiblesManager : MonoBehaviour
     private void Start()
     {
         CountAllFlies();
-        
+        SubscribeToFlies();
     }
 
     private void Update()
     {
+        // Only handles the debug cheat now — real win checks happen
+        // event-driven in OnFlyCollected, not polled every frame.
         if (_cheatWin)
         {
             _cheatWin = false;
             _hasWon = true;
             if (_winManager != null)
                 _winManager.UnlockTrophy();
-            return;
         }
-
-        if (_playerCollisions == null) return;
-
-        _collectedFlies = _playerCollisions._currentFliesCollected;
-
-        CheckWinCondition();
     }
 
     private void CountAllFlies()
@@ -50,6 +44,30 @@ public class CollectiblesManager : MonoBehaviour
             return;
         }
         _totalFlies = _allFlies.Length;
+    }
+
+    /// <summary>
+    /// Subscribes to every Fly's Collected event, so this manager is notified
+    /// immediately on pickup instead of polling PlayerCollisions every frame.
+    /// </summary>
+    private void SubscribeToFlies()
+    {
+        if (_allFlies == null) return;
+
+        foreach (Fly fly in _allFlies)
+        {
+            if (fly != null)
+            {
+                // Whenever a fly is collected, this manager will be notified and can update the count.
+                fly.Collected += OnFlyCollected;
+            }
+        }
+    }
+
+    private void OnFlyCollected(Fly fly)
+    {
+        _collectedFlies++;
+        CheckWinCondition();
     }
 
     /// <summary>
@@ -73,6 +91,7 @@ public class CollectiblesManager : MonoBehaviour
         }
     }
 
+
     public int GetTotalFlies()
     {
         return _totalFlies;
@@ -88,5 +107,16 @@ public class CollectiblesManager : MonoBehaviour
         return _collectedFlies >= _totalFlies;
     }
 
+    private void OnDestroy()
+    {
+        if (_allFlies == null) return;
 
+        foreach (Fly fly in _allFlies)
+        {
+            if (fly != null)
+            {
+                fly.Collected -= OnFlyCollected;
+            }
+        }
+    }
 }

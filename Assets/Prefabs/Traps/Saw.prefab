@@ -316,6 +316,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc66202088a06c94aa462d0ed8870d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damage: 1
+  _knockbackForce: 15
   _speed: 5
   _sawAnimator: {fileID: 1962633648005420725}
   _destinationPositions:

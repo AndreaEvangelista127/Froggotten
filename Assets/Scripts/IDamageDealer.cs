@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// Interface for objects that deal damage on contact
 public interface IDamageDealer
 {
     /// <summary>
