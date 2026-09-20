@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 2123496617048426594}
   - component: {fileID: 4134189169478266611}
   - component: {fileID: 992963951620282353}
-  - component: {fileID: 4520225380421731162}
   - component: {fileID: 2862411762742142763}
   - component: {fileID: 8499945199555340838}
   - component: {fileID: 8679079770365640241}
@@ -287,23 +286,6 @@ MonoBehaviour:
   _playerMovement: {fileID: 4134189169478266611}
   _playerVfx: {fileID: 8499945199555340838}
   _velocityYThreshold: 0.5
---- !u!114 &4520225380421731162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1808940102878646774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 139d66076dfe7c549a2ef97e38a83391, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bounceForce: 15
-  _sawDamage: 1
-  _spikeDamage: 0.5
-  _trapKnockbackForce: 12
-  _currentFliesCollected: 0
 --- !u!114 &2862411762742142763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -340,8 +322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 275e0df896efed64291c0ae8250625d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpDustParticle: {fileID: 0}
-  _runParticles: {fileID: 0}
+  _jumpDustParticle: {fileID: 5529003094800833336}
+  _runParticles: {fileID: 7172358606370079644}
 --- !u!114 &8679079770365640241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5524,7 +5506,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpDustParticle: {fileID: 5529003094800833336}
-  _runParticles: {fileID: 0}
+  _runParticles: {fileID: 7172358606370079644}
 --- !u!1001 &758168415105403505
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5535,7 +5517,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1139590453463572920, guid: 1a33930c662b29647b5de11e0f011914, type: 3}
       propertyPath: m_Name
-      value: DustParticle
+      value: DustParticleJump
       objectReference: {fileID: 0}
     - target: {fileID: 4873882926895211422, guid: 1a33930c662b29647b5de11e0f011914, type: 3}
       propertyPath: m_LocalPosition.x

@@ -49,13 +49,18 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Knockback Settings")]
     // Time during which player control is locked after knockback is applied, to let the player be knocked back properly without being able to move during the knockback
-    [SerializeField] private float _knockbackControlLockTime = 0.3f; 
+    [SerializeField] private float _knockbackControlLockTime = 0.3f;
+    [Header("Wind Settings")]
+    [SerializeField] private float _movementAcceleration = 50f; // How quickly the player accelerates to the target speed
+    [SerializeField] private float _movementDeceleration = 60f; // How quickly the player decelerates to a stop
 
     private float _knockbackControlTimer = 0f;
 
     [Header("Platforms")]
     private ISurface2D _movingSurface;
     private Vector2 _surfaceVelocity;
+
+    private Vector2 _windForce;
 
     //Player sprite dimension
     private float _playerHalfWidth;
@@ -83,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
     public int WallDirection => GetJumpDirectionFromWall();
     public bool IsWallSliding => CanWallSlide();
     public bool IsGliding => _isGliding;
+    
 
 
     private void Start()
@@ -107,30 +113,44 @@ public class PlayerMovement : MonoBehaviour
 
         if (_rb == null) return;
 
-        // ========== Apply horizontal movement only if not in wall jump control lock or knockback control lock ==========
-        if (_wallJumpControlTimer <= 0 && _knockbackControlTimer <= 0) // If we are in wall jump control lock we want to block the horizontal movement to let the player jump properly in a wall jump, otherwise the wall jump direction would have been overriden by the rb.linearVelocity = new Vector2(_moveValue * speed, rb.linearVelocity.y);
-        {
-            // Normal horizontal movement + check if player is on the platform like the 3dcontroller
-            if (_movingSurface != null) _surfaceVelocity = _movingSurface.GetVelocity(); // If we are on a moving surface add its velocity to the player velocity to have the player moving with the platform
-            else _surfaceVelocity = Vector2.zero;
 
-            // HORIZONTAL MOVEMENT
-            _rb.linearVelocity = new Vector2((_moveValue * _speed) + _surfaceVelocity.x, _rb.linearVelocity.y);
+        // =========================================================
+        // HORIZONTAL MOVEMENT
+        // =========================================================
+        // ========== Apply horizontal movement only if not in wall jump control lock or knockback control lock ==========
+        if (_wallJumpControlTimer <= 0 && _knockbackControlTimer <= 0)
+        {
+            // If the player is on a moving surface, get its velocity to add it to the player's movement
+            if (_movingSurface != null)
+                _surfaceVelocity = _movingSurface.GetVelocity();
+            else
+                _surfaceVelocity = Vector2.zero;
+
+            // Handle horizontal movement based on input and surface velocity
+            HandleHorizontalMovement();
         }
         else
         {
-            // Count down control locks - horizontal input is blocked during these windows
-            // to preserve the intended direction of wall jumps and knockback
+            // If in wall jump control lock or knockback control lock, decrement the timers
             if (_wallJumpControlTimer > 0)
-            {
                 _wallJumpControlTimer -= Time.fixedDeltaTime;
-            }
 
-            if (_knockbackControlTimer > 0) //if we are in knockback control lock we want to block all the movement to let the player be knocked back properly, otherwise the player could move during the knockback and it would feel weird and not responsive
-            {
-                _knockbackControlTimer -= Time.fixedDeltaTime; //blocking the player movement for a certain amount of time, as soon as we reach 0 we restore the control to the player
-            }
+            if (_knockbackControlTimer > 0)
+                _knockbackControlTimer -= Time.fixedDeltaTime;
         }
+
+        // =========================================================
+        // WIND FORCE
+        // =========================================================
+        // If (windForce/ mass) roughly equals _movementAcceleration, the player will feel the wind as a constant force that will push him in the direction of the
+        // wind, but he will still be able to move against it if he wants to.
+        // If (windForce/ mass) is > than _movementAcceleration, the player will be pushed by the wind and will not be able to move against it.
+        // If (windForce/ mass) is < than _movementAcceleration, the player will be able to move against the wind and will not be pushed by it.
+        ApplyWind(); 
+
+        // =========================================================
+        // OTHER SYSTEMS
+        // =========================================================
 
         UpdateGroundedSurface();
 
@@ -155,6 +175,61 @@ public class PlayerMovement : MonoBehaviour
         {
             _coyoteTimeCounter -= Time.fixedDeltaTime; // Decremet timer while in mid air
         }
+    }
+
+    /// <summary>
+    /// Moves horizontal velocity toward the target speed using acceleration/
+    /// deceleration rather than an instant assignment. NOTE: this per-frame
+    /// correction can be counteracted by external continuous forces (see
+    /// ApplyWind below) — if their magnitudes are comparable, the player
+    /// effectively "runs in place" against the opposing force instead of
+    /// reaching _speed.
+    /// </summary>
+    private void HandleHorizontalMovement()
+    {
+        float targetVelocityX = (_moveValue * _speed) + _surfaceVelocity.x;
+
+        float currentVelocityX = _rb.linearVelocityX;
+
+        float acceleration;
+
+        if (Mathf.Abs(_moveValue) > 0.01f) // If the player is providing input, use acceleration; otherwise, use deceleration
+        {
+            acceleration = _movementAcceleration;
+        }
+        else
+        {
+            acceleration = _movementDeceleration;
+        }
+
+        // Smoothly move the current velocity towards the target velocity using MoveTowards
+        float newVelocityX = Mathf.MoveTowards(
+            currentVelocityX,
+            targetVelocityX,
+            acceleration * Time.fixedDeltaTime // How rapidly to change the velocity, higher values means less frames to reach the target velocity, that means more responsive movement but less smooth (snappy)
+        );
+
+        _rb.linearVelocity = new Vector2(newVelocityX, _rb.linearVelocityY);
+    }
+
+    private void ApplyWind()
+    {
+        if (_windForce == Vector2.zero)
+            return;
+
+        _rb.AddForce(_windForce, ForceMode2D.Force); // 2° Newton's law: F = m * a, so a = F / m, so higher mass means less acceleration(player less affected), lower mass means more acceleration (player more affected)
+
+        // USE IN CASE OF UNBOUNDED ACCELERATION DUE TO WIND FORCE
+        //float maxWindSpeed = 15f; 
+        //if (_rb.linearVelocity.magnitude > maxWindSpeed)
+        //{
+        //    _rb.linearVelocity = _rb.linearVelocity.normalized * maxWindSpeed;
+        //}
+    }
+
+    public void SetWindForce(Vector2 windForce)
+    {
+        _windForce = windForce;
     }
 
     private void Update()
@@ -205,6 +280,8 @@ public class PlayerMovement : MonoBehaviour
             SetMovingSurface(null);
         }
     }
+
+
 
     /// <summary>
     /// Reads horizontal input from the Input System and stores it for use in FixedUpdate.
@@ -451,8 +528,11 @@ public class PlayerMovement : MonoBehaviour
             _rb.linearVelocity = new Vector2(_rb.linearVelocityX, -_glidingFallSpeed);
         }
 
-        float horizontalInput = _moveValue;
-        _rb.linearVelocity = new Vector2(horizontalInput * _glidingHorizontalSpeed, _rb.linearVelocityY);
+        float targetHorizontalVelocity = _moveValue * _glidingHorizontalSpeed;
+
+        float newVelocityX = Mathf.MoveTowards(_rb.linearVelocityX, targetHorizontalVelocity, _movementAcceleration * Time.fixedDeltaTime);
+
+        _rb.linearVelocity = new Vector2(newVelocityX, _rb.linearVelocityY);
     }
 
     /// <summary>
