@@ -17522,6 +17522,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1745207280}
+  - component: {fileID: 1745207282}
   - component: {fileID: 1745207281}
   m_Layer: 0
   m_Name: SpikedBall
@@ -17559,12 +17560,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8432e1a9e4aa6d408c63cddfea322c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpikedBallTrap
-  _damage: 1
-  _knockbackForce: 8
+  _damage: 0.5
+  _knockbackForce: 15
   _chainpathOrigin: {fileID: 748694389}
   _chainPrefab: {fileID: 6329343225694087181, guid: 56c331af561d8314cbddb37086fe5ccd, type: 3}
   _chainSpacing: 0.5
   _rotationSpeed: 100
+--- !u!58 &1745207282
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745207279}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.03094387, y: -0.031205177}
+  m_Radius: 0.781991
 --- !u!114 &1762942568 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1316105883404137111, guid: 22964e01cc571304e994f2021b4fd79a, type: 3}
