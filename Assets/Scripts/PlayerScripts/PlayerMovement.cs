@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
@@ -21,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _doubleJumpingForce;
     [SerializeField] private bool _canDoubleJump;
     [SerializeField] private StatePlayerMovement _statePlayerMovement;
+    [SerializeField] private bool _useSmoothMovement = true; // If true, the player will accelerate and decelerate smoothly, otherwise the player will move instantly to the target speed
 
     [Header("Variable Jump Settings")]
     [SerializeField] private float _maxJumpTime = 0.1f; 
@@ -189,27 +191,34 @@ public class PlayerMovement : MonoBehaviour
     {
         float targetVelocityX = (_moveValue * _speed) + _surfaceVelocity.x;
 
-        float currentVelocityX = _rb.linearVelocityX;
-
-        float acceleration;
-
-        if (Mathf.Abs(_moveValue) > 0.01f) // If the player is providing input, use acceleration; otherwise, use deceleration
+        if (_useSmoothMovement)
         {
-            acceleration = _movementAcceleration;
+            // Smoothly move the current velocity towards the target velocity using MoveTowards
+            float currentVelocityX = _rb.linearVelocityX;
+
+            float acceleration;
+            if (Mathf.Abs(_moveValue) > 0.01f)
+            {
+                acceleration = _movementAcceleration; // Chance this to a higher value for more responsive movement, lower value for smoother movement
+            }
+            else
+            {
+                acceleration = _movementDeceleration; // Chance this to a higher value for more responsive deceleration, lower value for smoother deceleration
+            }
+
+            float newVelocityX = Mathf.MoveTowards(
+                currentVelocityX, // Example: current velocity is -5
+                targetVelocityX, // Example: target velocity is 5
+                acceleration * Time.fixedDeltaTime // Example: 50 * 0.02 = 1, this 1 is the amount of velocity change per frame, so in this case it will take 10 frames to go from -5 to 5, which is 0.2 seconds at 50 fps
+            );
+
+            _rb.linearVelocity = new Vector2(newVelocityX, _rb.linearVelocityY);
         }
         else
         {
-            acceleration = _movementDeceleration;
+            // OLD BEHAVIOR: instant velocity assignment, no acceleration/deceleration.
+            _rb.linearVelocity = new Vector2(targetVelocityX, _rb.linearVelocityY);
         }
-
-        // Smoothly move the current velocity towards the target velocity using MoveTowards
-        float newVelocityX = Mathf.MoveTowards(
-            currentVelocityX,
-            targetVelocityX,
-            acceleration * Time.fixedDeltaTime // How rapidly to change the velocity, higher values means less frames to reach the target velocity, that means more responsive movement but less smooth (snappy)
-        );
-
-        _rb.linearVelocity = new Vector2(newVelocityX, _rb.linearVelocityY);
     }
 
     private void ApplyWind()
