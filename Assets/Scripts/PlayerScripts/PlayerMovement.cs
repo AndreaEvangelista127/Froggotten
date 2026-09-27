@@ -55,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Wind Settings")]
     [SerializeField] private float _movementAcceleration = 50f; // How quickly the player accelerates to the target speed
     [SerializeField] private float _movementDeceleration = 60f; // How quickly the player decelerates to a stop
+    [SerializeField] private bool _windOverridesVelocity = false; // If true, the wind will override the player's velocity instead of applying a force
 
     private float _knockbackControlTimer = 0f;
 
@@ -226,16 +227,29 @@ public class PlayerMovement : MonoBehaviour
         if (_windForce == Vector2.zero)
             return;
 
-        _rb.AddForce(_windForce, ForceMode2D.Force); // 2° Newton's law: F = m * a, so a = F / m, so higher mass means less acceleration(player less affected), lower mass means more acceleration (player more affected)
+        if (_windOverridesVelocity)
+        {
+            Vector2 pushDirection = _windForce.normalized;
+            float pushMagnitude = _windForce.magnitude;
 
-        // USE IN CASE OF UNBOUNDED ACCELERATION DUE TO WIND FORCE
-        //float maxWindSpeed = 15f; 
-        //if (_rb.linearVelocity.magnitude > maxWindSpeed)
-        //{
-        //    _rb.linearVelocity = _rb.linearVelocity.normalized * maxWindSpeed;
-        //}
+            // How much the player velocity is aligned with the wind direction and how much in the same direction,
+            // if it's negative it means the player is moving against the wind and we want to remove that part of the
+            // velocity to avoid the player to be able to move against the wind
+            float velocityAlongPush = Vector2.Dot(_rb.linearVelocity, pushDirection);  // Example : Dot(Vector2(-10, 0), Vector2(1, 0)) = -10, which means the player is moving against the wind with a velocity of 10 units in the opposite direction of the wind
+
+            // Named perpendicularVelocity because it is the part of the velocity that is perpendicular to the wind direction, WE WANT TO KEEP THIS PART of the velocity because it is not affected by the wind
+            Vector2 perpendicularVelocity = _rb.linearVelocity - (pushDirection * velocityAlongPush); // Example : Vector2(-10, 0) - (Vector2(1, 0) * -10) = Vector2(-10, 0) - Vector2(-10, 0) = Vector2(0, 0), which means the player has no velocity perpendicular to the wind direction
+
+            // Reconstruct the new velocity by keeping the perpendicular part and adding the wind force in the direction of the wind
+            _rb.linearVelocity = perpendicularVelocity + (pushDirection * pushMagnitude); // Example : Vector2(0, 0) + (Vector2(1, 0) * 10) = Vector2(10, 0), which means the player is now moving with a velocity of 10 units in the direction of the wind
+        }
+        else
+        {
+            _rb.AddForce(_windForce, ForceMode2D.Force);
+        }
     }
 
+    // Called by the FanPlatform when the player is inside its wind area to apply a force to the player
     public void SetWindForce(Vector2 windForce)
     {
         _windForce = windForce;
