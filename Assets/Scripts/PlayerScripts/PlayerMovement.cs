@@ -46,7 +46,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Gliding Settings")]
     [SerializeField] private bool _glidingEnabled = true;
     [SerializeField] private float _glidingFallSpeed = 2f;  // fall speed while gliding
-    [SerializeField] private float _glidingHorizontalSpeed = 5f;  
+    [SerializeField] private float _glidingHorizontalSpeed = 5f;
+    [SerializeField] private float _glidingAcceleration = 10f; 
     [SerializeField] private GameObject _lilypadSprite;
 
     [Header("Knockback Settings")]
@@ -545,7 +546,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!_isGliding) return;
 
-        // Cap the fall speed to the gliding fall speed
         if (_rb.linearVelocityY < -_glidingFallSpeed)
         {
             _rb.linearVelocity = new Vector2(_rb.linearVelocityX, -_glidingFallSpeed);
@@ -553,9 +553,7 @@ public class PlayerMovement : MonoBehaviour
 
         float targetHorizontalVelocity = _moveValue * _glidingHorizontalSpeed;
 
-        float newVelocityX = Mathf.MoveTowards(_rb.linearVelocityX, targetHorizontalVelocity, _movementAcceleration * Time.fixedDeltaTime);
-
-        _rb.linearVelocity = new Vector2(newVelocityX, _rb.linearVelocityY);
+        _rb.linearVelocity = new Vector2(targetHorizontalVelocity, _rb.linearVelocityY);
     }
 
     /// <summary>
