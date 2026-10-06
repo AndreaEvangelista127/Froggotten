@@ -11,6 +11,7 @@ public class SawBehaviour : TrapBase
     [SerializeField] private float _chainSpacing = 0.5f;
     [SerializeField] private bool _useChainPath = true;
 
+
     private Vector3[] _realDestinations;
     private int _currentDestIndex = 0;
 
