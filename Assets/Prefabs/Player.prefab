@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 4134189169478266611}
   - component: {fileID: 992963951620282353}
   - component: {fileID: 2862411762742142763}
+  - component: {fileID: 8499945199555340838}
   - component: {fileID: 8679079770365640241}
   - component: {fileID: 4052842973100307301}
   m_Layer: 0
@@ -251,15 +252,14 @@ MonoBehaviour:
   _doubleJumpingForce: 11.5
   _canDoubleJump: 1
   _statePlayerMovement: {fileID: 992963951620282353}
-  _useSmoothMovement: 1
   _maxJumpTime: 0.1
   _coyoteTime: 0.15
   _wallJumpEnabled: 1
   _wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  _wallJumpForceX: 6
-  _wallJumpForceY: 16
+  _wallJumpForceX: 8
+  _wallJumpForceY: 12
   _wallCheckDistance: 0.2
   _wallJumpControlLockTime: 0.2
   _wallSlideEnabled: 1
@@ -267,12 +267,8 @@ MonoBehaviour:
   _glidingEnabled: 1
   _glidingFallSpeed: 2
   _glidingHorizontalSpeed: 5
-  _glidingAcceleration: 10
   _lilypadSprite: {fileID: 837290713127494147}
   _knockbackControlLockTime: 0.3
-  _movementAcceleration: 50
-  _movementDeceleration: 60
-  _windOverridesVelocity: 1
 --- !u!114 &992963951620282353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +284,7 @@ MonoBehaviour:
   _animator: {fileID: 8429801150884016669}
   _rigidBody: {fileID: 1220962759808310560}
   _playerMovement: {fileID: 4134189169478266611}
-  _playerVfx: {fileID: 3571303004862708281}
+  _playerVfx: {fileID: 8499945199555340838}
   _velocityYThreshold: 0.5
 --- !u!114 &2862411762742142763
 MonoBehaviour:
@@ -306,14 +302,28 @@ MonoBehaviour:
   _maxLives: 10
   _livesUI: {fileID: 0}
   _healthUi: {fileID: 0}
-  _numberOfFlashes: 4
+  _numberOfFlashes: 2
   _spriteRenderer: {fileID: 7342360625211366568}
   _hitFlashDuration: 0.1
   _startPosition: {x: -17, y: 13, z: 0}
-  _audioManager: {fileID: 0}
+  _audioManager: {fileID: 3221527684202101439, guid: 2dffb78d9acc3bf4e95cb30bb1cd1ca0, type: 3}
   _playerMovement: {fileID: 4134189169478266611}
   _virtualCamera: {fileID: 0}
   gameOverManager: {fileID: 0}
+--- !u!114 &8499945199555340838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808940102878646774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 275e0df896efed64291c0ae8250625d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpDustParticle: {fileID: 5529003094800833336}
+  _runParticles: {fileID: 7172358606370079644}
 --- !u!114 &8679079770365640241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5437,7 +5447,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2028436169
   m_SortingLayer: 1
-  m_SortingOrder: 11
+  m_SortingOrder: 10
   m_Sprite: {fileID: -6367560908665664636, guid: cd947491a13509945aa1b644f9db3ef2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5547,10 +5557,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4873882926895211422, guid: 1a33930c662b29647b5de11e0f011914, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5061897741540839753, guid: 1a33930c662b29647b5de11e0f011914, type: 3}
-      propertyPath: looping
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
