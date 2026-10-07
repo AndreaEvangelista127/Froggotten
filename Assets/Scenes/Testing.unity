@@ -7598,6 +7598,7 @@ GameObject:
   - component: {fileID: 1695691887}
   - component: {fileID: 1695691886}
   - component: {fileID: 1695691885}
+  - component: {fileID: 1695691888}
   m_Layer: 0
   m_Name: Rino
   m_TagString: Untagged
@@ -7670,6 +7671,22 @@ Transform:
   - {fileID: 1271071179}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1695691888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695691884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61e183ed586a89d45b384672c73e4f80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyRino
+  _sprite: {fileID: 0}
+  _playerTf: {fileID: 0}
+  _damage: 1
+  _knockbackForce: 5
 --- !u!1001 &1722156516
 PrefabInstance:
   m_ObjectHideFlags: 0
