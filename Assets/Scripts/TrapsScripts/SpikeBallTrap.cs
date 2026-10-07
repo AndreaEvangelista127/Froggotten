@@ -14,11 +14,9 @@ public class SpikeBallTrap : TrapBase
     [Header("Swing Motion Settings")]
     [SerializeField] private float _swingAngle = 60f;
     [SerializeField] private float _swingSpeed = 2f;
-
     [SerializeField] private float _rotationSpeed = 90f;
     [SerializeField] private GameObject _chainPrefab;
     [SerializeField] private Transform _ballPivot;
-
     [SerializeField] private float _desiredChainSpacing = 0.5f;
 
     private Rigidbody2D _rb;
