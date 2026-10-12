@@ -2,20 +2,27 @@ using UnityEngine;
 
 public class EnemyRino : GroundEnemyBase
 {
+    private enum RinoState
+    {
+        Patrol,
+        Charging,
+        Stunned
+    }
+
     [Header("Movement")]
     [SerializeField] private float _moveSpeed = 1.0f;
+    [SerializeField] private float _chargeSpeed = 6f;
 
     [Header("Facing")]
-    // Starting direction, set from the Inspector
     [SerializeField] private bool _facingRight = false;
 
     [Header("Sight")]
-    [SerializeField] private float _playerRayLenght = 5f;
-    // Must contain the Player layer AND the wall layer: the ray stops at the
-    // first thing it hits, so a wall between rhino and player blocks the view
+    [SerializeField] private float _playerRayLenght = 10f;
+    // Player + wall layers: the first thing the ray hits decides what it sees
     [SerializeField] private LayerMask _sightLayerMask;
-    // 0 = ray starts at the center height, higher = starts lower
     [SerializeField] private float _sightRayOffsetY = 0f;
+
+    private RinoState _currentState = RinoState.Patrol;
 
     protected override void Awake()
     {
@@ -28,60 +35,95 @@ public class EnemyRino : GroundEnemyBase
     {
         if (_isDead) return;
 
-        if (CanSeePlayer())
+        // 
+        switch (_currentState)
         {
-            Debug.Log("Rino sees the player!"); // TEMP: replace with the switch to Charging
+            case RinoState.Patrol:
+                UpdatePatrol();
+                break;
+
+            case RinoState.Charging:
+                UpdateCharge();
+                break;
+
+                // Stunned: nothing, so the knockback velocity is never overwritten
         }
     }
 
+    private void UpdatePatrol()
+    {
+        // Player in front: charge straight away
+        if (CanSeePlayer(FacingDirection))
+        {
+            StartCharge();
+            return;
+        }
+
+        // Player behind: turn around first, then charge
+        if (CanSeePlayer(-FacingDirection))
+        {
+            FlipDirection();
+            StartCharge();
+            return;
+        }
+    }
+
+    private void StartCharge()
+    {
+        _currentState = RinoState.Charging;
+        _animator.SetBool("isCharging", true);
+    }
+
+    private void UpdateCharge()
+    {
+        Move(_chargeSpeed);
+    }
+
+    private void Move(float speed)
+    {
+        _animator.SetBool("isCharging", true);
+        PlayDustParticle();
+
+        _rb.linearVelocity = new Vector2(FacingDirection * speed, _rb.linearVelocity.y);
+    }
+
+
+    // ========= SIGHT =========
+
     /// <summary>
-    /// Starting point of the sight ray: front edge of the collider, so the ray
-    /// never hits the rhino's own collider.
+    /// Ray origin on the collider edge that faces the given direction
+    /// (+1 = right edge, -1 = left edge), so the ray never hits the rhino itself.
     /// </summary>
-    private Vector2 GetSightRayOrigin()
+    private Vector2 GetSightRayOrigin(float direction)
     {
         return new Vector2(
-            transform.position.x + BodyCollider.bounds.extents.x * FacingDirection,
+            transform.position.x + BodyCollider.bounds.extents.x * direction,
             transform.position.y - _sightRayOffsetY
         );
     }
 
     /// <summary>
-    /// Casts a ray forward and returns true only if the FIRST thing it hits is
-    /// the player. A wall in between returns false, because the ray stops there.
+    /// Casts a ray toward the given direction (+1 right, -1 left) and returns
+    /// true only if the FIRST thing it hits is the player.
     /// </summary>
-    private bool CanSeePlayer()
+    private bool CanSeePlayer(float direction)
     {
         RaycastHit2D hit = Physics2D.Raycast(
-            GetSightRayOrigin(),
-            new Vector2(FacingDirection, 0f),
+            GetSightRayOrigin(direction),
+            new Vector2(direction, 0f),
             _playerRayLenght,
             _sightLayerMask
         );
 
-        // hit is a struct, never null: the collider inside it is what tells
-        // whether the ray hit something
         if (hit.collider == null) return false;
 
         return hit.collider.CompareTag("Player");
     }
 
-    // Applies the Facing checkbox immediately in the Editor (no Play needed),
-    // so sprite and gizmos follow the checkbox while you set up the level.
-    private void OnValidate()
+
+    private void DrawSightGizmo(float direction)
     {
-        _isFacingRight = _facingRight;
-        Flip(_facingRight);
-    }
-
-    protected override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos(); // shared wall / enemy / precipice rays
-
-        if (BodyCollider == null) return;
-
-        // Yellow when the player is visible, cyan otherwise
-        if (CanSeePlayer())
+        if (CanSeePlayer(direction))
         {
             Gizmos.color = Color.yellow;
         }
@@ -90,9 +132,17 @@ public class EnemyRino : GroundEnemyBase
             Gizmos.color = Color.cyan;
         }
 
-        Vector3 origin = GetSightRayOrigin();
-        Vector3 direction = new Vector3(FacingDirection, 0f, 0f);
+        Vector3 origin = GetSightRayOrigin(direction);
+        Gizmos.DrawLine(origin, origin + new Vector3(direction, 0f, 0f) * _playerRayLenght);
+    }
 
-        Gizmos.DrawLine(origin, origin + direction * _playerRayLenght);
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        if (BodyCollider == null) return;
+
+        DrawSightGizmo(FacingDirection);   // front
+        DrawSightGizmo(-FacingDirection);  // back
     }
 }
