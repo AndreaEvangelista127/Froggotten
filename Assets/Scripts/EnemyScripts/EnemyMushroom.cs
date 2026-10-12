@@ -94,7 +94,6 @@ public class EnemyMushroom : EnemyBase
     /// </summary>
     private bool HitsWall()
     {
-        
         float direction = 1f;// Moving right
 
         if (_isFacingRight == false)//if moving right is false, means that he needs to go left

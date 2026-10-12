@@ -13,7 +13,6 @@ public abstract class EnemyBase : MonoBehaviour, IDamageDealer
     [Header("Knockback")]
     [SerializeField] private float _knockbackForce = 5f;
 
-
     protected Animator _animator;
     protected Rigidbody2D _rb;
     protected bool _isDead = false;

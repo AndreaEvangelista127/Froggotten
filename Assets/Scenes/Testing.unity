@@ -7600,7 +7600,7 @@ GameObject:
   - component: {fileID: 1695691889}
   - component: {fileID: 1695691888}
   - component: {fileID: 1695691886}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rino
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7644,7 +7644,7 @@ Animator:
   m_GameObject: {fileID: 1695691884}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29f27b2e230325f4d99d64daddd00b76, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -7665,7 +7665,7 @@ Transform:
   m_GameObject: {fileID: 1695691884}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.93946, y: 24.66, z: 0}
+  m_LocalPosition: {x: -16.33, y: 24.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7688,6 +7688,30 @@ MonoBehaviour:
   _playerTf: {fileID: 361476113}
   _damage: 1
   _knockbackForce: 5
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  _enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  _wallCheckDistance: 1
+  _wallRayOffsetY: 0.5
+  _precipiceCheckDistance: 1
+  _precipiceCheckOffsetX: 0.8
+  _enemyCheckDistance: 1.25
+  _drawWallRay: 1
+  _drawEnemyRay: 1
+  _drawPrecipiceRay: 1
+  _moveSpeed: 1
+  _facingRight: 0
+  _playerRayLenght: 5
+  _sightLayerMask:
+    serializedVersion: 2
+    m_Bits: 1152
+  _sightRayOffsetY: 0.4
 --- !u!61 &1695691889
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7722,17 +7746,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.12695932, y: -0.4110775}
+  m_Offset: {x: -0.12695932, y: -0.39204693}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.25, y: 2.125}
+    newSize: {x: 3.25, y: 2.125}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.7498808, y: 1.3168678}
+  m_Size: {x: 2.7498808, y: 1.2788067}
   m_EdgeRadius: 0
 --- !u!1001 &1722156516
 PrefabInstance:
