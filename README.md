@@ -8,16 +8,18 @@ Play as a frog who collects flies to recover forgotten memories, while mastering
 · [▶ Play on itch.io] https://sealty.itch.io/froggotten 
 · [🎬 Gameplay video](https://www.youtube.com/watch?v=_h7kcPgvuk4&t=1s)
 
-## At a glance:
-
+## At a glance
+ 
+| | |
+|---|---|
 | **Genre** | 2D precision platformer / rage game |
 | **Engine** | Unity (URP) · C# |
-| **Platforms** | Windows |
+| **Platforms** | WebGL, macOS, Windows |
 | **Input** | Keyboard and gamepad |
 | **Development time** | ~3 months (first semester) |
 | **Status** | Released on itch.io · Steam release planned |
 | **Inspired by** | Celeste, Super Meat Boy, Hollow Knight |
-
+ 
 ---
 
 ## Features
@@ -44,28 +46,13 @@ Play as a frog who collects flies to recover forgotten memories, while mastering
 
 ---
 
-## Architecture highlights
-
-The codebase is built around small, reusable components instead of one big player script.
-
-```
-IDamageDealer ──► TrapBase (abstract) ──► Spike / Saw / Fire
-      ▲
-      └─────────► EnemyBase (abstract) ──► Mushroom / Log / BlueBird
-                     both use the shared DamageUtility
-
-IBounceGiver  ──► BounceGiverBase (abstract) ──► Trampoline / Stomp
-                     uses the shared BounceUtility
-
-IMovingSurface2D ──► Moving platforms (player follows the surface)
-```
-
 | Principle | How it is applied |
+|---|---|
 | Interfaces for behaviour | `IDamageDealer`, `IBounceGiver`, `IMovingSurface2D` |
 | Abstract base classes | `EnemyBase`, `TrapBase`, `BounceGiverBase` |
 | Responsibility split | Collision logic moved out of the player into the objects themselves (e.g. collectibles raise their own `Collected` event) |
 | Designer friendly | `[SerializeField]` references and Inspector-configurable components |
-
+ 
 ---
 
 ## Roadmap
